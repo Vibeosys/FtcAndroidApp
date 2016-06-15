@@ -24,7 +24,12 @@
         <activity
             android:name=".activities.TreadingAlertActivity"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".activities.MyProfileActivity"></activity>
+        <activity
+            android:name=".activities.MyProfileActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".activities.LoginClientActivity">
+
+        </activity>
     </application>
 
 </manifest>
