@@ -23,7 +23,8 @@
         <activity android:name=".activities.ForgotPassActivity" />
         <activity
             android:name=".activities.TreadingAlertActivity"
-            android:parentActivityName=".MainActivity"></activity>
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".activities.MyProfileActivity"></activity>
     </application>
 
 </manifest>

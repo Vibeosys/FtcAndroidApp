@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.vibeosys.ftc.activities.MyProfileActivity;
 import com.vibeosys.ftc.activities.TreadingAlertActivity;
 
 public class MainActivity extends AppCompatActivity
@@ -82,8 +83,9 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_my_profile) {
             // Handle the camera action
+            startActivity(new Intent(getApplicationContext(), MyProfileActivity.class));
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
