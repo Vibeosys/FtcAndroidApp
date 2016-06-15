@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#83CCD5</color>
+    <color name="colorPrimaryDark">#6daeb6</color>
+    <color name="colorAccent">#2a898c</color>
+    <color name="transperent">#38000000</color>
+    <color name="black_color">#000000</color>
+    <color name="black_overlay">#66000000</color>
+    <color name="colorPrimaryLight">#E1BEE7</color>
+    <color name="light_grey">#d1cdcd</color>
+    <color name="white_color">#FFFFFF</color>
+    <color name="red">#F74042</color>
+    <color name="loginTransparnt">#b7000000</color>
+    <color name="textAlert">#23E763</color>
+    <color name="primaryText">#fc474a4f</color>
+    <color name="accentText">#ff5252</color>
+    <color name="secondaryText">#7e848c</color>
+    <color name="tirnaryText">#c37e848c</color>
+</resources>
