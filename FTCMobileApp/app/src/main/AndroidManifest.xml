@@ -3,6 +3,7 @@
     package="com.vibeosys.tradenow">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,29 +11,32 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.vibeosys.tradenow.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="com.vibeosys.tradenow.activities.LoginActivity">
+        <activity android:name=".activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.vibeosys.tradenow.activities.RegisterActivity" />
-        <activity android:name="com.vibeosys.tradenow.activities.ForgotPassActivity" />
+        <activity android:name=".activities.RegisterActivity" />
+        <activity android:name=".activities.ForgotPassActivity" />
         <activity
-            android:name="com.vibeosys.tradenow.activities.TreadingAlertActivity"
-            android:parentActivityName="com.vibeosys.tradenow.MainActivity" />
+            android:name=".activities.TradingAlertActivity"
+            android:parentActivityName=".MainActivity" />
         <activity
-            android:name="com.vibeosys.tradenow.activities.MyProfileActivity"
-            android:parentActivityName="com.vibeosys.tradenow.MainActivity" />
-        <activity android:name="com.vibeosys.tradenow.activities.LoginClientActivity" />
+            android:name=".activities.MyProfileActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".activities.LoginClientActivity" />
         <activity
-            android:name="com.vibeosys.tradenow.activities.ResetPassActivity"
-            android:parentActivityName="com.vibeosys.tradenow.MainActivity" />
-        <activity android:name="com.vibeosys.tradenow.activities.DemoActivity"></activity>
+            android:name=".activities.ResetPassActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".activities.DemoActivity" />
+        <activity
+            android:name=".activities.TradeHistoryActivity"
+            android:parentActivityName=".MainActivity"></activity>
     </application>
 
 </manifest>

@@ -14,12 +14,12 @@ import java.util.ArrayList;
 /**
  * Created by akshay on 14-06-2016.
  */
-public class TreadAlertAdapter extends BaseAdapter {
+public class TradeHistoryAdapter extends BaseAdapter {
 
     private ArrayList<Integer> data;
     private Context mContext;
 
-    public TreadAlertAdapter(ArrayList<Integer> data, Context mContext) {
+    public TradeHistoryAdapter(ArrayList<Integer> data, Context mContext) {
         this.data = data;
         this.mContext = mContext;
     }
@@ -47,7 +47,7 @@ public class TreadAlertAdapter extends BaseAdapter {
 
             LayoutInflater theLayoutInflator = (LayoutInflater) mContext.getSystemService
                     (Context.LAYOUT_INFLATER_SERVICE);
-            row = theLayoutInflator.inflate(R.layout.row_trade_alert_new, null);
+            row = theLayoutInflator.inflate(R.layout.row_trade_history, null);
             viewHolder = new ViewHolder();
             viewHolder.txtPrice = (TextView) row.findViewById(R.id.txtPrice);
             viewHolder.txtSL = (TextView) row.findViewById(R.id.txtSL);
@@ -69,10 +69,10 @@ public class TreadAlertAdapter extends BaseAdapter {
         viewHolder.txtCloseTime.setText("03:30 PM");
         if (i % 2 == 0) {
             viewHolder.txtBuyOrSell.setBackgroundColor(mContext.getResources().getColor(R.color.cancel_btn_colour));
-            viewHolder.txtBuyOrSell.setText("Sale");
+            viewHolder.txtBuyOrSell.setText("Loss");
         } else {
             viewHolder.txtBuyOrSell.setBackgroundColor(mContext.getResources().getColor(R.color.ok_btn_colour));
-            viewHolder.txtBuyOrSell.setText("Buy");
+            viewHolder.txtBuyOrSell.setText("Profit");
         }
 
         return row;

@@ -34,4 +34,6 @@
     <string name="str_tp">TP</string>
     <string name="my_profile">My Profile</string>
     <string name="trade_alert">Trade Alert</string>
+    <string name="str_size">Size</string>
+    <string name="trade_history">Trade History</string>
 </resources>

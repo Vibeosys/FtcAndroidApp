@@ -16,8 +16,8 @@ import android.view.MenuItem;
 import com.vibeosys.tradenow.activities.DemoActivity;
 import com.vibeosys.tradenow.activities.MyProfileActivity;
 import com.vibeosys.tradenow.activities.ResetPassActivity;
-import com.vibeosys.tradenow.activities.TreadingAlertActivity;
-import com.vibeosys.tradenow.R;
+import com.vibeosys.tradenow.activities.TradeHistoryActivity;
+import com.vibeosys.tradenow.activities.TradingAlertActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -89,9 +89,9 @@ public class MainActivity extends AppCompatActivity
             // Handle the camera action
             startActivity(new Intent(getApplicationContext(), MyProfileActivity.class));
         } else if (id == R.id.nav_tread_alert) {
-            startActivity(new Intent(getApplicationContext(), TreadingAlertActivity.class));
+            startActivity(new Intent(getApplicationContext(), TradingAlertActivity.class));
         } else if (id == R.id.nav_tread_history) {
-            startActivity(new Intent(getApplicationContext(), MyProfileActivity.class));
+            startActivity(new Intent(getApplicationContext(), TradeHistoryActivity.class));
         } else if (id == R.id.nav_change_pass) {
             startActivity(new Intent(getApplicationContext(), ResetPassActivity.class));
         } else if (id == R.id.nav_demo) {
