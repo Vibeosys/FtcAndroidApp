@@ -3,14 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
-    tools:context="com.vibeosys.tradenow.activities.MyProfileActivity">
-
-    <!--<RelativeLayout
-        android:id="@+id/profilePic"
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:orientation="horizontal"></RelativeLayout>-->
+    tools:context="com.vibeosys.tradenow.activities.ResetPassActivity">
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -42,7 +35,7 @@
                     android:layout_margin="5dp"
                     android:layout_marginLeft="15dp"
                     android:gravity="center_vertical"
-                    android:text="Name"
+                    android:text="Old Password"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="12sp" />
 
@@ -58,10 +51,9 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="10dp"
-                    android:background="@android:color/white"
-                    android:enabled="false"
+                    android:enabled="true"
                     android:gravity="center_vertical"
-                    android:text="Jack Reacher"
+                    android:hint="@string/old_password"
                     android:textColor="@color/secondaryText"
                     android:textSize="16sp" />
             </LinearLayout>
@@ -83,7 +75,7 @@
                     android:layout_margin="5dp"
                     android:layout_marginLeft="15dp"
                     android:gravity="center_vertical"
-                    android:text="Email Id"
+                    android:text="@string/new_password"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="12sp" />
 
@@ -99,10 +91,9 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="10dp"
-                    android:background="@android:color/white"
-                    android:enabled="false"
+                    android:enabled="true"
                     android:gravity="center_vertical"
-                    android:text="jackreacher@dt.com"
+                    android:hint="@string/new_password"
                     android:textColor="@color/secondaryText"
                     android:textSize="16sp" />
             </LinearLayout>
@@ -124,7 +115,7 @@
                     android:layout_margin="5dp"
                     android:layout_marginLeft="15dp"
                     android:gravity="center_vertical"
-                    android:text="Mobile Number"
+                    android:text="@string/confirm_pass"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="12sp" />
 
@@ -140,10 +131,9 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="10dp"
-                    android:background="@android:color/white"
-                    android:enabled="false"
+                    android:enabled="true"
                     android:gravity="center_vertical"
-                    android:text="9999765490"
+                    android:hint="@string/confirm_pass"
                     android:textColor="@color/secondaryText"
                     android:textSize="16sp" />
             </LinearLayout>
@@ -159,34 +149,6 @@
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        android:src="@drawable/ic_person_black_24dp" />-->
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="5dp"
-                    android:layout_marginLeft="15dp"
-                    android:gravity="center_vertical"
-                    android:text="Agency Name"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="12sp" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:layout_marginLeft="5dp"
-                    android:background="@color/colorPrimaryDark" />
-
-                <EditText
-                    android:id="@+id/txtAgencyName"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@android:color/white"
-                    android:enabled="false"
-                    android:gravity="center_vertical"
-                    android:text="Abc Funds"
-                    android:textColor="@color/secondaryText"
-                    android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -209,8 +171,7 @@
                     android:background="@drawable/button_custom_disable"
                     android:text="@string/str_cancel_btn"
                     android:textColor="@android:color/white"
-                    android:textSize="16sp"
-                    android:visibility="gone" />
+                    android:textSize="16sp" />
 
                 <Button
                     android:id="@+id/btnUpdate"
@@ -221,8 +182,7 @@
                     android:background="@drawable/button_custom"
                     android:text="@string/str_update_btn"
                     android:textColor="@android:color/white"
-                    android:textSize="16sp"
-                    android:visibility="gone" />
+                    android:textSize="16sp" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

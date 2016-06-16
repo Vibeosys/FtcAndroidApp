@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.vibeosys.ftc.activities.LoginClientActivity">
+    tools:context="com.vibeosys.tradenow.activities.LoginClientActivity">
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -42,6 +42,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -124,7 +126,8 @@
                     <Spinner
                         android:id="@+id/spnClient"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"></Spinner>
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"></Spinner>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -152,42 +155,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="4dp"
                             android:layout_weight="1"
-                            android:background="@drawable/customborder"
+                            android:background="@drawable/button_custom"
                             android:text="@string/str_login_btn"
                             android:textColor="@android:color/white"
                             android:textSize="16sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:background="@android:color/transparent"
-                        android:orientation="horizontal"
-                        android:weightSum="1">
-
-                        <TextView
-                            android:id="@+id/signin_new"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="4dp"
-                            android:paddingStart="5dp"
-                            android:text="Not register yet?"
-                            android:textColor="@android:color/white"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/txtRegister"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="4dp"
-                            android:layout_weight="1"
-                            android:onClick="callRegister"
-                            android:text="@string/str_create_acc"
-                            android:textColor="@color/textAlert"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
                     </LinearLayout>
 
                 </LinearLayout>

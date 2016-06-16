@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FTC</string>
+    <string name="app_name">Trade Now</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -9,6 +9,7 @@
     <string name="str_user_name_hint">User Name</string>
     <string name="str_user_password">Password</string>
     <string name="str_user_forgot_password">Forgot password?</string>
+    <string name="str_activity_forgot_password">Forgot Password</string>
     <string name="str_login_btn">Login</string>
     <string name="str_create_acc">Create Account</string>
     <string name="str_name">Name</string>
@@ -21,4 +22,16 @@
     <string name="str_cancel_btn">Cancel</string>
     <string name="str_update_btn">Update</string>
     <string name="action_edit_profile">Edit Profile</string>
+    <string name="new_password">New Password</string>
+    <string name="old_password">Old Password</string>
+    <string name="reset_pass">Reset Password</string>
+    <string name="str_subscriber_login">Log in for subscriber</string>
+    <string name="str_activity_subscriber_login">Subscribers Login</string>
+    <string name="confirm_pass">Confirm Password</string>
+    <string name="open_time">Open Time</string>
+    <string name="close_time">Close Time</string>
+    <string name="str_sl">SL</string>
+    <string name="str_tp">TP</string>
+    <string name="my_profile">My Profile</string>
+    <string name="trade_alert">Trade Alert</string>
 </resources>

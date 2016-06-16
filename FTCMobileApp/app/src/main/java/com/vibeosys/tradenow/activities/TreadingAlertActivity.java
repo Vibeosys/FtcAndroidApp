@@ -1,11 +1,11 @@
-package com.vibeosys.ftc.activities;
+package com.vibeosys.tradenow.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
 
-import com.vibeosys.ftc.R;
-import com.vibeosys.ftc.adapters.TreadAlertAdapter;
+import com.vibeosys.tradenow.R;
+import com.vibeosys.tradenow.adapters.TreadAlertAdapter;
 
 import java.util.ArrayList;
 
@@ -18,6 +18,7 @@ public class TreadingAlertActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_treading_alert);
+        setTitle(getResources().getString(R.string.trade_alert));
         listTreadAlert = (ListView) findViewById(R.id.listTreadAlert);
         ArrayList<Integer> data = new ArrayList<>();
         data.add(1);

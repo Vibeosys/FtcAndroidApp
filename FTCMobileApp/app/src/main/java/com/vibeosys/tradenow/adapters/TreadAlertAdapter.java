@@ -1,4 +1,4 @@
-package com.vibeosys.ftc.adapters;
+package com.vibeosys.tradenow.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.vibeosys.ftc.R;
+import com.vibeosys.tradenow.R;
 
 import java.util.ArrayList;
 
@@ -47,29 +47,39 @@ public class TreadAlertAdapter extends BaseAdapter {
 
             LayoutInflater theLayoutInflator = (LayoutInflater) mContext.getSystemService
                     (Context.LAYOUT_INFLATER_SERVICE);
-            row = theLayoutInflator.inflate(R.layout.row_trade_alert, null);
+            row = theLayoutInflator.inflate(R.layout.row_trade_alert_new, null);
             viewHolder = new ViewHolder();
             viewHolder.txtPrice = (TextView) row.findViewById(R.id.txtPrice);
-            viewHolder.txtClosePrice = (TextView) row.findViewById(R.id.txtClosePrice);
-            viewHolder.txtDate = (TextView) row.findViewById(R.id.txtDate);
-            viewHolder.txtCloseDate = (TextView) row.findViewById(R.id.txtCloseDate);
+            viewHolder.txtSL = (TextView) row.findViewById(R.id.txtSL);
+            viewHolder.txtLotSize = (TextView) row.findViewById(R.id.txtLotSize);
+            viewHolder.txtTP = (TextView) row.findViewById(R.id.txtTP);
             viewHolder.txtTime = (TextView) row.findViewById(R.id.txtTime);
             viewHolder.txtCloseTime = (TextView) row.findViewById(R.id.txtCloseTime);
+            viewHolder.txtBuyOrSell = (TextView) row.findViewById(R.id.txtBuyOrSell);
             row.setTag(viewHolder);
 
         } else
             viewHolder = (ViewHolder) convertView.getTag();
-        viewHolder.txtPrice.setText("50.00");
-        viewHolder.txtClosePrice.setText("60.00");
-        viewHolder.txtDate.setText("14 Jun 2016");
-        viewHolder.txtCloseDate.setText("16 Jun 2016");
+        int i = data.get(position);
+        viewHolder.txtPrice.setText("0.84875");
+        viewHolder.txtSL.setText("0.84975");
+        viewHolder.txtLotSize.setText("0.1");
+        viewHolder.txtTP.setText("0.85725");
         viewHolder.txtTime.setText("09:30 AM");
         viewHolder.txtCloseTime.setText("03:30 PM");
+        if (i % 2 == 0) {
+            viewHolder.txtBuyOrSell.setBackgroundColor(mContext.getResources().getColor(R.color.cancel_btn_colour));
+            viewHolder.txtBuyOrSell.setText("Sale");
+        } else {
+            viewHolder.txtBuyOrSell.setBackgroundColor(mContext.getResources().getColor(R.color.ok_btn_colour));
+            viewHolder.txtBuyOrSell.setText("Buy");
+        }
+
         return row;
     }
 
     private class ViewHolder {
-        TextView txtPrice, txtClosePrice, txtDate, txtCloseDate, txtTime, txtCloseTime;
+        TextView txtPrice, txtSL, txtLotSize, txtTP, txtTime, txtCloseTime, txtBuyOrSell;
     }
 
     public void addItem(final Integer item) {

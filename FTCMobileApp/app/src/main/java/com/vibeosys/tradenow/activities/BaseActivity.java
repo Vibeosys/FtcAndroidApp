@@ -1,4 +1,4 @@
-package com.vibeosys.ftc.activities;
+package com.vibeosys.tradenow.activities;
 
 import android.os.Bundle;
 import android.os.PersistableBundle;

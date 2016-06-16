@@ -1,6 +1,5 @@
-package com.vibeosys.ftc.activities;
+package com.vibeosys.tradenow.activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -8,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.vibeosys.ftc.R;
+import com.vibeosys.tradenow.R;
 
 public class MyProfileActivity extends BaseActivity implements View.OnClickListener {
 
@@ -19,6 +18,7 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
+        setTitle(getResources().getString(R.string.my_profile));
         mTxtName = (EditText) findViewById(R.id.txtName);
         mTxtEmail = (EditText) findViewById(R.id.txtEmail);
         mTxtPhNo = (EditText) findViewById(R.id.txtPhNo);

@@ -1,9 +1,8 @@
-package com.vibeosys.ftc;
+package com.vibeosys.tradenow;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,8 +13,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.vibeosys.ftc.activities.MyProfileActivity;
-import com.vibeosys.ftc.activities.TreadingAlertActivity;
+import com.vibeosys.tradenow.activities.DemoActivity;
+import com.vibeosys.tradenow.activities.MyProfileActivity;
+import com.vibeosys.tradenow.activities.ResetPassActivity;
+import com.vibeosys.tradenow.activities.TreadingAlertActivity;
+import com.vibeosys.tradenow.R;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -31,7 +33,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), TreadingAlertActivity.class));
+
             }
         });
 
@@ -86,14 +88,14 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_my_profile) {
             // Handle the camera action
             startActivity(new Intent(getApplicationContext(), MyProfileActivity.class));
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
+        } else if (id == R.id.nav_tread_alert) {
+            startActivity(new Intent(getApplicationContext(), TreadingAlertActivity.class));
+        } else if (id == R.id.nav_tread_history) {
+            startActivity(new Intent(getApplicationContext(), MyProfileActivity.class));
+        } else if (id == R.id.nav_change_pass) {
+            startActivity(new Intent(getApplicationContext(), ResetPassActivity.class));
+        } else if (id == R.id.nav_demo) {
+            startActivity(new Intent(getApplicationContext(), DemoActivity.class));
         } else if (id == R.id.nav_send) {
 
         }
