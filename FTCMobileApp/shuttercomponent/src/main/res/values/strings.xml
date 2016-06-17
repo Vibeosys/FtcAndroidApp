@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Shutter Component</string>
+    <string name="str_size">Size</string>
+    <string name="str_tp">TP</string>
+    <string name="close_time">Close Time</string>
+    <string name="str_sl">SL</string>
+    <string name="open_time">Open Time</string>
+    <string name="str_price">Price</string>
+</resources>

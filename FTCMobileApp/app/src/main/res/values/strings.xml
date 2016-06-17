@@ -11,6 +11,7 @@
     <string name="str_user_forgot_password">Forgot password?</string>
     <string name="str_activity_forgot_password">Forgot Password</string>
     <string name="str_login_btn">Login</string>
+    <string name="str_login_activity">New User Login</string>
     <string name="str_create_acc">Create Account</string>
     <string name="str_name">Name</string>
     <string name="user_name">User Name</string>
@@ -25,15 +26,29 @@
     <string name="new_password">New Password</string>
     <string name="old_password">Old Password</string>
     <string name="reset_pass">Reset Password</string>
-    <string name="str_subscriber_login">Log in for subscriber</string>
-    <string name="str_activity_subscriber_login">Subscribers Login</string>
+    <string name="str_subscriber_login">Log in for subscribers</string>
+    <string name="str_activity_subscriber_login">Subscriber Login</string>
     <string name="confirm_pass">Confirm Password</string>
     <string name="open_time">Open Time</string>
     <string name="close_time">Close Time</string>
     <string name="str_sl">SL</string>
     <string name="str_tp">TP</string>
     <string name="my_profile">My Profile</string>
-    <string name="trade_alert">Trade Alert</string>
+    <string name="trade_alert">Trade Alerts</string>
     <string name="str_size">Size</string>
     <string name="trade_history">Trade History</string>
+    <string name="action_notification">Notifications</string>
+    <string name="updated_on">Updated On</string>
+    <string name="demo_text">\tAt vero eos et accusamus et iusto odio dignissimos ducimus qui
+        blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias
+        excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui
+        officia deserunt mollitia animi, id est laborum et dolorum fuga.\n Et harum quidem
+        rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est
+        eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus,
+        omnis voluptas assumenda est, omnis dolor repellendus. \nTemporibus autem quibusdam et aut
+        officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint
+        et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut
+        reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores
+        repellat.</string>
+    <string name="demo_activity">Demo View</string>
 </resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#1F5689</color>
+    <color name="colorPrimaryDark">#16426b</color>
+    <color name="colorAccent">#FE5E08</color>
+    <color name="primaryText">#fc474a4f</color>
+    <color name="accentText">#ff5252</color>
+    <color name="secondaryText">#7e848c</color>
+    <color name="tirnaryText">#c37e848c</color>
+    <color name="cancel_btn_colour">#e74c3c</color>
+    <color name="ok_btn_colour">#2ecc71</color>
+    <color name="light_grey">#d1cdcd</color>
+</resources>

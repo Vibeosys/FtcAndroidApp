@@ -68,10 +68,10 @@ public class TradeHistoryAdapter extends BaseAdapter {
         viewHolder.txtTime.setText("09:30 AM");
         viewHolder.txtCloseTime.setText("03:30 PM");
         if (i % 2 == 0) {
-            viewHolder.txtBuyOrSell.setBackgroundColor(mContext.getResources().getColor(R.color.cancel_btn_colour));
+            viewHolder.txtBuyOrSell.setTextColor(mContext.getResources().getColor(R.color.cancel_btn_colour));
             viewHolder.txtBuyOrSell.setText("Loss");
         } else {
-            viewHolder.txtBuyOrSell.setBackgroundColor(mContext.getResources().getColor(R.color.ok_btn_colour));
+            viewHolder.txtBuyOrSell.setTextColor(mContext.getResources().getColor(R.color.ok_btn_colour));
             viewHolder.txtBuyOrSell.setText("Profit");
         }
 

@@ -14,6 +14,7 @@ public class DemoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_demo);
+        setTitle(getResources().getString(R.string.demo_activity));
         VideoView vidView = (VideoView) findViewById(R.id.videoDisplay);
         String vidAddress = "https://archive.org/download/ksnn_compilation_master_the_internet/ksnn_compilation_master_the_internet_512kb.mp4";
         Uri vidUri = Uri.parse(vidAddress);

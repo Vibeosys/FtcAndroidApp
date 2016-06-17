@@ -33,9 +33,14 @@
         <activity
             android:name=".activities.ResetPassActivity"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".activities.DemoActivity" />
+        <activity
+            android:name=".activities.DemoActivity"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".activities.TradeHistoryActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".activities.NotificationActivity"
             android:parentActivityName=".MainActivity"></activity>
     </application>
 

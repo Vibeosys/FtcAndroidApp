@@ -27,7 +27,30 @@ public class TradingAlertActivity extends AppCompatActivity {
         data.add(4);
         data.add(5);
         data.add(6);
-
+        data.add(1);
+        data.add(3);
+        data.add(2);
+        data.add(4);
+        data.add(5);
+        data.add(6);
+        data.add(1);
+        data.add(3);
+        data.add(2);
+        data.add(4);
+        data.add(5);
+        data.add(6);
+        data.add(1);
+        data.add(3);
+        data.add(2);
+        data.add(4);
+        data.add(5);
+        data.add(6);
+        data.add(1);
+        data.add(3);
+        data.add(2);
+        data.add(4);
+        data.add(5);
+        data.add(6);
         adapter = new TradeAlertAdapter(data, getApplicationContext());
         listTreadAlert.setAdapter(adapter);
     }

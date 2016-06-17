@@ -21,7 +21,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        setTitle(getResources().getString(R.string.str_login_btn));
+        setTitle(getResources().getString(R.string.str_login_activity));
         txtUserName = (EditText) findViewById(R.id.txtUserName);
         txtPassword = (EditText) findViewById(R.id.txtPassword);
         txtRegister = (TextView) findViewById(R.id.txtRegister);
