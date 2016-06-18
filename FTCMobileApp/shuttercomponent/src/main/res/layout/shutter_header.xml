@@ -33,7 +33,7 @@
                     android:padding="6dp"
                     android:text="INR TO USD"
                     android:textColor="@color/primaryText"
-                    android:textSize="16sp" />
+                    android:textSize="17sp" />
 
                 <TextView
                     android:id="@+id/txtBuyOrSell"
@@ -46,7 +46,7 @@
                     android:paddingTop="6dp"
                     android:text="BUY / SELL"
                     android:textColor="@color/primaryText"
-                    android:textSize="16sp"
+                    android:textSize="17sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -55,8 +55,9 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
+                android:layout_marginBottom="6dp"
                 android:background="@color/colorPrimaryDark"
-                android:translationZ="3dp" />
+                android:translationZ="1dp" />
 
             <ImageView
                 android:id="@+id/downArrow"
@@ -92,7 +93,7 @@
                             android:padding="1dp"
                             android:text="09:30 AM"
                             android:textColor="@color/secondaryText"
-                            android:textSize="14sp" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -101,7 +102,7 @@
                             android:paddingTop="0dp"
                             android:text="@string/open_time"
                             android:textColor="@color/secondaryText"
-                            android:textSize="9sp" />
+                            android:textSize="12sp" />
 
                         <TextView
                             android:id="@+id/txtSL"
@@ -113,7 +114,7 @@
                             android:paddingTop="2dp"
                             android:text="0.84975"
                             android:textColor="@color/secondaryText"
-                            android:textSize="14sp" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -121,7 +122,7 @@
                             android:padding="0dp"
                             android:text="@string/str_sl"
                             android:textColor="@color/secondaryText"
-                            android:textSize="9sp" />
+                            android:textSize="12sp" />
 
 
                     </LinearLayout>
@@ -140,7 +141,7 @@
                             android:padding="1dp"
                             android:text="03:00 PM"
                             android:textColor="@color/secondaryText"
-                            android:textSize="14sp" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -148,7 +149,7 @@
                             android:paddingBottom="2dp"
                             android:text="@string/close_time"
                             android:textColor="@color/secondaryText"
-                            android:textSize="9sp" />
+                            android:textSize="12sp" />
 
                         <TextView
                             android:id="@+id/txtTP"
@@ -160,7 +161,7 @@
                             android:paddingTop="2dp"
                             android:text="0.85725"
                             android:textColor="@color/secondaryText"
-                            android:textSize="14sp" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -168,7 +169,7 @@
                             android:padding="0dp"
                             android:text="@string/str_tp"
                             android:textColor="@color/secondaryText"
-                            android:textSize="9sp" />
+                            android:textSize="12sp" />
 
 
                     </LinearLayout>
@@ -195,7 +196,7 @@
                             android:paddingBottom="2dp"
                             android:text="@string/str_price"
                             android:textColor="@color/secondaryText"
-                            android:textSize="9sp" />
+                            android:textSize="12sp" />
 
                         <TextView
                             android:id="@+id/txtLotSize"
@@ -207,7 +208,7 @@
                             android:paddingTop="2dp"
                             android:text="0.1"
                             android:textColor="@color/secondaryText"
-                            android:textSize="14sp" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -215,7 +216,7 @@
                             android:padding="0dp"
                             android:text="@string/str_size"
                             android:textColor="@color/secondaryText"
-                            android:textSize="9sp" />
+                            android:textSize="12sp" />
 
 
                     </LinearLayout>
@@ -227,11 +228,33 @@
                     android:layout_marginTop="6dp"
                     android:background="@color/colorPrimaryDark" />
 
-                <ImageView
-                    android:id="@+id/upArrow"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_keyboard_arrow_up_black_24dp" />
+                    android:layout_margin="6dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="3dp">
+
+                    <ImageView
+                        android:id="@+id/upArrow"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_weight="2"
+                        android:src="@drawable/ic_keyboard_arrow_up_black_24dp" />
+
+                    <TextView
+                        android:id="@+id/txtViewAll"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:padding="3dp"
+                        android:text="@string/view_all"
+                        android:textColor="@color/tirnaryText"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
             </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
