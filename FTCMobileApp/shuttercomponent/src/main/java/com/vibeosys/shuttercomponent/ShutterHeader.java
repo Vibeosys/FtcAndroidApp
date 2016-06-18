@@ -16,6 +16,7 @@ public class ShutterHeader extends LinearLayout implements View.OnClickListener 
     private Context mContext;
     private LinearLayout linearLayout;
     private ImageView imgDown, imgUp;
+    public TextView txtViewAll;
 
     public ShutterHeader(Context context) {
         super(context);
@@ -45,6 +46,7 @@ public class ShutterHeader extends LinearLayout implements View.OnClickListener 
         txtCloseTime = (TextView) findViewById(R.id.txtCloseTime);
         txtBuyOrSell = (TextView) findViewById(R.id.txtBuyOrSell);
         linearLayout = (LinearLayout) findViewById(R.id.hideLayout);
+        txtViewAll = (TextView) findViewById(R.id.txtViewAll);
         imgDown = (ImageView) findViewById(R.id.downArrow);
         imgUp = (ImageView) findViewById(R.id.upArrow);
         imgDown.setOnClickListener(this);

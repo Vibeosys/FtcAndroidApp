@@ -42,7 +42,16 @@
         <activity
             android:name=".activities.NotificationActivity"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".activities.TermsAndConditionActivity"></activity>
+        <activity
+            android:name=".activities.TermsAndConditionActivity"
+            android:parentActivityName=".activities.LoginActivity" />
+        <activity
+            android:name=".activities.TradeAlertDetailsActivity"
+            android:parentActivityName=".activities.TradingAlertActivity" />
+        <activity
+            android:name=".activities.TradeHistoryDetailsActivity"
+            android:parentActivityName=".activities.TradeHistoryActivity" />
+        <activity android:name=".activities.TradeDetailViewActivity"></activity>
     </application>
 
 </manifest>

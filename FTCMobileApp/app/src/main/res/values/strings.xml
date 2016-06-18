@@ -63,4 +63,13 @@
     <string name="nav_str_log_out">Log Out</string>
     <string name="privacy_text_check">I agree to the Tread Now</string>
     <string name="terms_n_condition">Terms And Conditions</string>
+    <string name="trade_alert_details">Trade Alert Details</string>
+    <string name="trade_history_details">Trade History Details</string>
+    <string name="str_ticket_no">Ticket No</string>
+    <string name="str_lot">Lot</string>
+    <string name="str_close_price">Close Price</string>
+    <string name="str_swap">Swap</string>
+    <string name="str_profit">Profit</string>
+    <string name="str_pl_pips">Pl PIPs</string>
+    <string name="str_master_acc_id">Master Account Id</string>
 </resources>

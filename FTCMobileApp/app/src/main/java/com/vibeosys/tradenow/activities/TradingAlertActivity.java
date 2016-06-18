@@ -1,5 +1,6 @@
 package com.vibeosys.tradenow.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
@@ -9,7 +10,7 @@ import com.vibeosys.tradenow.adapters.TradeAlertAdapter;
 
 import java.util.ArrayList;
 
-public class TradingAlertActivity extends AppCompatActivity {
+public class TradingAlertActivity extends AppCompatActivity implements TradeAlertAdapter.ViewDetailsListener {
 
     ListView listTreadAlert;
     TradeAlertAdapter adapter;
@@ -52,6 +53,12 @@ public class TradingAlertActivity extends AppCompatActivity {
         data.add(5);
         data.add(6);
         adapter = new TradeAlertAdapter(data, getApplicationContext());
+        adapter.setCustomButtonListner(this);
         listTreadAlert.setAdapter(adapter);
+    }
+
+    @Override
+    public void onViewClickListener(int id, int value, Object object) {
+        startActivity(new Intent(getApplicationContext(), TradeAlertDetailsActivity.class));
     }
 }

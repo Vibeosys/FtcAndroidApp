@@ -16,14 +16,15 @@ import com.vibeosys.tradenow.R;
 import com.vibeosys.tradenow.adapters.LoginFragmentAdapter;
 
 public class LoginActivity extends BaseActivity {
-    
+
     TabLayout tab_layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_login);
-        setTitle(getResources().getString(R.string.str_login_btn));
+        getSupportActionBar().hide();
+        //setTitle(getResources().getString(R.string.str_login_btn));
 
         tab_layout = (TabLayout) findViewById(R.id.tab_layout);
         tab_layout.addTab(tab_layout.newTab().setText("NEW USER"));

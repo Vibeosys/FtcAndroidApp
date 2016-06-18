@@ -18,6 +18,7 @@ public class TradeHistoryAdapter extends BaseAdapter {
 
     private ArrayList<Integer> data;
     private Context mContext;
+    ViewDetailsListener viewDetailsListener;
 
     public TradeHistoryAdapter(ArrayList<Integer> data, Context mContext) {
         this.data = data;
@@ -56,6 +57,7 @@ public class TradeHistoryAdapter extends BaseAdapter {
             viewHolder.txtTime = (TextView) row.findViewById(R.id.txtTime);
             viewHolder.txtCloseTime = (TextView) row.findViewById(R.id.txtCloseTime);
             viewHolder.txtBuyOrSell = (TextView) row.findViewById(R.id.txtBuyOrSell);
+            viewHolder.txtViewAll = (TextView) row.findViewById(R.id.txtViewAll);
             row.setTag(viewHolder);
 
         } else
@@ -74,12 +76,18 @@ public class TradeHistoryAdapter extends BaseAdapter {
             viewHolder.txtBuyOrSell.setTextColor(mContext.getResources().getColor(R.color.ok_btn_colour));
             viewHolder.txtBuyOrSell.setText("PROFIT");
         }
-
+        viewHolder.txtViewAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (viewDetailsListener != null)
+                    viewDetailsListener.onViewClickListener(v.getId(), 1, new Object());
+            }
+        });
         return row;
     }
 
     private class ViewHolder {
-        TextView txtPrice, txtSL, txtLotSize, txtTP, txtTime, txtCloseTime, txtBuyOrSell;
+        TextView txtPrice, txtSL, txtLotSize, txtTP, txtTime, txtCloseTime, txtBuyOrSell, txtViewAll;
     }
 
     public void addItem(final Integer item) {
@@ -89,5 +97,13 @@ public class TradeHistoryAdapter extends BaseAdapter {
 
     public void clear() {
         data.clear();
+    }
+
+    public void setCustomButtonListner(ViewDetailsListener listener) {
+        this.viewDetailsListener = listener;
+    }
+
+    public interface ViewDetailsListener {
+        public void onViewClickListener(int id, int value, Object object);
     }
 }

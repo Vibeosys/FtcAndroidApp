@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.TextView;
 
 import com.vibeosys.shuttercomponent.ShutterHeader;
 import com.vibeosys.tradenow.R;
@@ -19,6 +18,7 @@ public class TradeAlertAdapter extends BaseAdapter {
 
     private ArrayList<Integer> data;
     private Context mContext;
+    ViewDetailsListener viewDetailsListener;
 
     public TradeAlertAdapter(ArrayList<Integer> data, Context mContext) {
         this.data = data;
@@ -71,6 +71,13 @@ public class TradeAlertAdapter extends BaseAdapter {
         viewHolder.shutterHeader.setCloseTime("03:30 PM");
         viewHolder.shutterHeader.setLayoutVisibility(View.GONE);
         viewHolder.shutterHeader.setImageVisibility(View.VISIBLE);
+        viewHolder.shutterHeader.txtViewAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (viewDetailsListener != null)
+                    viewDetailsListener.onViewClickListener(v.getId(), 1, new Object());
+            }
+        });
         /*viewHolder.txtPrice.setText("0.84875");
         viewHolder.txtSL.setText("0.84975");
         viewHolder.txtLotSize.setText("0.1");
@@ -104,5 +111,13 @@ public class TradeAlertAdapter extends BaseAdapter {
 
     public void clear() {
         data.clear();
+    }
+
+    public void setCustomButtonListner(ViewDetailsListener listener) {
+        this.viewDetailsListener = listener;
+    }
+
+    public interface ViewDetailsListener {
+        public void onViewClickListener(int id, int value, Object object);
     }
 }

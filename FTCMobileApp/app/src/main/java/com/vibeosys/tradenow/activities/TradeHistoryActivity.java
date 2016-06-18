@@ -1,5 +1,6 @@
 package com.vibeosys.tradenow.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
@@ -9,7 +10,7 @@ import com.vibeosys.tradenow.adapters.TradeHistoryAdapter;
 
 import java.util.ArrayList;
 
-public class TradeHistoryActivity extends AppCompatActivity {
+public class TradeHistoryActivity extends BaseActivity implements TradeHistoryAdapter.ViewDetailsListener {
 
     ListView listTradeHistory;
     TradeHistoryAdapter adapter;
@@ -29,6 +30,12 @@ public class TradeHistoryActivity extends AppCompatActivity {
         data.add(6);
 
         adapter = new TradeHistoryAdapter(data, getApplicationContext());
+        adapter.setCustomButtonListner(this);
         listTradeHistory.setAdapter(adapter);
+    }
+
+    @Override
+    public void onViewClickListener(int id, int value, Object object) {
+        startActivity(new Intent(getApplicationContext(), TradeHistoryDetailsActivity.class));
     }
 }
