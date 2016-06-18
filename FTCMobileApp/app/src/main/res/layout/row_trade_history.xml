@@ -204,13 +204,18 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <TextView
+                <!--<TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="3dp"
                     android:text="@string/updated_on"
                     android:textColor="@color/secondaryText"
-                    android:textSize="12sp" />
+                    android:textSize="12sp" />-->
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:src="@drawable/ic_query_builder_black_24dp" />
 
                 <TextView
                     android:id="@+id/txtDate"
