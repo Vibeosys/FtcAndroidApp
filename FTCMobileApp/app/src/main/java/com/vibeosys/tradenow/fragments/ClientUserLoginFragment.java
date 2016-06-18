@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.vibeosys.tradenow.MainActivity;
 import com.vibeosys.tradenow.R;
 import com.vibeosys.tradenow.activities.ForgotPassActivity;
+import com.vibeosys.tradenow.activities.TermsAndConditionActivity;
 import com.vibeosys.tradenow.adapters.LoginSpinner;
 
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class ClientUserLoginFragment extends BaseFragment implements View.OnClic
 
     //Spinner spnClient;
     EditText txtUserName, txtPassword;
-    TextView txtForgotPass;
+    TextView txtForgotPass, txtTerms;
     Button btnLogIn;
     //private LoginSpinner adapter;
 
@@ -37,9 +38,11 @@ public class ClientUserLoginFragment extends BaseFragment implements View.OnClic
         txtUserName = (EditText) view.findViewById(R.id.txtUserName);
         txtPassword = (EditText) view.findViewById(R.id.txtPassword);
         txtForgotPass = (TextView) view.findViewById(R.id.txtForgotPass);
+        txtTerms = (TextView) view.findViewById(R.id.txtTerms);
         btnLogIn = (Button) view.findViewById(R.id.btnLogIn);
         btnLogIn.setOnClickListener(this);
         txtForgotPass.setOnClickListener(this);
+        txtTerms.setOnClickListener(this);
         ArrayList<String> spnItem = new ArrayList<>();
         spnItem.add("Abc");
         spnItem.add("Xyz");
@@ -59,6 +62,9 @@ public class ClientUserLoginFragment extends BaseFragment implements View.OnClic
                 break;
             case R.id.txtForgotPass:
                 startActivity(new Intent(getActivity().getApplicationContext(), ForgotPassActivity.class));
+                break;
+            case R.id.txtTerms:
+                startActivity(new Intent(getActivity().getApplicationContext(), TermsAndConditionActivity.class));
                 break;
         }
     }

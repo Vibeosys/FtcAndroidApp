@@ -32,9 +32,10 @@
                 android:background="@color/loginTransparnt"
                 android:gravity="center_vertical"
                 android:orientation="vertical"
+                android:paddingBottom="24dp"
                 android:paddingLeft="24dp"
                 android:paddingRight="24dp"
-                android:paddingTop="20dp">
+                android:paddingTop="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -46,7 +47,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_gravity="center"
-                        android:layout_marginTop="35dp"
                         android:background="@drawable/custom_white_border"
                         android:orientation="horizontal">
 
@@ -81,7 +81,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_gravity="center"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/custom_white_border"
                         android:orientation="horizontal">
@@ -116,7 +115,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_gravity="center"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/custom_white_border"
                         android:orientation="horizontal">
@@ -151,7 +149,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_gravity="center"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/custom_white_border"
                         android:orientation="horizontal">
@@ -237,8 +234,6 @@
                             android:textColor="@android:color/white"
                             android:textSize="16sp" />
                     </LinearLayout>
-
-
                 </LinearLayout>
             </LinearLayout>
 

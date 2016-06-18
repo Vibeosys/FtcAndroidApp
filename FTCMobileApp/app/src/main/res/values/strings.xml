@@ -61,4 +61,6 @@
     <string name="view_all">View Details</string>
     <string name="subscriber_id">Subscriber Id</string>
     <string name="nav_str_log_out">Log Out</string>
+    <string name="privacy_text_check">I agree to the Tread Now</string>
+    <string name="terms_n_condition">Terms And Conditions</string>
 </resources>

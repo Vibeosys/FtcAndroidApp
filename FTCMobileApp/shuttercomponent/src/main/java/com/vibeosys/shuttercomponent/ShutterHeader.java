@@ -135,7 +135,7 @@ public class ShutterHeader extends LinearLayout implements View.OnClickListener 
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.downArrow) {
-            imgDown.setVisibility(GONE);
+            imgDown.setVisibility(INVISIBLE);
             linearLayout.setVisibility(VISIBLE);
             return;
         }
