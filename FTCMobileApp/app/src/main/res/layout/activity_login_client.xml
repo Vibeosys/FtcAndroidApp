@@ -72,7 +72,7 @@
                                 android:layout_height="wrap_content"
                                 android:background="@android:color/transparent"
                                 android:drawablePadding="10dp"
-                                android:hint="User Name"
+                                android:hint="@string/user_name"
                                 android:inputType="textEmailAddress"
                                 android:paddingStart="5dp"
 
@@ -111,7 +111,7 @@
                                 android:background="@android:color/transparent"
                                 android:drawablePadding="10dp"
                                 android:focusableInTouchMode="true"
-                                android:hint="Password"
+                                android:hint="@string/password"
                                 android:inputType="textPassword"
                                 android:paddingStart="5dp"
                                 android:singleLine="true"

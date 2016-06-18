@@ -42,7 +42,7 @@
                     android:layout_margin="5dp"
                     android:layout_marginLeft="15dp"
                     android:gravity="center_vertical"
-                    android:text="Name"
+                    android:text="@string/str_name"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="12sp" />
 
@@ -83,7 +83,7 @@
                     android:layout_margin="5dp"
                     android:layout_marginLeft="15dp"
                     android:gravity="center_vertical"
-                    android:text="Email Id"
+                    android:text="@string/email_id"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="12sp" />
 
@@ -124,7 +124,7 @@
                     android:layout_margin="5dp"
                     android:layout_marginLeft="15dp"
                     android:gravity="center_vertical"
-                    android:text="Mobile Number"
+                    android:text="@string/str_mob_no"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="12sp" />
 
@@ -165,7 +165,7 @@
                     android:layout_margin="5dp"
                     android:layout_marginLeft="15dp"
                     android:gravity="center_vertical"
-                    android:text="Agency Name"
+                    android:text="@string/str_agency_name"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="12sp" />
 

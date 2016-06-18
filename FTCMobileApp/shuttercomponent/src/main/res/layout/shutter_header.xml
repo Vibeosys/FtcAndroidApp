@@ -55,7 +55,8 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="@color/colorPrimaryDark" />
+                android:background="@color/colorPrimaryDark"
+                android:translationZ="3dp" />
 
             <ImageView
                 android:id="@+id/downArrow"

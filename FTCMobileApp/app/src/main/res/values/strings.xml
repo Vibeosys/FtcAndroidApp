@@ -51,4 +51,10 @@
         reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores
         repellat.</string>
     <string name="demo_activity">Demo View</string>
+    <string name="not_register">Not register yet?</string>
+    <string name="str_mob_no">Mobile Number</string>
+    <string name="str_agency_name">Agency Name</string>
+    <string name="nav_str_my_profile">My Profile</string>
+    <string name="str_change_pass">Change Password</string>
+    <string name="nav_demo_view">Demo Views</string>
 </resources>

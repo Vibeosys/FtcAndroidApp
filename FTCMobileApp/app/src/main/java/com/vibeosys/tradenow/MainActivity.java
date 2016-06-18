@@ -1,6 +1,7 @@
 package com.vibeosys.tradenow;
 
 import android.content.Intent;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.vibeosys.tradenow.activities.NotificationActivity;
 import com.vibeosys.tradenow.activities.ResetPassActivity;
 import com.vibeosys.tradenow.activities.TradeHistoryActivity;
 import com.vibeosys.tradenow.activities.TradingAlertActivity;
+import com.vibeosys.tradenow.utils.Utils2;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -62,6 +64,11 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        MenuItem item = menu.findItem(R.id.action_notification);
+        LayerDrawable icon = (LayerDrawable) item.getIcon();
+
+        // Update LayerDrawable's BadgeDrawable
+        Utils2.setBadgeCount(this, icon, 2);
         return true;
     }
 

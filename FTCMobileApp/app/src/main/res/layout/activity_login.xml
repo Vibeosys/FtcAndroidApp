@@ -72,7 +72,7 @@
                                 android:layout_height="wrap_content"
                                 android:background="@android:color/transparent"
                                 android:drawablePadding="10dp"
-                                android:hint="User Name"
+                                android:hint="@string/user_name"
                                 android:inputType="textEmailAddress"
                                 android:paddingStart="5dp"
 
@@ -111,7 +111,7 @@
                                 android:background="@android:color/transparent"
                                 android:drawablePadding="10dp"
                                 android:focusableInTouchMode="true"
-                                android:hint="Password"
+                                android:hint="@string/str_user_password"
                                 android:inputType="textPassword"
                                 android:paddingStart="5dp"
                                 android:singleLine="true"
@@ -169,7 +169,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="4dp"
                             android:paddingStart="5dp"
-                            android:text="Not register yet?"
+                            android:text="@string/not_register"
                             android:textColor="@android:color/white"
                             android:textSize="14sp"
                             android:textStyle="bold" />

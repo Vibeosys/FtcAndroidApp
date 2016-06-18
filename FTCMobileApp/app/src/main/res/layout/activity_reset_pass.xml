@@ -35,7 +35,7 @@
                     android:layout_margin="5dp"
                     android:layout_marginLeft="15dp"
                     android:gravity="center_vertical"
-                    android:text="Old Password"
+                    android:text="@string/old_password"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="12sp" />
 

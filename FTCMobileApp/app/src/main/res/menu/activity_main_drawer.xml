@@ -5,19 +5,19 @@
         <item
             android:id="@+id/nav_my_profile"
             android:icon="@drawable/ic_person_black_24dp"
-            android:title="My Profile" />
+            android:title="@string/nav_str_my_profile" />
         <item
             android:id="@+id/nav_tread_alert"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Trade Alert" />
+            android:title="@string/trade_alert" />
         <item
             android:id="@+id/nav_tread_history"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Trade History" />
+            android:title="@string/trade_history" />
         <item
             android:id="@+id/nav_change_pass"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Change Password" />
+            android:title="@string/str_change_pass" />
     </group>
 
     <item android:title="Communicate">
@@ -25,7 +25,7 @@
             <item
                 android:id="@+id/nav_demo"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Demo Views" />
+                android:title="@string/nav_demo_view" />
         </menu>
     </item>
 
