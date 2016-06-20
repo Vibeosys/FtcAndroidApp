@@ -3,8 +3,6 @@ package com.vibeosys.tradenow;
 import android.content.Intent;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -19,8 +17,8 @@ import com.vibeosys.tradenow.activities.LoginActivity;
 import com.vibeosys.tradenow.activities.MyProfileActivity;
 import com.vibeosys.tradenow.activities.NotificationActivity;
 import com.vibeosys.tradenow.activities.ResetPassActivity;
-import com.vibeosys.tradenow.activities.TradeHistoryActivity;
-import com.vibeosys.tradenow.activities.TradingAlertActivity;
+import com.vibeosys.tradenow.activities.TradeAlertDateActivity;
+import com.vibeosys.tradenow.activities.TradeHistoryDateActivity;
 import com.vibeosys.tradenow.utils.Utils2;
 
 public class MainActivity extends AppCompatActivity
@@ -99,9 +97,9 @@ public class MainActivity extends AppCompatActivity
             // Handle the camera action
             startActivity(new Intent(getApplicationContext(), MyProfileActivity.class));
         } else if (id == R.id.nav_tread_alert) {
-            startActivity(new Intent(getApplicationContext(), TradingAlertActivity.class));
+            startActivity(new Intent(getApplicationContext(), TradeAlertDateActivity.class));
         } else if (id == R.id.nav_tread_history) {
-            startActivity(new Intent(getApplicationContext(), TradeHistoryActivity.class));
+            startActivity(new Intent(getApplicationContext(), TradeHistoryDateActivity.class));
         } else if (id == R.id.nav_change_pass) {
             startActivity(new Intent(getApplicationContext(), ResetPassActivity.class));
         } else if (id == R.id.nav_demo) {

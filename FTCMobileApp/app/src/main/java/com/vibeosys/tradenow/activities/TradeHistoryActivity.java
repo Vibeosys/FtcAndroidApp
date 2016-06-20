@@ -19,7 +19,7 @@ public class TradeHistoryActivity extends BaseActivity implements TradeHistoryAd
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trade_history);
-        setTitle(getResources().getString(R.string.trade_history));
+        setTitle("Monday 20th June 2016");
         listTradeHistory = (ListView) findViewById(R.id.listTradeHistory);
         ArrayList<Integer> data = new ArrayList<>();
         data.add(1);

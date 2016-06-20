@@ -14,12 +14,12 @@
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activities.LoginActivity"></activity>
+        <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.RegisterActivity" />
         <activity android:name=".activities.ForgotPassActivity" />
         <activity
             android:name=".activities.TradingAlertActivity"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".activities.TradeAlertDateActivity" />
         <activity
             android:name=".activities.MyProfileActivity"
             android:parentActivityName=".MainActivity" />
@@ -32,7 +32,7 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".activities.TradeHistoryActivity"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".activities.TradeHistoryDateActivity" />
         <activity
             android:name=".activities.NotificationActivity"
             android:parentActivityName=".MainActivity" />
@@ -53,6 +53,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activities.TradeAlertDateActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".activities.TradeHistoryDateActivity"
+            android:parentActivityName=".MainActivity"></activity>
     </application>
 
 </manifest>

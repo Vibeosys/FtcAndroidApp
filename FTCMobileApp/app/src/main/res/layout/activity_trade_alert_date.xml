@@ -5,12 +5,11 @@
     android:layout_height="match_parent"
     android:background="@drawable/back_login"
     android:padding="10dp"
-    tools:context="com.vibeosys.tradenow.activities.TradeHistoryActivity">
+    tools:context="com.vibeosys.tradenow.activities.TradeAlertDateActivity">
 
     <ListView
-        android:id="@+id/listTradeHistory"
+        android:id="@+id/listTradeDate"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:divider="@null"
-        android:dividerHeight="0dp"></ListView>
+        android:layout_height="match_parent"
+        android:background="@color/white_color"></ListView>
 </RelativeLayout>
