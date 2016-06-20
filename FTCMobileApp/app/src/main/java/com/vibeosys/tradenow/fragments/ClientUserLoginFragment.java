@@ -3,6 +3,7 @@ package com.vibeosys.tradenow.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,7 @@ public class ClientUserLoginFragment extends BaseFragment implements View.OnClic
         txtPassword = (EditText) view.findViewById(R.id.txtPassword);
         txtForgotPass = (TextView) view.findViewById(R.id.txtForgotPass);
         txtTerms = (TextView) view.findViewById(R.id.txtTerms);
+        txtTerms.setText(Html.fromHtml(getResources().getString(R.string.privacy_text_check)));
         btnLogIn = (Button) view.findViewById(R.id.btnLogIn);
         btnLogIn.setOnClickListener(this);
         txtForgotPass.setOnClickListener(this);
