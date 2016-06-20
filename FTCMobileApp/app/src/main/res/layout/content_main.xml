@@ -21,6 +21,6 @@
         android:gravity="center"
         android:padding="6dp"
         android:text="Welcome, To Trade Now Forex trading"
-        android:textColor="@color/secondaryText"
+        android:textColor="@color/white_color"
         android:textSize="38sp" />
 </RelativeLayout>
