@@ -6,6 +6,10 @@ android {
 
     defaultConfig {
         applicationId "com.vibeosys.treadenow"
+
+        manifestPlaceholders = [manifestApplicationId          : "${applicationId}",
+                                onesignal_app_id               : "d7d678e9-7cd4-4e9d-b823-3f172572ef74",
+                                onesignal_google_project_number: "842391435177"]
         minSdkVersion 19
         targetSdkVersion 23
         versionCode 1
@@ -25,5 +29,11 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.android.support:design:23.4.0'
     compile 'com.android.support:cardview-v7:23.1.1'
+
+    // OneSignal SDK
+    compile 'com.onesignal:OneSignal:2.+@aar'
+    // OneSignal requires at least version 7.0.0 of GMS but the newest version is recommend.
+    compile 'com.google.android.gms:play-services-gcm:+'
+    compile 'com.google.android.gms:play-services-analytics:+'
     compile project(path: ':shuttercomponent')
 }
