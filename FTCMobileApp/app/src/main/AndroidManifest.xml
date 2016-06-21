@@ -59,6 +59,9 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".activities.TradeHistoryDateActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".activities.NewsActivity"
             android:parentActivityName=".MainActivity"></activity>
     </application>
 

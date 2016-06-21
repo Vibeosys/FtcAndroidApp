@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import com.vibeosys.tradenow.activities.DemoActivity;
 import com.vibeosys.tradenow.activities.LoginActivity;
 import com.vibeosys.tradenow.activities.MyProfileActivity;
+import com.vibeosys.tradenow.activities.NewsActivity;
 import com.vibeosys.tradenow.activities.NotificationActivity;
 import com.vibeosys.tradenow.activities.ResetPassActivity;
 import com.vibeosys.tradenow.activities.TradeAlertDateActivity;
@@ -106,6 +107,8 @@ public class MainActivity extends AppCompatActivity
             startActivity(new Intent(getApplicationContext(), DemoActivity.class));
         } else if (id == R.id.nav_log_out) {
             startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+        } else if (id == R.id.nav_news) {
+            startActivity(new Intent(getApplicationContext(), NewsActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

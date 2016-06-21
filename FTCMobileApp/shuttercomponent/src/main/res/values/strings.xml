@@ -3,7 +3,7 @@
     <string name="str_size">Size</string>
     <string name="str_tp">TP</string>
     <string name="close_time">Close Time</string>
-    <string name="str_sl">SL</string>
+    <string name="str_sl">Stock Loss</string>
     <string name="open_time">Open Time</string>
     <string name="str_price">Price</string>
     <string name="view_all">View Details</string>

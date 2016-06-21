@@ -31,7 +31,7 @@
     <string name="confirm_pass">Confirm Password</string>
     <string name="open_time">Open Time</string>
     <string name="close_time">Close Time</string>
-    <string name="str_sl">SL</string>
+    <string name="str_sl">Stock Loss</string>
     <string name="str_tp">TP</string>
     <string name="my_profile">My Profile</string>
     <string name="trade_alert">Trade Alerts</string>
@@ -71,9 +71,11 @@
     <string name="str_close_price">Close Price</string>
     <string name="str_swap">Swap</string>
     <string name="str_profit">Profit</string>
-    <string name="str_pl_pips">Pl PIPs</string>
+    <string name="str_pl_pips">Profit / Loss</string>
     <string name="str_master_acc_id">Master Account Id</string>
     <string name="subscription_id">Subscription Id</string>
     <string name="splash_trade">Trade</string>
     <string name="splash_now">Now</string>
+    <string name="news">Forex News</string>
+    <string name="nav_news">News</string>
 </resources>
