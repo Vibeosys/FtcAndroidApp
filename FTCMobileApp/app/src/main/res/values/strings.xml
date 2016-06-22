@@ -31,11 +31,11 @@
     <string name="confirm_pass">Confirm Password</string>
     <string name="open_time">Open Time</string>
     <string name="close_time">Close Time</string>
-    <string name="str_sl">Stock Loss</string>
-    <string name="str_tp">TP</string>
+    <string name="str_sl">Stop Loss</string>
+    <string name="str_tp">Take Profit</string>
     <string name="my_profile">My Profile</string>
     <string name="trade_alert">Trade Alerts</string>
-    <string name="str_size">Size</string>
+    <string name="str_size">Lot Size</string>
     <string name="trade_history">Trade History</string>
     <string name="action_notification">Notifications</string>
     <string name="updated_on">Updated On</string>
@@ -58,6 +58,7 @@
     <string name="str_change_pass">Change Password</string>
     <string name="nav_demo_view">Demo Views</string>
     <string name="str_profit_n_loss">Profit n Loss</string>
+    <string name="str_profit_n_loss_in_pips">Profit and Loss\nin pips</string>
     <string name="view_all">View Details</string>
     <string name="subscriber_id">Subscriber Id</string>
     <string name="nav_str_log_out">Log Out</string>
@@ -78,4 +79,5 @@
     <string name="splash_now">Now</string>
     <string name="news">Forex News</string>
     <string name="nav_news">News</string>
+    <string name="open_price">Open Price</string>
 </resources>

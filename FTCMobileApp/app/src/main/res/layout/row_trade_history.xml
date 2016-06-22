@@ -97,8 +97,25 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="0dp"
+                        android:layout_marginBottom="6dp"
                         android:text="@string/str_sl"
+                        android:textColor="@color/secondaryText"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/txtOpenPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="1dp"
+                        android:text="0.83775"
+                        android:textColor="@color/secondaryText"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="0dp"
+                        android:text="@string/open_price"
                         android:textColor="@color/secondaryText"
                         android:textSize="12sp" />
 
@@ -141,11 +158,27 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="0dp"
+                        android:layout_marginBottom="6dp"
                         android:text="@string/str_tp"
                         android:textColor="@color/secondaryText"
                         android:textSize="12sp" />
 
+                    <TextView
+                        android:id="@+id/txtClosePrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="1dp"
+                        android:text="0.84975"
+                        android:textColor="@color/secondaryText"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="0dp"
+                        android:text="@string/str_close_price"
+                        android:textColor="@color/secondaryText"
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
@@ -186,7 +219,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingBottom="4dp"
-                        android:text="@string/str_profit_n_loss"
+                        android:text="@string/str_profit_n_loss_in_pips"
                         android:textColor="@color/secondaryText"
                         android:textSize="12sp" />
                 </LinearLayout>
