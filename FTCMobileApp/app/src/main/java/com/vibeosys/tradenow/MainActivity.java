@@ -20,7 +20,7 @@ import com.vibeosys.tradenow.activities.NotificationActivity;
 import com.vibeosys.tradenow.activities.ResetPassActivity;
 import com.vibeosys.tradenow.activities.TradeAlertDateActivity;
 import com.vibeosys.tradenow.activities.TradeHistoryDateActivity;
-import com.vibeosys.tradenow.utils.Utils2;
+import com.vibeosys.tradenow.utils.NotificationUtil;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity
         LayerDrawable icon = (LayerDrawable) item.getIcon();
 
         // Update LayerDrawable's BadgeDrawable
-        Utils2.setBadgeCount(this, icon, 2);
+        NotificationUtil.setBadgeCount(this, icon, 2);
         return true;
     }
 

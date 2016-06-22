@@ -35,5 +35,6 @@ dependencies {
     // OneSignal requires at least version 7.0.0 of GMS but the newest version is recommend.
     compile 'com.google.android.gms:play-services-gcm:+'
     compile 'com.google.android.gms:play-services-analytics:+'
+    compile 'com.mcxiaoke.volley:library:1.0.19'
     compile project(path: ':shuttercomponent')
 }

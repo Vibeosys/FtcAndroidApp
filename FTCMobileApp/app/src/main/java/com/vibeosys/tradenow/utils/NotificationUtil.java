@@ -10,7 +10,7 @@ import com.vibeosys.tradenow.views.BadgeDrawable;
 /**
  * Created by akshay on 18-06-2016.
  */
-public class Utils2 {
+public class NotificationUtil {
     public static void setBadgeCount(Context context, LayerDrawable icon, int count) {
 
         BadgeDrawable badge;
