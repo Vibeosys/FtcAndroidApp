@@ -33,8 +33,7 @@ public class NewsActivity extends BaseActivity {
         formView = findViewById(R.id.formView);
         progressBar = findViewById(R.id.progressBar);
         listNews = (ListView) findViewById(R.id.listNews);
-        adapter = new NewsAdapter(newses, getApplicationContext());
-        listNews.setAdapter(adapter);
+
         AsyncNewsFetch fetch = new AsyncNewsFetch();
         fetch.execute();
 
@@ -75,9 +74,8 @@ public class NewsActivity extends BaseActivity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             Log.d("TAG", "## News" + newses);
-            for (int i = 0; i < newses.size(); i++) {
-                adapter.addItem(newses.get(i));
-            }
+            adapter = new NewsAdapter(newses, getApplicationContext());
+            listNews.setAdapter(adapter);
             adapter.notifyDataSetChanged();
             showProgress(false, formView, progressBar);
 

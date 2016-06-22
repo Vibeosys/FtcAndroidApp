@@ -125,6 +125,8 @@ public class NewsFeedParser {
                 /*Time t = new Time();
                 t.parse3339(readTag(parser, TAG_PUB_DATE));*/
                 pubdate = readTag(parser, TAG_PUB_DATE);
+            } else if (name.equals("description")) {
+                description = readTag(parser, TAG_DESCRIPTION);
             } else {
                 skip(parser);
             }
