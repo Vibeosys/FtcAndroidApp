@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.vibeosys.tradenow.activities.BaseActivity;
 import com.vibeosys.tradenow.activities.DemoActivity;
 import com.vibeosys.tradenow.activities.LoginActivity;
 import com.vibeosys.tradenow.activities.MyProfileActivity;
@@ -20,9 +21,10 @@ import com.vibeosys.tradenow.activities.NotificationActivity;
 import com.vibeosys.tradenow.activities.ResetPassActivity;
 import com.vibeosys.tradenow.activities.TradeAlertDateActivity;
 import com.vibeosys.tradenow.activities.TradeHistoryDateActivity;
+import com.vibeosys.tradenow.services.SignalSyncService;
 import com.vibeosys.tradenow.utils.NotificationUtil;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
@@ -48,6 +50,10 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+       /* if (!isMyServiceRunning(SignalSyncService.class))*/
+        Intent syncServiceIntent = new Intent(Intent.ACTION_SYNC, null, this, SignalSyncService.class);
+        startService(syncServiceIntent);
     }
 
     @Override

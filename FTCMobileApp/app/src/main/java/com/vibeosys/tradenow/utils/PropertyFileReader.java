@@ -70,7 +70,7 @@ public class PropertyFileReader {
     }
 
     public int getDbVersion() {
-        String versionNumber = mProperties.getProperty(PropertyTypeConstants.VERSION_NUMBER);
+        String versionNumber = mProperties.getProperty(PropertyTypeConstants.DATABASE_VERSION_NUMBER);
         return Integer.valueOf(versionNumber);
     }
 }

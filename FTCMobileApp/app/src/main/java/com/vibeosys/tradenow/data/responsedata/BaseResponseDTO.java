@@ -1,5 +1,9 @@
 package com.vibeosys.tradenow.data.responsedata;
 
+import android.util.Log;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonParseException;
 import com.vibeosys.tradenow.data.BaseDTO;
 
 /**
@@ -7,6 +11,7 @@ import com.vibeosys.tradenow.data.BaseDTO;
  */
 public class BaseResponseDTO extends BaseDTO {
 
+    private static final String TAG = BaseResponseDTO.class.getSimpleName();
     private String error;
     private String data;
 
@@ -32,5 +37,16 @@ public class BaseResponseDTO extends BaseDTO {
 
     public void setData(String data) {
         this.data = data;
+    }
+
+    public static BaseResponseDTO deserializeJson(String serializedString) {
+        Gson gson = new Gson();
+        BaseResponseDTO resonceDto = null;
+        try {
+            resonceDto = gson.fromJson(serializedString, BaseResponseDTO.class);
+        } catch (JsonParseException e) {
+            Log.d(TAG, "Exception in deserialization" + e.toString());
+        }
+        return resonceDto;
     }
 }

@@ -5,7 +5,7 @@ package com.vibeosys.tradenow.database;
  */
 public class SqlContract {
 
-    public abstract class Signal {
+    public abstract class SqlSignal {
         public static final String TABLE_NAME = "signal";
         public static final String TICKET = "Ticket";
         public static final String SYMBOL = "Symbol";

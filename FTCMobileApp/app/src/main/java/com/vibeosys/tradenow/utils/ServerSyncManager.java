@@ -13,6 +13,8 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.vibeosys.tradenow.data.requestdata.BaseRequestDTO;
 import com.vibeosys.tradenow.data.requestdata.UserRequestDTO;
+import com.vibeosys.tradenow.data.responsedata.BaseResponseDTO;
+import com.vibeosys.tradenow.data.responsedata.ResponseErrorDTO;
 import com.vibeosys.tradenow.interfaces.BackgroundTaskCallback;
 
 import org.json.JSONObject;
@@ -81,7 +83,22 @@ public class ServerSyncManager
 
             @Override
             public void onResponse(JSONObject response) {
+                BaseResponseDTO responseDTO = BaseResponseDTO.deserializeJson(response.toString());
+                ResponseErrorDTO errorDTO = ResponseErrorDTO.deserializeJson(responseDTO.getError());
+                if (responseDTO == null) {
+                    Log.e(TAG, "Error to get the data from server");
+                    return;
+                }
+                if (errorDTO.getErrorCode() > 0) {
+                    if (mErrorReceived != null)
+                        mErrorReceived.onDataErrorReceived(errorDTO, requestToken);
+                    Log.e("Data Error", "Error to get the data");
+                    return;
+                }
 
+                if (mOnSuccessResultReceived != null) {
+                    mOnSuccessResultReceived.onResultReceived(responseDTO.getData(), requestToken);
+                }
             }
 
         }, new Response.ErrorListener() {
@@ -111,6 +128,8 @@ public class ServerSyncManager
 
     public interface OnErrorResultReceived {
         void onVolleyErrorReceived(@NonNull VolleyError error, int requestToken);
+
+        void onDataErrorReceived(ResponseErrorDTO errorDbDTO, int requestToken);
     }
 
 }

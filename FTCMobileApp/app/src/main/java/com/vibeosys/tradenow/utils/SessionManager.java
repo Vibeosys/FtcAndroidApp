@@ -62,6 +62,7 @@ public class SessionManager {
         editor.putString(PropertyTypeConstants.DATABASE_FILE_NAME, mPropertyFileReader.getDatabaseFileName());
         editor.putString(PropertyTypeConstants.VERSION_NUMBER, String.valueOf(mPropertyFileReader.getVersion()));
         editor.putInt(PropertyTypeConstants.DATABASE_VERSION_NUMBER, mPropertyFileReader.getDbVersion());
+        editor.apply();
         return true;
     }
 
@@ -81,6 +82,33 @@ public class SessionManager {
     }
 
     public int getDatabaseVersion() {
+        Log.d("DB version", "##" + mProjectSharedPref.getInt(PropertyTypeConstants.DATABASE_VERSION_NUMBER, 0));
         return mProjectSharedPref.getInt(PropertyTypeConstants.DATABASE_VERSION_NUMBER, 0);
+    }
+
+    public long getLastSyncDate() {
+        return mProjectSharedPref.getLong(PropertyTypeConstants.DATE_TO_SYNC, 0);
+    }
+
+    public void setLastSyncDate(long date) {
+        setValuesInSharedPrefs(PropertyTypeConstants.DATE_TO_SYNC, date);
+    }
+
+    private static void setValuesInSharedPrefs(String sharedPrefKey, String sharedPrefValue) {
+        SharedPreferences.Editor editor = mProjectSharedPref.edit();
+        editor.putString(sharedPrefKey, sharedPrefValue);
+        editor.apply();
+    }
+
+    private static void setValuesInSharedPrefs(String sharedPrefKey, int sharedPrefValue) {
+        SharedPreferences.Editor editor = mProjectSharedPref.edit();
+        editor.putInt(sharedPrefKey, sharedPrefValue);
+        editor.apply();
+    }
+
+    private static void setValuesInSharedPrefs(String sharedPrefKey, long sharedPrefValue) {
+        SharedPreferences.Editor editor = mProjectSharedPref.edit();
+        editor.putLong(sharedPrefKey, sharedPrefValue);
+        editor.apply();
     }
 }

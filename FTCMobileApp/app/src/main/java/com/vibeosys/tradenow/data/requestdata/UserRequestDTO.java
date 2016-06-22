@@ -9,13 +9,13 @@ public class UserRequestDTO extends BaseDTO {
 
     private long userId;
     private long subscriberId;
-    private String userName;
+    private String username;
     private String pwd;
 
     public UserRequestDTO(long userId, long subscriberId, String userName, String pwd) {
         this.userId = userId;
         this.subscriberId = subscriberId;
-        this.userName = userName;
+        this.username = userName;
         this.pwd = pwd;
     }
 
@@ -36,11 +36,11 @@ public class UserRequestDTO extends BaseDTO {
     }
 
     public String getUserName() {
-        return userName;
+        return username;
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.username = userName;
     }
 
     public String getPwd() {

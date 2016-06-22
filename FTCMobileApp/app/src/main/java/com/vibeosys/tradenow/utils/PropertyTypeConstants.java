@@ -13,4 +13,5 @@ public final class PropertyTypeConstants {
     public static final String SIGNAL_URL = "api.endpoint.signal";
     public static final String PAGES_URL = "api.endpoint.pages";
     public static final String DATABASE_VERSION_NUMBER = "database.version.number";
+    public static final String DATE_TO_SYNC = "syncdate";
 }
