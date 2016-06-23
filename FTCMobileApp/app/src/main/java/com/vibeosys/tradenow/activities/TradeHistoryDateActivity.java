@@ -29,7 +29,11 @@ public class TradeHistoryDateActivity extends BaseActivity {
         listTradeData.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                startActivity(new Intent(getApplicationContext(), TradeHistoryActivity.class));
+                SignalDateDTO signalDateDTO = (SignalDateDTO) adapter.getItem(position);
+                String date = signalDateDTO.getDate();
+                Intent iTradeAlert = new Intent(getApplicationContext(), TradeHistoryActivity.class);
+                iTradeAlert.putExtra("SelectedDate", date);
+                startActivity(iTradeAlert);
             }
         });
     }

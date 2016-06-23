@@ -3,35 +3,50 @@ package com.vibeosys.tradenow.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.vibeosys.tradenow.R;
 import com.vibeosys.tradenow.adapters.TradeHistoryAdapter;
+import com.vibeosys.tradenow.data.adapterdata.SignalDataDTO;
+import com.vibeosys.tradenow.data.adapterdata.SignalDateDTO;
+import com.vibeosys.tradenow.utils.DateUtils;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class TradeHistoryActivity extends BaseActivity implements TradeHistoryAdapter.ViewDetailsListener {
 
     ListView listTradeHistory;
     TradeHistoryAdapter adapter;
+    TextView txtError;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trade_history);
-        setTitle("Monday 20th June 2016");
-        listTradeHistory = (ListView) findViewById(R.id.listTradeHistory);
-        ArrayList<Integer> data = new ArrayList<>();
-        data.add(1);
-        data.add(3);
-        data.add(2);
-        data.add(4);
-        data.add(5);
-        data.add(6);
+        String selectedDate = getIntent().getExtras().getString("SelectedDate");
 
-        adapter = new TradeHistoryAdapter(data, getApplicationContext());
-        adapter.setCustomButtonListner(this);
-        listTradeHistory.setAdapter(adapter);
+        DateUtils dateUtils = new DateUtils();
+        Date signalDate = dateUtils.getFormattedOnlyDate(selectedDate);
+        setTitle(dateUtils.getLocalDateInReadableFormat(signalDate));
+
+        listTradeHistory = (ListView) findViewById(R.id.listTradeHistory);
+        txtError = (TextView) findViewById(R.id.txtError);
+
+        ArrayList<SignalDataDTO> data = new ArrayList<>();
+        data = mDbRepository.getSignalDataList("NULL", selectedDate);
+        if (data.size() <= 0) {
+            txtError.setVisibility(View.VISIBLE);
+            listTradeHistory.setVisibility(View.GONE);
+        } else {
+            txtError.setVisibility(View.GONE);
+            listTradeHistory.setVisibility(View.VISIBLE);
+            adapter = new TradeHistoryAdapter(data, getApplicationContext());
+            adapter.setCustomButtonListner(this);
+            listTradeHistory.setAdapter(adapter);
+        }
     }
 
     @Override

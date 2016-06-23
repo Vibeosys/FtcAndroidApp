@@ -3,7 +3,9 @@ package com.vibeosys.tradenow.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.vibeosys.tradenow.R;
 import com.vibeosys.tradenow.adapters.TradeAlertAdapter;
@@ -17,6 +19,7 @@ public class TradingAlertActivity extends BaseActivity implements TradeAlertAdap
 
     ListView listTreadAlert;
     TradeAlertAdapter adapter;
+    TextView txtError;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +32,20 @@ public class TradingAlertActivity extends BaseActivity implements TradeAlertAdap
         setTitle(dateUtils.getLocalDateInReadableFormat(signalDate));
 
         listTreadAlert = (ListView) findViewById(R.id.listTradeAlert);
+        txtError = (TextView) findViewById(R.id.txtError);
+
         ArrayList<SignalDataDTO> data = new ArrayList<>();
         data = mDbRepository.getSignalDataList("NULL", selectedDate);
-        adapter = new TradeAlertAdapter(data, getApplicationContext());
-        adapter.setCustomButtonListner(this);
-        listTreadAlert.setAdapter(adapter);
+        if (data.size() <= 0) {
+            txtError.setVisibility(View.VISIBLE);
+            listTreadAlert.setVisibility(View.GONE);
+        } else {
+            txtError.setVisibility(View.GONE);
+            listTreadAlert.setVisibility(View.VISIBLE);
+            adapter = new TradeAlertAdapter(data, getApplicationContext());
+            adapter.setCustomButtonListner(this);
+            listTreadAlert.setAdapter(adapter);
+        }
     }
 
     @Override
