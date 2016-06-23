@@ -2,8 +2,11 @@ package com.vibeosys.tradenow.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Html;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,46 +15,49 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.android.volley.VolleyError;
+import com.google.gson.Gson;
 import com.vibeosys.tradenow.MainActivity;
 import com.vibeosys.tradenow.R;
 import com.vibeosys.tradenow.activities.ForgotPassActivity;
 import com.vibeosys.tradenow.activities.TermsAndConditionActivity;
 import com.vibeosys.tradenow.adapters.LoginSpinner;
+import com.vibeosys.tradenow.data.requestdata.BaseRequestDTO;
+import com.vibeosys.tradenow.data.requestdata.GetUserSubLogin;
+import com.vibeosys.tradenow.data.responsedata.ResponseErrorDTO;
+import com.vibeosys.tradenow.utils.ServerRequestConstants;
+import com.vibeosys.tradenow.utils.ServerSyncManager;
 
 import java.util.ArrayList;
 
 /**
  * Created by akshay on 18-06-2016.
  */
-public class ClientUserLoginFragment extends BaseFragment implements View.OnClickListener {
+public class ClientUserLoginFragment extends BaseFragment implements View.OnClickListener,
+        ServerSyncManager.OnErrorResultReceived, ServerSyncManager.OnSuccessResultReceived {
 
-    //Spinner spnClient;
-    EditText txtUserName, txtPassword;
+    private static final String TAG = ClientUserLoginFragment.class.getSimpleName();
+    EditText txtUserName, txtPassword, txtSubscriberId;
     TextView txtForgotPass, txtTerms;
     Button btnLogIn;
-    //private LoginSpinner adapter;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_login_client, container, false);
-        //spnClient = (Spinner) view.findViewById(R.id.spnClient);
+
         txtUserName = (EditText) view.findViewById(R.id.txtUserName);
         txtPassword = (EditText) view.findViewById(R.id.txtPassword);
         txtForgotPass = (TextView) view.findViewById(R.id.txtForgotPass);
+        txtSubscriberId = (EditText) view.findViewById(R.id.txtSubscriberId);
         txtTerms = (TextView) view.findViewById(R.id.txtTerms);
         txtTerms.setText(Html.fromHtml(getResources().getString(R.string.privacy_text_check)));
         btnLogIn = (Button) view.findViewById(R.id.btnLogIn);
         btnLogIn.setOnClickListener(this);
         txtForgotPass.setOnClickListener(this);
         txtTerms.setOnClickListener(this);
-        ArrayList<String> spnItem = new ArrayList<>();
-        spnItem.add("Abc");
-        spnItem.add("Xyz");
-        spnItem.add("Pqr");
-        spnItem.add("Efg");
-       /* adapter = new LoginSpinner(spnItem, getActivity().getApplicationContext());
-        spnClient.setAdapter(adapter);*/
+        mServerSyncManager.setOnStringErrorReceived(this);
+        mServerSyncManager.setOnStringResultReceived(this);
         return view;
     }
 
@@ -60,13 +66,85 @@ public class ClientUserLoginFragment extends BaseFragment implements View.OnClic
         int id = v.getId();
         switch (id) {
             case R.id.btnLogIn:
-                startActivity(new Intent(getActivity().getApplicationContext(), MainActivity.class));
+                String userName = txtUserName.getText().toString();
+                String password = txtPassword.getText().toString();
+                String subId = txtSubscriberId.getText().toString();
+                callLogin(userName, password, subId);
                 break;
             case R.id.txtForgotPass:
                 startActivity(new Intent(getActivity().getApplicationContext(), ForgotPassActivity.class));
                 break;
             case R.id.txtTerms:
                 startActivity(new Intent(getActivity().getApplicationContext(), TermsAndConditionActivity.class));
+                break;
+        }
+    }
+
+    private void callLogin(String userName, String password, String subId) {
+
+        boolean cancelFlag = false;
+        View focusView = null;
+        txtUserName.setError(null);
+        txtPassword.setError(null);
+        txtSubscriberId.setError(null);
+        if (TextUtils.isEmpty(userName)) {
+            cancelFlag = true;
+            focusView = txtUserName;
+            txtUserName.setError(getResources().getString(R.string.str_error_user_name_empty));
+        } else if (TextUtils.isEmpty(password)) {
+            cancelFlag = true;
+            focusView = txtPassword;
+            txtPassword.setError(getResources().getString(R.string.str_err_pass_empty));
+        } else if (TextUtils.isEmpty(subId)) {
+            cancelFlag = true;
+            focusView = txtSubscriberId;
+            txtSubscriberId.setError(getResources().getString(R.string.str_err_sub_empty));
+        }
+
+        if (cancelFlag) {
+            focusView.requestFocus();
+        } else {
+            try {
+                int userSubId = Integer.parseInt(subId);
+                GetUserSubLogin userSubLogin = new GetUserSubLogin(userName, password, userSubId);
+                Gson gson = new Gson();
+                String serializedJsonString = gson.toJson(userSubLogin);
+                BaseRequestDTO baseRequestDTO = new BaseRequestDTO();
+                baseRequestDTO.setData(serializedJsonString);
+                mServerSyncManager.uploadDataToServer(ServerRequestConstants.REQUEST_CLIENT_LOGIN,
+                        mSessionManager.getClientLoginUrl(), baseRequestDTO);
+            } catch (NumberFormatException e) {
+                txtSubscriberId.requestFocus();
+                txtSubscriberId.setError(getResources().getString(R.string.str_err_sub_num_invalid));
+            }
+
+        }
+    }
+
+    @Override
+    public void onVolleyErrorReceived(@NonNull VolleyError error, int requestToken) {
+        switch (requestToken) {
+            case ServerRequestConstants.REQUEST_CLIENT_LOGIN:
+                Log.e(TAG, "Error in Client Login" + error.toString());
+                break;
+        }
+    }
+
+    @Override
+    public void onDataErrorReceived(ResponseErrorDTO errorDbDTO, int requestToken) {
+        switch (requestToken) {
+            case ServerRequestConstants.REQUEST_CLIENT_LOGIN:
+                Log.e(TAG, "Error in Client Login data" + errorDbDTO.getMessage());
+                break;
+        }
+    }
+
+    @Override
+    public void onResultReceived(@NonNull String data, int requestToken) {
+        switch (requestToken) {
+            case ServerRequestConstants.REQUEST_CLIENT_LOGIN:
+                Log.d(TAG, "Success Login " + data);
+                startActivity(new Intent(getContext(), MainActivity.class));
                 break;
         }
     }

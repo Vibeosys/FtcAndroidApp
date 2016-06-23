@@ -46,7 +46,6 @@ public class DbRepository extends SQLiteOpenHelper {
 
     public DbRepository(Context context, SessionManager sessionManager) {
         super(context, DATABASE_NAME, null, sessionManager.getDatabaseVersion());
-        context.openOrCreateDatabase(DATABASE_NAME, context.MODE_PRIVATE, null);
     }
 
     @Override
@@ -88,7 +87,7 @@ public class DbRepository extends SQLiteOpenHelper {
         DateUtils dateUtils = new DateUtils();
         long count = -1;
         try {
-            sqLiteDatabase = this.getWritableDatabase();
+            sqLiteDatabase = getWritableDatabase();
             synchronized (sqLiteDatabase) {
                 contentValues = new ContentValues();
                 for (ResponseSignalDTO signalDTO : signalDTOList) {

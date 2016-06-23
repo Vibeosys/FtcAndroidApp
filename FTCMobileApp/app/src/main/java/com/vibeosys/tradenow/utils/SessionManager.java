@@ -56,6 +56,7 @@ public class SessionManager {
 
         SharedPreferences.Editor editor = mProjectSharedPref.edit();
         editor.putString(PropertyTypeConstants.SIGNAL_URL, mPropertyFileReader.getSignalUrl());
+        editor.putString(PropertyTypeConstants.CLIENT_LOGIN_URL, mPropertyFileReader.getClientLoginUrl());
         editor.putString(PropertyTypeConstants.PAGES_URL, mPropertyFileReader.getPagesUrl());
         editor.putString(PropertyTypeConstants.DATABASE_DEVICE_FULLPATH, mPropertyFileReader.getDatabaseDeviceFullPath());
         editor.putString(PropertyTypeConstants.DATABASE_DIR_PATH, mPropertyFileReader.getDatabaseDirPath());
@@ -110,5 +111,9 @@ public class SessionManager {
         SharedPreferences.Editor editor = mProjectSharedPref.edit();
         editor.putLong(sharedPrefKey, sharedPrefValue);
         editor.apply();
+    }
+
+    public String getClientLoginUrl() {
+        return mProjectSharedPref.getString(PropertyTypeConstants.CLIENT_LOGIN_URL, null);
     }
 }

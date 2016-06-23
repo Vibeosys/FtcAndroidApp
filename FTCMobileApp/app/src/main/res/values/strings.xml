@@ -58,7 +58,7 @@
     <string name="str_change_pass">Change Password</string>
     <string name="nav_demo_view">Demo Views</string>
     <string name="str_profit_n_loss">Profit n Loss</string>
-    <string name="str_profit_n_loss_in_pips">Profit/Loss\nin pips</string>
+    <string name="str_profit_n_loss_in_pips">P/L in pips</string>
     <string name="view_all">View Details</string>
     <string name="subscriber_id">Subscriber Id</string>
     <string name="nav_str_log_out">Log Out</string>
@@ -81,4 +81,8 @@
     <string name="nav_news">News</string>
     <string name="open_price">Open Price</string>
     <string name="content_error">Sorry,There is no any content found</string>
+    <string name="str_error_user_name_empty">Please Enter User Name</string>
+    <string name="str_err_pass_empty">Please Enter Your Password</string>
+    <string name="str_err_sub_empty">Please Enter Subscription Id</string>
+    <string name="str_err_sub_num_invalid">Number is not valid</string>
 </resources>

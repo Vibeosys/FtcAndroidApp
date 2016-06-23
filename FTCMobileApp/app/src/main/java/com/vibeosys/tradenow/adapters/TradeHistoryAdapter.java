@@ -63,7 +63,6 @@ public class TradeHistoryAdapter extends BaseAdapter {
             viewHolder.txtBuyOrSell = (TextView) row.findViewById(R.id.txtBuyOrSell);
             viewHolder.txtViewAll = (TextView) row.findViewById(R.id.txtViewAll);
             viewHolder.txtClosePrice = (TextView) row.findViewById(R.id.txtClosePrice);
-            viewHolder.txtOpenPrice = (TextView) row.findViewById(R.id.txtOpenPrice);
             viewHolder.txtType = (TextView) row.findViewById(R.id.txtType);
             row.setTag(viewHolder);
 
@@ -82,7 +81,6 @@ public class TradeHistoryAdapter extends BaseAdapter {
         Date closeDate = dateUtils.getFormattedDate(signalDataDTO.getCloseTime());
         viewHolder.txtCloseTime.setText(dateUtils.getLocalTimeInReadableFormat(closeDate));
         viewHolder.txtClosePrice.setText("" + signalDataDTO.getClosePrice());
-        viewHolder.txtOpenPrice.setText("" + signalDataDTO.getPrice());
         /*if (i % 2 == 0) {
             viewHolder.txtBuyOrSell.setTextColor(mContext.getResources().getColor(R.color.cancel_btn_colour));
             viewHolder.txtBuyOrSell.setText("LOSS");
@@ -102,7 +100,7 @@ public class TradeHistoryAdapter extends BaseAdapter {
 
     private class ViewHolder {
         TextView txtPrice, txtSL, txtPlPip, txtTP, txtTime, txtCloseTime, txtBuyOrSell,
-                txtViewAll, txtOpenPrice, txtClosePrice, txtType;
+                txtViewAll, txtClosePrice, txtType;
     }
 
     public void addItem(final SignalDataDTO item) {

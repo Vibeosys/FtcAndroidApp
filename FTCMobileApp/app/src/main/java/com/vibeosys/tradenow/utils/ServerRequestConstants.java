@@ -6,4 +6,5 @@ package com.vibeosys.tradenow.utils;
 public class ServerRequestConstants {
 
     public static final int REQUEST_SIGNAL = 111;
+    public static final int REQUEST_CLIENT_LOGIN = 112;
 }
