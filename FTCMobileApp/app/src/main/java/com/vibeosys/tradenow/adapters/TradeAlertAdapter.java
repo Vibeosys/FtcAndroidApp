@@ -9,7 +9,10 @@ import android.widget.TextView;
 
 import com.vibeosys.shuttercomponent.ShutterHeader;
 import com.vibeosys.tradenow.R;
+import com.vibeosys.tradenow.data.adapterdata.SignalDataDTO;
+import com.vibeosys.tradenow.utils.DateUtils;
 
+import java.util.Date;
 import java.util.ArrayList;
 
 /**
@@ -17,11 +20,11 @@ import java.util.ArrayList;
  */
 public class TradeAlertAdapter extends BaseAdapter {
 
-    private ArrayList<Integer> data;
+    private ArrayList<SignalDataDTO> data;
     private Context mContext;
     ViewDetailsListener viewDetailsListener;
 
-    public TradeAlertAdapter(ArrayList<Integer> data, Context mContext) {
+    public TradeAlertAdapter(ArrayList<SignalDataDTO> data, Context mContext) {
         this.data = data;
         this.mContext = mContext;
     }
@@ -58,53 +61,43 @@ public class TradeAlertAdapter extends BaseAdapter {
             viewHolder.txtTP = (TextView) row.findViewById(R.id.txtTP);
             viewHolder.txtTime = (TextView) row.findViewById(R.id.txtTime);
             viewHolder.txtBuyOrSell = (TextView) row.findViewById(R.id.txtBuyOrSell);
+            viewHolder.txtType = (TextView) row.findViewById(R.id.txtType);
             row.setTag(viewHolder);
 
         } else
             viewHolder = (ViewHolder) convertView.getTag();
-        int i = data.get(position);
-       /* viewHolder.shutterHeader.setTxtPrice("0.84875");
-        viewHolder.shutterHeader.setTxtSL("0.84975");
-        viewHolder.shutterHeader.setLotSize("0.1");
-        viewHolder.shutterHeader.setTP("0.85725");
-        viewHolder.shutterHeader.setTime("09:30 AM");
-        viewHolder.shutterHeader.setCloseTime("03:30 PM");
-        viewHolder.shutterHeader.setLayoutVisibility(View.GONE);
-        viewHolder.shutterHeader.setImageVisibility(View.VISIBLE);
-        viewHolder.shutterHeader.txtViewAll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (viewDetailsListener != null)
-                    viewDetailsListener.onViewClickListener(v.getId(), 1, new Object());
-            }
-        });*/
-        viewHolder.txtPrice.setText("0.84875");
-        viewHolder.txtSL.setText("0.84975");
-        viewHolder.txtLotSize.setText("0.1");
-        viewHolder.txtTP.setText("0.85725");
-        viewHolder.txtTime.setText("09:30 AM");
-        if (i % 2 == 0) {
+        SignalDataDTO signalDataDTO = data.get(position);
+
+        viewHolder.txtPrice.setText("" + signalDataDTO.getPrice());
+        viewHolder.txtSL.setText("" + signalDataDTO.getSl());
+        viewHolder.txtLotSize.setText("" + signalDataDTO.getLot());
+        viewHolder.txtTP.setText("" + signalDataDTO.getTp());
+        viewHolder.txtType.setText(signalDataDTO.getSymbol());
+        DateUtils dateUtils = new DateUtils();
+        Date openDate = dateUtils.getFormattedDate(signalDataDTO.getOpenTime());
+        viewHolder.txtTime.setText(dateUtils.getLocalTimeInReadableFormat(openDate));
+        /*if (i % 2 == 0) {
             viewHolder.txtBuyOrSell.setTextColor(mContext.getResources().getColor(R.color.cancel_btn_colour));
             viewHolder.txtBuyOrSell.setText("SELL");
-            /*viewHolder.shutterHeader.setTxtBuyOrSell("SELL");
-            viewHolder.shutterHeader.setTxtBuyOrSellColor(mContext.getResources().getColor(R.color.cancel_btn_colour));*/
+            *//*viewHolder.shutterHeader.setTxtBuyOrSell("SELL");
+            viewHolder.shutterHeader.setTxtBuyOrSellColor(mContext.getResources().getColor(R.color.cancel_btn_colour));*//*
         } else {
             viewHolder.txtBuyOrSell.setTextColor(mContext.getResources().getColor(R.color.ok_btn_colour));
             viewHolder.txtBuyOrSell.setText("BUY");
-           /* viewHolder.shutterHeader.setTxtBuyOrSell("BUY");
-            viewHolder.shutterHeader.setTxtBuyOrSellColor(mContext.getResources().getColor(R.color.ok_btn_colour));*/
-        }
+           *//* viewHolder.shutterHeader.setTxtBuyOrSell("BUY");
+            viewHolder.shutterHeader.setTxtBuyOrSellColor(mContext.getResources().getColor(R.color.ok_btn_colour));*//*
+        }*/
 
         return row;
     }
 
     private class ViewHolder {
-        TextView txtPrice, txtSL, txtLotSize, txtTP, txtTime, txtBuyOrSell;
+        TextView txtPrice, txtSL, txtLotSize, txtTP, txtTime, txtBuyOrSell, txtType;
 
         //ShutterHeader shutterHeader;
     }
 
-    public void addItem(final Integer item) {
+    public void addItem(final SignalDataDTO item) {
         data.add(item);
         notifyDataSetChanged();
     }

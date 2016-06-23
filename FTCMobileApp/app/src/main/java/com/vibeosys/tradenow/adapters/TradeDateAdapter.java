@@ -1,14 +1,18 @@
 package com.vibeosys.tradenow.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
-import com.vibeosys.shuttercomponent.ShutterHeader;
 import com.vibeosys.tradenow.R;
+import com.vibeosys.tradenow.data.adapterdata.SignalDateDTO;
+import com.vibeosys.tradenow.utils.DateUtils;
 
+import java.util.Date;
 import java.util.ArrayList;
 
 /**
@@ -16,10 +20,11 @@ import java.util.ArrayList;
  */
 public class TradeDateAdapter extends BaseAdapter {
 
-    private ArrayList<Integer> data;
+    private static final String TAG = TradeDateAdapter.class.getSimpleName();
+    private ArrayList<SignalDateDTO> data;
     private Context mContext;
 
-    public TradeDateAdapter(ArrayList<Integer> data, Context mContext) {
+    public TradeDateAdapter(ArrayList<SignalDateDTO> data, Context mContext) {
         this.data = data;
         this.mContext = mContext;
     }
@@ -49,21 +54,26 @@ public class TradeDateAdapter extends BaseAdapter {
                     (Context.LAYOUT_INFLATER_SERVICE);
             row = theLayoutInflator.inflate(R.layout.row_trade_date, null);
             viewHolder = new ViewHolder();
-
+            viewHolder.txtDate = (TextView) row.findViewById(R.id.txtDate);
             row.setTag(viewHolder);
 
         } else
             viewHolder = (ViewHolder) convertView.getTag();
-        int i = data.get(position);
-
+        SignalDateDTO tradeDateDTO = data.get(position);
+        /*long tradeDate = tradeDateDTO.getDate() * 1000;*/
+        //Log.d(TAG, "## date time stamp" + tradeDate);
+        //Date tDate = new Date(tradeDate);
+        DateUtils dateUtils = new DateUtils();
+        Date signalDate = dateUtils.getFormattedOnlyDate(tradeDateDTO.getDate());
+        viewHolder.txtDate.setText(dateUtils.getLocalDateInReadableFormat(signalDate));
         return row;
     }
 
     private class ViewHolder {
-
+        TextView txtDate;
     }
 
-    public void addItem(final Integer item) {
+    public void addItem(final SignalDateDTO item) {
         data.add(item);
         notifyDataSetChanged();
     }

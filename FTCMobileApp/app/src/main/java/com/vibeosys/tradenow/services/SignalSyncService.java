@@ -30,12 +30,12 @@ public class SignalSyncService extends IntentService {
         while (true) {
             synchronized (this) {
                 try {
-                    //TODO: Hardcoded time for now, need to read from properties
-                    wait(AppConstants.SERVICE_TIME_OUT * 1000);
                     if (NetworkUtils.isActiveNetworkAvailable(getApplicationContext()))
                         mSignalSyncManager.syncWithServer();
 
                     Log.d("SyncService", "##In service");
+                    //TODO: Hardcoded time for now, need to read from properties
+                    wait(AppConstants.SERVICE_TIME_OUT * 1000);
                 } catch (Exception e) {
                     Log.e("SyncService", "##Error occurred in background service " + e.toString());
                 }

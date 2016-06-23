@@ -72,7 +72,16 @@ public class SignalSyncManager implements ServerSyncManager.OnSuccessResultRecei
         switch (requestToken) {
             case ServerRequestConstants.REQUEST_SIGNAL:
                 List<ResponseSignalDTO> signalDTOList = ResponseSignalDTO.deserializeToArray(data);
-                mDbRepository.insertSignal(signalDTOList);
+                boolean flagQuery = mDbRepository.insertSignal(signalDTOList);
+                if (flagQuery) {
+                    try {
+                        ResponseSignalDTO responseSignalDTO = signalDTOList.get(signalDTOList.size() - 1);
+                        mSessionManager.setLastSyncDate(responseSignalDTO.getOpenTime());
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        Log.e(TAG, " Error at Signal Sync " + e.toString());
+                    }
+
+                }
                 Log.d(TAG, "##Volley Response" + data);
                 break;
         }

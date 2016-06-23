@@ -22,5 +22,6 @@ public class SqlContract {
         public static final String STATUS = "status";
         public static final String COPY = "copy";
         public static final String EXP_TIME = "exp_time";
+        public static final String SIGNAL_DATE = "signal_date";
     }
 }
