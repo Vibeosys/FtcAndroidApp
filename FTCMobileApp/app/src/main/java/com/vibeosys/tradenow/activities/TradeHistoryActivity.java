@@ -32,7 +32,7 @@ public class TradeHistoryActivity extends BaseActivity implements TradeHistoryAd
 
         DateUtils dateUtils = new DateUtils();
         Date signalDate = dateUtils.getFormattedOnlyDate(selectedDate);
-        setTitle(dateUtils.getLocalDateInReadableFormat(signalDate));
+        setTitle("As On" + dateUtils.getLocalDateInReadableFormat(signalDate));
 
         listTradeHistory = (ListView) findViewById(R.id.listTradeHistory);
         txtError = (TextView) findViewById(R.id.txtError);
