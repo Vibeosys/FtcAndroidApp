@@ -18,6 +18,7 @@ import com.vibeosys.tradenow.adapters.LoginFragmentAdapter;
 public class LoginActivity extends BaseActivity {
 
     TabLayout tab_layout;
+    View mainLoginView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +26,7 @@ public class LoginActivity extends BaseActivity {
         setContentView(R.layout.activity_main_login);
         getSupportActionBar().hide();
         //setTitle(getResources().getString(R.string.str_login_btn));
-
+        mainLoginView = findViewById(R.id.mainLoginView);
         tab_layout = (TabLayout) findViewById(R.id.tab_layout);
         tab_layout.addTab(tab_layout.newTab().setText("NEW USER"));
         tab_layout.addTab(tab_layout.newTab().setText("SUBSCRIBERS"));
@@ -54,5 +55,10 @@ public class LoginActivity extends BaseActivity {
 
             }
         });
+    }
+
+    @Override
+    protected View getMainView() {
+        return this.mainLoginView;
     }
 }

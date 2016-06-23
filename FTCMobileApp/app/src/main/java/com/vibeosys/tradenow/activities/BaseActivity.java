@@ -8,31 +8,34 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.provider.Settings;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
-import com.vibeosys.tradenow.R;
 import com.vibeosys.tradenow.database.DbRepository;
 import com.vibeosys.tradenow.utils.NetworkUtils;
 import com.vibeosys.tradenow.utils.ServerSyncManager;
 import com.vibeosys.tradenow.utils.SessionManager;
 import com.vibeosys.tradenow.utils.SignalSyncManager;
 
+import java.io.IOException;
+
 /**
  * Created by akshay on 15-06-2016.
  */
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
+    private static final String TAG = BaseActivity.class.getSimpleName();
     protected ServerSyncManager mServerSyncManager = null;
     protected SignalSyncManager mSignalSyncManager = null;
     protected DbRepository mDbRepository = null;
     protected static SessionManager mSessionManager = null;
+    protected View mainView = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,8 +116,26 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-       /* if (!NetworkUtils.isActiveNetworkAvailable(getApplicationContext()))
-            Snackbar.make(formView, "Unable to connect Internet", Snackbar.LENGTH_SHORT).show();*/
+        View view = new View(getApplicationContext());
+        if (!NetworkUtils.isActiveNetworkAvailable(getApplicationContext())) {
+            try {
+                view = getMainView();
+                Snackbar snackbar = Snackbar
+                        .make(view, "No internet connection!", Snackbar.LENGTH_INDEFINITE)
+                        .setAction("Setting", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                startActivityForResult(new Intent(Settings.ACTION_SETTINGS), 0);
+                            }
+                        });
+// Changing message text color
+                snackbar.setActionTextColor(Color.RED);
+                snackbar.show();
+            } catch (NullPointerException e) {
+                Log.e(TAG, " Error at base activity null view" + e.toString());
+            }
+
+        }
     }
 
     protected boolean isMyServiceRunning(Class<?> serviceClass) {
@@ -126,4 +147,6 @@ public class BaseActivity extends AppCompatActivity {
         }
         return false;
     }
+
+    protected abstract View getMainView() throws NullPointerException;
 }

@@ -18,11 +18,13 @@ import java.util.Date;
 
 public class TradeHistoryActivity extends BaseActivity implements TradeHistoryAdapter.ViewDetailsListener {
 
-    ListView listTradeHistory;
-    TradeHistoryAdapter adapter;
-    TextView txtError;
+    private ListView listTradeHistory;
+    private TradeHistoryAdapter adapter;
+    private TextView txtError;
+    private View mainTradHistoryView;
 
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trade_history);
@@ -34,6 +36,7 @@ public class TradeHistoryActivity extends BaseActivity implements TradeHistoryAd
 
         listTradeHistory = (ListView) findViewById(R.id.listTradeHistory);
         txtError = (TextView) findViewById(R.id.txtError);
+        mainTradHistoryView = findViewById(R.id.mainTradHistoryView);
 
         ArrayList<SignalDataDTO> data = new ArrayList<>();
         data = mDbRepository.getSignalDataList("NULL", selectedDate);
@@ -47,6 +50,11 @@ public class TradeHistoryActivity extends BaseActivity implements TradeHistoryAd
             adapter.setCustomButtonListner(this);
             listTradeHistory.setAdapter(adapter);
         }
+    }
+
+    @Override
+    protected View getMainView() {
+        return this.mainTradHistoryView;
     }
 
     @Override

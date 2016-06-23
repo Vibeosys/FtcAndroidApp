@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.vibeosys.tradenow.activities.BaseActivity;
 import com.vibeosys.tradenow.activities.DemoActivity;
@@ -27,13 +28,15 @@ import com.vibeosys.tradenow.utils.NotificationUtil;
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private View mainActivityView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        mainActivityView = findViewById(R.id.mainActivityView);
        /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +57,11 @@ public class MainActivity extends BaseActivity
        /* if (!isMyServiceRunning(SignalSyncService.class))*/
         Intent syncServiceIntent = new Intent(Intent.ACTION_SYNC, null, this, SignalSyncService.class);
         startService(syncServiceIntent);
+    }
+
+    @Override
+    protected View getMainView() {
+        return this.mainActivityView;
     }
 
     @Override

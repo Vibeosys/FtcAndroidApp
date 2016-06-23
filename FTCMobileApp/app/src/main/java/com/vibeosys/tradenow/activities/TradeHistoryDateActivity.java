@@ -13,8 +13,10 @@ import com.vibeosys.tradenow.data.adapterdata.SignalDateDTO;
 import java.util.ArrayList;
 
 public class TradeHistoryDateActivity extends BaseActivity {
-    ListView listTradeData;
-    TradeDateAdapter adapter;
+
+    private ListView listTradeData;
+    private TradeDateAdapter adapter;
+    private View mainTradHistoryDateView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +24,7 @@ public class TradeHistoryDateActivity extends BaseActivity {
         setContentView(R.layout.activity_trade_history_date_activiy);
         setTitle(getResources().getString(R.string.trade_history));
         listTradeData = (ListView) findViewById(R.id.listTradeDate);
+        mainTradHistoryDateView = findViewById(R.id.mainTradHistoryDateView);
         ArrayList<SignalDateDTO> data = new ArrayList<>();
         data = mDbRepository.getSignalDateList("NULL");
         adapter = new TradeDateAdapter(data, getApplicationContext());
@@ -36,5 +39,10 @@ public class TradeHistoryDateActivity extends BaseActivity {
                 startActivity(iTradeAlert);
             }
         });
+    }
+
+    @Override
+    protected View getMainView() {
+        return this.mainTradHistoryDateView;
     }
 }

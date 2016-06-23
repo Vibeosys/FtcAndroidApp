@@ -24,6 +24,7 @@ public class NewsActivity extends BaseActivity {
     private View progressBar;
     NewsAdapter adapter;
     ListView listNews;
+    View mainNewsView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +34,15 @@ public class NewsActivity extends BaseActivity {
         formView = findViewById(R.id.formView);
         progressBar = findViewById(R.id.progressBar);
         listNews = (ListView) findViewById(R.id.listNews);
-
+        mainNewsView = findViewById(R.id.mainNewsView);
         AsyncNewsFetch fetch = new AsyncNewsFetch();
         fetch.execute();
 
+    }
+
+    @Override
+    protected View getMainView() {
+        return this.mainNewsView;
     }
 
     private class AsyncNewsFetch extends AsyncTask<Void, Void, Void> {

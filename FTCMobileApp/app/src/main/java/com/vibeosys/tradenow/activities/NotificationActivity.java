@@ -2,6 +2,7 @@ package com.vibeosys.tradenow.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
 
 import com.vibeosys.tradenow.R;
@@ -53,5 +54,10 @@ public class NotificationActivity extends BaseActivity {
         data.add(6);
         adapter = new NotificationAdapter(data, getApplicationContext());
         listNotification.setAdapter(adapter);
+    }
+
+    @Override
+    protected View getMainView() {
+        return null;
     }
 }

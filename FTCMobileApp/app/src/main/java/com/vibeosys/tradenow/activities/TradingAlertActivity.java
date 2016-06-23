@@ -17,9 +17,10 @@ import java.util.Date;
 
 public class TradingAlertActivity extends BaseActivity implements TradeAlertAdapter.ViewDetailsListener {
 
-    ListView listTreadAlert;
-    TradeAlertAdapter adapter;
-    TextView txtError;
+    private ListView listTreadAlert;
+    private TradeAlertAdapter adapter;
+    private TextView txtError;
+    private View mainTradeAlert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class TradingAlertActivity extends BaseActivity implements TradeAlertAdap
 
         listTreadAlert = (ListView) findViewById(R.id.listTradeAlert);
         txtError = (TextView) findViewById(R.id.txtError);
+        mainTradeAlert = findViewById(R.id.mainTradeAlert);
 
         ArrayList<SignalDataDTO> data = new ArrayList<>();
         data = mDbRepository.getSignalDataList("NULL", selectedDate);
@@ -46,6 +48,11 @@ public class TradingAlertActivity extends BaseActivity implements TradeAlertAdap
             adapter.setCustomButtonListner(this);
             listTreadAlert.setAdapter(adapter);
         }
+    }
+
+    @Override
+    protected View getMainView() {
+        return this.mainTradeAlert;
     }
 
     @Override

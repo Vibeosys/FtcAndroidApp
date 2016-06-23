@@ -28,6 +28,11 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
     }
 
     @Override
+    protected View getMainView() {
+        return null;
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.profile_update, menu);
         return true;

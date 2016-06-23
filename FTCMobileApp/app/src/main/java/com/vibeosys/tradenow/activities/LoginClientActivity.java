@@ -16,18 +16,20 @@ import java.util.ArrayList;
 
 public class LoginClientActivity extends BaseActivity implements View.OnClickListener {
 
-   // Spinner spnClient;
+    // Spinner spnClient;
     EditText txtUserName, txtPassword;
     TextView txtForgotPass;
     Button btnLogIn;
     //private LoginSpinner adapter;
+    View mainClientLoginView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_client);
         setTitle(getResources().getString(R.string.str_activity_subscriber_login));
-       // spnClient = (Spinner) findViewById(R.id.spnClient);
+        // spnClient = (Spinner) findViewById(R.id.spnClient);
+        mainClientLoginView = findViewById(R.id.mainClientLoginView);
         txtUserName = (EditText) findViewById(R.id.txtUserName);
         txtPassword = (EditText) findViewById(R.id.txtPassword);
         txtForgotPass = (TextView) findViewById(R.id.txtForgotPass);
@@ -41,6 +43,11 @@ public class LoginClientActivity extends BaseActivity implements View.OnClickLis
         spnItem.add("Efg");
        /* adapter = new LoginSpinner(spnItem, getApplicationContext());
         spnClient.setAdapter(adapter);*/
+    }
+
+    @Override
+    protected View getMainView() {
+        return this.mainClientLoginView;
     }
 
     @Override
