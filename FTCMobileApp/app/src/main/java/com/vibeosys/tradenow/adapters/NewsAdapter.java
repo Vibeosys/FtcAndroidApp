@@ -8,11 +8,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.vibeosys.shuttercomponent.ShutterHeader;
 import com.vibeosys.tradenow.R;
-import com.vibeosys.tradenow.xmlparser.News;
+import com.vibeosys.tradenow.newutils.News;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

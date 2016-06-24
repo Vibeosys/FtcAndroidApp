@@ -8,8 +8,11 @@ import android.widget.ListView;
 
 import com.vibeosys.tradenow.R;
 import com.vibeosys.tradenow.adapters.NewsAdapter;
-import com.vibeosys.tradenow.xmlparser.News;
-import com.vibeosys.tradenow.xmlparser.NewsFeedParser;
+import com.vibeosys.tradenow.newutils.News;
+import com.vibeosys.tradenow.newutils.NewsFactory;
+import com.vibeosys.tradenow.newutils.NewsStandConstants;
+import com.vibeosys.tradenow.newutils.interfaces.NewsReader;
+import com.vibeosys.tradenow.newutils.parser.NewsForexFactoryParser;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -68,8 +71,11 @@ public class NewsActivity extends BaseActivity {
                 conn.connect();
                 InputStream stream = conn.getInputStream();
 
-                NewsFeedParser parser = new NewsFeedParser();
-                newses = parser.parse(stream);
+                /*NewsForexFactoryParser parser = new NewsForexFactoryParser();
+                newses = parser.parse(stream);*/
+                NewsFactory newsFactory = new NewsFactory();
+                NewsReader newsReader = newsFactory.getNews(NewsStandConstants.FOREX_FACTORY_NEWS);
+                newses = newsReader.parse(stream);
                 stream.close();
             } catch (Exception e) {
             }

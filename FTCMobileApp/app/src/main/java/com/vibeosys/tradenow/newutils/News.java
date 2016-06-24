@@ -1,4 +1,4 @@
-package com.vibeosys.tradenow.xmlparser;
+package com.vibeosys.tradenow.newutils;
 
 /**
  * Created by akshay on 21-06-2016.

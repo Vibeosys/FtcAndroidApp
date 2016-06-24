@@ -1,4 +1,4 @@
-package com.vibeosys.tradenow.xmlparser;
+package com.vibeosys.tradenow.newutils.parser;
 
 import android.util.Log;
 import android.util.Xml;
@@ -9,7 +9,8 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 import java.io.InputStream;
 
-import android.text.format.Time;
+import com.vibeosys.tradenow.newutils.News;
+import com.vibeosys.tradenow.newutils.interfaces.NewsReader;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ import java.util.List;
 /**
  * Created by akshay on 21-06-2016.
  */
-public class NewsFeedParser {
+public class NewsForexFactoryParser implements NewsReader {
     // Constants indicting XML element names that we're interested in
 
     private static final int TAG_GUID = 1;
