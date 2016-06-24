@@ -3,18 +3,16 @@ package com.vibeosys.tradenow.data.requestdata;
 import com.vibeosys.tradenow.data.BaseDTO;
 
 /**
- * Created by akshay on 23-06-2016.
+ * Created by akshay on 24-06-2016.
  */
-public class GetUserSubLogin extends BaseDTO {
+public class GetUserLogin extends BaseDTO {
 
     private String username;
     private String pwd;
-    private int subscriberId;
 
-    public GetUserSubLogin(String username, String pwd, int subscriberId) {
+    public GetUserLogin(String username, String pwd) {
         this.username = username;
         this.pwd = pwd;
-        this.subscriberId = subscriberId;
     }
 
     public String getUsername() {
@@ -31,13 +29,5 @@ public class GetUserSubLogin extends BaseDTO {
 
     public void setPwd(String pwd) {
         this.pwd = pwd;
-    }
-
-    public int getSubscriberId() {
-        return subscriberId;
-    }
-
-    public void setSubscriberId(int subscriberId) {
-        this.subscriberId = subscriberId;
     }
 }

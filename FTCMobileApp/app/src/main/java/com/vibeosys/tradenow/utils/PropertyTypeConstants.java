@@ -15,6 +15,15 @@ public final class PropertyTypeConstants {
     public static final String DATABASE_VERSION_NUMBER = "database.version.number";
     public static final String DATE_TO_SYNC = "syncdate";
     public static final String CLIENT_LOGIN_URL = "api.endpoint.client.login";
+    public static final String USER_LOGIN_URL = "api.endpoint.user.login";
     public static final String USER_NAME_AVAILABLE = "api.endpoint.user.check";
     public static final String USER_REGISTRATION = "api.endpoint.user.register";
+
+
+    public static final String USER_ID = "user.id";
+    public static final String USER_FULL_NAME = "user.fullname";
+    public static final String USER_USER_NAME = "user.username";
+    public static final String USER_PASS = "user.password";
+    public static final String USER_EMAIL = "user.email";
+    public static final String USER_SUB_ID = "user.subid";
 }

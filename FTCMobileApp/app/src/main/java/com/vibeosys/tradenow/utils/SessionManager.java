@@ -65,6 +65,7 @@ public class SessionManager {
         editor.putInt(PropertyTypeConstants.DATABASE_VERSION_NUMBER, mPropertyFileReader.getDbVersion());
         editor.putString(PropertyTypeConstants.USER_NAME_AVAILABLE, mPropertyFileReader.getUserNameAvail());
         editor.putString(PropertyTypeConstants.USER_REGISTRATION, mPropertyFileReader.getUserRegistrationUrl());
+        editor.putString(PropertyTypeConstants.USER_LOGIN_URL, mPropertyFileReader.getUserLoginUrl());
         editor.apply();
         return true;
     }
@@ -125,5 +126,58 @@ public class SessionManager {
 
     public String getRegisterUserUrl() {
         return mProjectSharedPref.getString(PropertyTypeConstants.USER_REGISTRATION, null);
+    }
+
+
+    public void setUserId(long userId) {
+        setValuesInSharedPrefs(PropertyTypeConstants.USER_ID, userId);
+    }
+
+    public long getUserId() {
+        return mProjectSharedPref.getLong(PropertyTypeConstants.USER_ID, 0);
+    }
+
+    public void setFullName(String fullName) {
+        setValuesInSharedPrefs(PropertyTypeConstants.USER_FULL_NAME, fullName);
+    }
+
+    public String getUserFullName() {
+        return mProjectSharedPref.getString(PropertyTypeConstants.USER_FULL_NAME, null);
+    }
+
+    public void setUserName(String userName) {
+        setValuesInSharedPrefs(PropertyTypeConstants.USER_USER_NAME, userName);
+    }
+
+    public String getUserName() {
+        return mProjectSharedPref.getString(PropertyTypeConstants.USER_USER_NAME, null);
+    }
+
+    public void setUserPassword(String userPassword) {
+        setValuesInSharedPrefs(PropertyTypeConstants.USER_PASS, userPassword);
+    }
+
+    public String getUserPassword() {
+        return mProjectSharedPref.getString(PropertyTypeConstants.USER_PASS, null);
+    }
+
+    public void setUserEmailId(String userEmailId) {
+        setValuesInSharedPrefs(PropertyTypeConstants.USER_EMAIL, userEmailId);
+    }
+
+    public String getUserEmailId() {
+        return mProjectSharedPref.getString(PropertyTypeConstants.USER_EMAIL, null);
+    }
+
+    public void setSubId(long subId) {
+        setValuesInSharedPrefs(PropertyTypeConstants.USER_SUB_ID, subId);
+    }
+
+    public long getSubId() {
+        return mProjectSharedPref.getLong(PropertyTypeConstants.USER_SUB_ID, 0);
+    }
+
+    public String getUserLoginUrl() {
+        return mProjectSharedPref.getString(PropertyTypeConstants.USER_LOGIN_URL, null);
     }
 }

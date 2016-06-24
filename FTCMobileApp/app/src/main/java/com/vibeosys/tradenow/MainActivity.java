@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.vibeosys.tradenow.activities.BaseActivity;
 import com.vibeosys.tradenow.activities.DemoActivity;
@@ -24,6 +25,7 @@ import com.vibeosys.tradenow.activities.TradeAlertDateActivity;
 import com.vibeosys.tradenow.activities.TradeHistoryDateActivity;
 import com.vibeosys.tradenow.services.SignalSyncService;
 import com.vibeosys.tradenow.utils.NotificationUtil;
+import com.vibeosys.tradenow.utils.UserAuth;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -36,7 +38,11 @@ public class MainActivity extends BaseActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        mainActivityView = findViewById(R.id.mainActivityView);
+
+        if (!UserAuth.isUserLoggedIn()) {
+            callToLogOut();
+        } else {
+            mainActivityView = findViewById(R.id.mainActivityView);
        /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,18 +51,25 @@ public class MainActivity extends BaseActivity
             }
         });*/
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                    this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+            drawer.setDrawerListener(toggle);
+            toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+            navigationView.setNavigationItemSelectedListener(this);
 
        /* if (!isMyServiceRunning(SignalSyncService.class))*/
-        Intent syncServiceIntent = new Intent(Intent.ACTION_SYNC, null, this, SignalSyncService.class);
-        startService(syncServiceIntent);
+            Intent syncServiceIntent = new Intent(Intent.ACTION_SYNC, null, this, SignalSyncService.class);
+            startService(syncServiceIntent);
+            View headerView = navigationView.getHeaderView(0);
+            TextView txtUserName = (TextView) headerView.findViewById(R.id.txtUserName);
+            txtUserName.setText(mSessionManager.getUserFullName());
+            TextView txtEmail = (TextView) headerView.findViewById(R.id.txtEmail);
+            txtEmail.setText(mSessionManager.getUserEmailId());
+        }
+
     }
 
     @Override
@@ -120,7 +133,7 @@ public class MainActivity extends BaseActivity
         } else if (id == R.id.nav_demo) {
             startActivity(new Intent(getApplicationContext(), DemoActivity.class));
         } else if (id == R.id.nav_log_out) {
-            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            callToLogOut();
         } else if (id == R.id.nav_news) {
             startActivity(new Intent(getApplicationContext(), NewsActivity.class));
         }
@@ -128,5 +141,13 @@ public class MainActivity extends BaseActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void callToLogOut() {
+        UserAuth.CleanAuthenticationInfo();
+        Intent loginIntent = new Intent(getApplicationContext(), LoginActivity.class);
+        loginIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(loginIntent);
+        finish();
     }
 }

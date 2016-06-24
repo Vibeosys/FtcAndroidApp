@@ -1,9 +1,11 @@
 package com.vibeosys.tradenow.data.requestdata;
 
+import com.vibeosys.tradenow.data.BaseDTO;
+
 /**
  * Created by akshay on 24-06-2016.
  */
-public class UsernameAvailabilityRequest {
+public class UsernameAvailabilityRequest extends BaseDTO {
 
     private String username;
 

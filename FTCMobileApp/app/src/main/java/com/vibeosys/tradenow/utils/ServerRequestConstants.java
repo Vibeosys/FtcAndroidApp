@@ -9,4 +9,5 @@ public class ServerRequestConstants {
     public static final int REQUEST_CLIENT_LOGIN = 112;
     public static final int REQUEST_USER_NAME_AVAIL = 113;
     public static final int REQUEST_REGISTER_USER = 114;
+    public static final int REQUEST_USER_LOGIN = 115;
 }
