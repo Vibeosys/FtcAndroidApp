@@ -71,10 +71,22 @@ public class UserForgotPassActivity extends BaseActivity implements View.OnClick
         boolean cancelFlag = false;
         View focusView = null;
         txtEmail.setError(null);
+        if (TextUtils.isEmpty(userName)) {
             cancelFlag = true;
+            focusView = txtUserName;
+            txtUserName.setError(getResources().getString(R.string.str_error_user_name_empty));
+        } else if (!validator.validateUserName(userName)) {
             cancelFlag = true;
+            focusView = txtUserName;
+            txtUserName.setError(getResources().getString(R.string.str_error_user_name_validate));
+        } else if (TextUtils.isEmpty(strEmail)) {
             cancelFlag = true;
+            focusView = txtEmail;
+            txtEmail.setError(getResources().getString(R.string.str_err_email_empty));
+        } else if (!validator.isValidMail(strEmail)) {
             cancelFlag = true;
+            focusView = txtEmail;
+            txtEmail.setError(getResources().getString(R.string.str_err_email_validate));
         }
         if (cancelFlag) {
             focusView.requestFocus();
