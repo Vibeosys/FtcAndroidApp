@@ -31,6 +31,7 @@ public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private View mainActivityView;
+    private Intent syncServiceIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,13 +62,22 @@ public class MainActivity extends BaseActivity
             navigationView.setNavigationItemSelectedListener(this);
 
        /* if (!isMyServiceRunning(SignalSyncService.class))*/
-            Intent syncServiceIntent = new Intent(Intent.ACTION_SYNC, null, this, SignalSyncService.class);
-            startService(syncServiceIntent);
+
             View headerView = navigationView.getHeaderView(0);
             TextView txtUserName = (TextView) headerView.findViewById(R.id.txtUserName);
             txtUserName.setText(mSessionManager.getUserFullName());
             TextView txtEmail = (TextView) headerView.findViewById(R.id.txtEmail);
             txtEmail.setText(mSessionManager.getUserEmailId());
+
+            if (mSessionManager.getSubId() > 0) {
+                navigationView.getMenu().clear(); //clear old inflated items.
+                navigationView.inflateMenu(R.menu.activity_main_drawer);
+                syncServiceIntent = new Intent(Intent.ACTION_SYNC, null, this, SignalSyncService.class);
+                startService(syncServiceIntent);
+            } else {
+                navigationView.getMenu().clear(); //clear old inflated items.
+                navigationView.inflateMenu(R.menu.activity_user_drawer);
+            }
         }
 
     }
@@ -144,6 +154,9 @@ public class MainActivity extends BaseActivity
     }
 
     private void callToLogOut() {
+        if (isMyServiceRunning(SignalSyncService.class)) {
+            stopService(syncServiceIntent);
+        }
         UserAuth.CleanAuthenticationInfo();
         Intent loginIntent = new Intent(getApplicationContext(), LoginActivity.class);
         loginIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

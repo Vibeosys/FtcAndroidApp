@@ -67,12 +67,18 @@ public class TradeAlertAdapter extends BaseAdapter {
         } else
             viewHolder = (ViewHolder) convertView.getTag();
         SignalDataDTO signalDataDTO = data.get(position);
+        String symbol = signalDataDTO.getSymbol();
+        if (symbol.length() == 6) {
+            StringBuffer sb = new StringBuffer(symbol);
+            sb.insert(3, " To ");
+            symbol = sb.toString();
+        }
 
         viewHolder.txtPrice.setText("" + signalDataDTO.getPrice());
         viewHolder.txtSL.setText("" + signalDataDTO.getSl());
         viewHolder.txtLotSize.setText("" + signalDataDTO.getLot());
         viewHolder.txtTP.setText("" + signalDataDTO.getTp());
-        viewHolder.txtType.setText(signalDataDTO.getSymbol());
+        viewHolder.txtType.setText(symbol);
         DateUtils dateUtils = new DateUtils();
         Date openDate = dateUtils.getFormattedDate(signalDataDTO.getOpenTime());
         viewHolder.txtTime.setText(dateUtils.getLocalTimeInReadableFormat(openDate));

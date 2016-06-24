@@ -69,7 +69,13 @@ public class TradeHistoryAdapter extends BaseAdapter {
         } else
             viewHolder = (ViewHolder) convertView.getTag();
         SignalDataDTO signalDataDTO = data.get(position);
-        viewHolder.txtType.setText(signalDataDTO.getSymbol());
+        String symbol = signalDataDTO.getSymbol();
+        if (symbol.length() == 6) {
+            StringBuffer sb = new StringBuffer(symbol);
+            sb.insert(3, " To ");
+            symbol = sb.toString();
+        }
+        viewHolder.txtType.setText(symbol);
         viewHolder.txtPrice.setText("" + signalDataDTO.getPrice());
         viewHolder.txtSL.setText("" + signalDataDTO.getSl());
         viewHolder.txtPlPip.setText("" + signalDataDTO.getProfit());

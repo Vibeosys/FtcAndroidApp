@@ -30,7 +30,7 @@ public class TradingAlertActivity extends BaseActivity implements TradeAlertAdap
 
         DateUtils dateUtils = new DateUtils();
         Date signalDate = dateUtils.getFormattedOnlyDate(selectedDate);
-        setTitle("Trade Alert On" + dateUtils.getLocalDateInReadableFormat(signalDate));
+        setTitle("Trade Alert On " + dateUtils.getLocalDateInReadableFormat(signalDate));
 
         listTreadAlert = (ListView) findViewById(R.id.listTradeAlert);
         txtError = (TextView) findViewById(R.id.txtError);

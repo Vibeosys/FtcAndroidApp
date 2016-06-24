@@ -66,7 +66,9 @@ public class ServerSyncManager
 
     private String prepareUploadJsonFromData(BaseRequestDTO params) {
 
-        UserRequestDTO userRequestDTO = new UserRequestDTO(10, 1010, "xyz", "1111");
+        UserRequestDTO userRequestDTO = new UserRequestDTO(mSessionManager.getUserId(),
+                mSessionManager.getSubId(), mSessionManager.getUserName(),
+                mSessionManager.getUserPassword());
         //get the values from session manager
         params.setUser(userRequestDTO.serializeString());
         String uploadJson = params.serializeString();
