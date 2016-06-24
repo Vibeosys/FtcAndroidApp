@@ -11,7 +11,7 @@ import com.vibeosys.tradenow.R;
 
 public class MyProfileActivity extends BaseActivity implements View.OnClickListener {
 
-    private EditText mTxtName, mTxtEmail, mTxtPhNo;
+    private EditText mTxtName, mTxtEmail, mTxtPhNo, mTxtSubId;
     private Button mBtnCancel, mBtnUpdate;
 
     @Override
@@ -24,7 +24,12 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
         mTxtPhNo = (EditText) findViewById(R.id.txtPhNo);
         mBtnCancel = (Button) findViewById(R.id.btnCancel);
         mBtnUpdate = (Button) findViewById(R.id.btnUpdate);
+        mTxtSubId = (EditText) findViewById(R.id.txtSubscriptionId);
         hideVisibility();
+
+        mTxtName.setText(mSessionManager.getUserFullName());
+        mTxtEmail.setText(mSessionManager.getUserEmailId());
+        mTxtSubId.setText("" + mSessionManager.getSubId());
     }
 
     @Override

@@ -89,4 +89,12 @@ public class PropertyFileReader {
     public String getUserLoginUrl() {
         return getEndPointUri() + mProperties.getProperty(PropertyTypeConstants.USER_LOGIN_URL);
     }
+
+    public String getUserForgotPassUrl() {
+        return getEndPointUri() + mProperties.getProperty(PropertyTypeConstants.USER_FORGOT_PASS);
+    }
+
+    public String getClientForgotPassUrl() {
+        return getEndPointUri() + mProperties.getProperty(PropertyTypeConstants.CLIENT_FORGOT_PASS);
+    }
 }

@@ -10,4 +10,6 @@ public class ServerRequestConstants {
     public static final int REQUEST_USER_NAME_AVAIL = 113;
     public static final int REQUEST_REGISTER_USER = 114;
     public static final int REQUEST_USER_LOGIN = 115;
+    public static final int REQUEST_FORGOT_USER_PASS = 116;
+    public static final int REQUEST_FORGOT_CLIENT_PASS = 117;
 }

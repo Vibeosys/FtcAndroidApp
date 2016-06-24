@@ -20,7 +20,8 @@ import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.vibeosys.tradenow.MainActivity;
 import com.vibeosys.tradenow.R;
-import com.vibeosys.tradenow.activities.ForgotPassActivity;
+import com.vibeosys.tradenow.activities.ClientForgotPassActivity;
+import com.vibeosys.tradenow.activities.UserForgotPassActivity;
 import com.vibeosys.tradenow.activities.TermsAndConditionActivity;
 import com.vibeosys.tradenow.data.UserDTO;
 import com.vibeosys.tradenow.data.requestdata.BaseRequestDTO;
@@ -76,7 +77,7 @@ public class ClientUserLoginFragment extends BaseFragment implements View.OnClic
                 callLogin(userName, password, subId);
                 break;
             case R.id.txtForgotPass:
-                startActivity(new Intent(getActivity().getApplicationContext(), ForgotPassActivity.class));
+                startActivity(new Intent(getActivity().getApplicationContext(), ClientForgotPassActivity.class));
                 break;
             case R.id.txtTerms:
                 startActivity(new Intent(getActivity().getApplicationContext(), TermsAndConditionActivity.class));

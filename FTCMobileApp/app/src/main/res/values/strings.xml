@@ -93,4 +93,6 @@
     <string name="str_err_email_validate">Please enter valid email id</string>
     <string name="str_err_phone_validate">Please enter valid phone number</string>
     <string name="str_register_success">Congratulation you are successfully registered !!..</string>
+    <string name="str_dlg_result_forgot_pass">Reset Password</string>
+    <string name="str_msg_pass">Please check your mailbox and follow instruction.</string>
 </resources>

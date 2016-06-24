@@ -18,7 +18,8 @@ public final class PropertyTypeConstants {
     public static final String USER_LOGIN_URL = "api.endpoint.user.login";
     public static final String USER_NAME_AVAILABLE = "api.endpoint.user.check";
     public static final String USER_REGISTRATION = "api.endpoint.user.register";
-
+    public static final String USER_FORGOT_PASS = "api.endpoint.user.forgotpass";
+    public static final String CLIENT_FORGOT_PASS = "api.endpoint.client.forgotpass";
 
     public static final String USER_ID = "user.id";
     public static final String USER_FULL_NAME = "user.fullname";

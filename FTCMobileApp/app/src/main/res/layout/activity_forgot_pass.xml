@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainForgotPassword"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.vibeosys.tradenow.activities.ForgotPassActivity">
+    tools:context=".activities.UserForgotPassActivity">
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/back_login"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:focusableInTouchMode="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/loginTransparnt"
             android:orientation="vertical">
 
             <ProgressBar
@@ -29,7 +32,6 @@
                 android:id="@+id/forgotPassword"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/loginTransparnt"
                 android:gravity="center_vertical"
                 android:orientation="vertical"
                 android:paddingLeft="24dp"
@@ -43,11 +45,44 @@
                     android:orientation="vertical">
 
                     <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/custom_white_border"
+
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:orientation="horizontal">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:focusable="false"
+                            android:textColorHint="@android:color/white">
+
+                            <EditText
+                                android:id="@+id/txtUserName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@android:color/transparent"
+                                android:drawablePadding="10dp"
+                                android:hint="@string/user_name"
+                                android:inputType="textEmailAddress"
+                                android:paddingStart="5dp"
+
+                                android:singleLine="true"
+                                android:textColor="@android:color/white"
+                                android:textSize="16sp" />
+                        </android.support.design.widget.TextInputLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:id="@+id/emailIdLinearLayout"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_gravity="center"
-                        android:layout_marginTop="35dp"
+                        android:layout_marginTop="10dp"
                         android:background="@drawable/custom_white_border"
                         android:orientation="horizontal">
 

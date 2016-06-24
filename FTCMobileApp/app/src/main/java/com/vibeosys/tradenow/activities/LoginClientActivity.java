@@ -8,21 +8,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.vibeosys.tradenow.MainActivity;
 import com.vibeosys.tradenow.R;
-import com.vibeosys.tradenow.adapters.LoginSpinner;
 import com.vibeosys.tradenow.data.requestdata.BaseRequestDTO;
 import com.vibeosys.tradenow.data.requestdata.GetUserSubLogin;
 import com.vibeosys.tradenow.data.responsedata.ResponseErrorDTO;
 import com.vibeosys.tradenow.utils.ServerRequestConstants;
 import com.vibeosys.tradenow.utils.ServerSyncManager;
-
-import java.util.ArrayList;
 
 public class LoginClientActivity extends BaseActivity implements View.OnClickListener,
         ServerSyncManager.OnErrorResultReceived, ServerSyncManager.OnSuccessResultReceived {
@@ -67,7 +63,7 @@ public class LoginClientActivity extends BaseActivity implements View.OnClickLis
                 callLogin(userName, password, subId);
                 break;
             case R.id.txtForgotPass:
-                startActivity(new Intent(getApplicationContext(), ForgotPassActivity.class));
+                startActivity(new Intent(getApplicationContext(), UserForgotPassActivity.class));
                 break;
         }
     }
