@@ -85,4 +85,12 @@
     <string name="str_err_pass_empty">Please Enter Your Password</string>
     <string name="str_err_sub_empty">Please Enter Subscription Id</string>
     <string name="str_err_sub_num_invalid">Number is not valid</string>
+    <string name="check_available">Check User Name</string>
+    <string name="str_error_user_name_validate">Not valid Avoid upper case and special symbols.</string>
+    <string name="str_err_name_empty">Please Enter Name</string>
+    <string name="str_err_email_empty">Please Enter Email address</string>
+    <string name="str_err_phone_empty">Please enter phone number</string>
+    <string name="str_err_email_validate">Please enter valid email id</string>
+    <string name="str_err_phone_validate">Please enter valid phone number</string>
+    <string name="str_register_success">Congratulation you are successfully registered !!..</string>
 </resources>

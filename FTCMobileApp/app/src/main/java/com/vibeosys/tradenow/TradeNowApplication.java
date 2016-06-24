@@ -12,14 +12,20 @@ import org.json.JSONObject;
  */
 public class TradeNowApplication extends Application {
 
+    private static final String TAG = TradeNowApplication.class.getSimpleName();
+
     @Override
     public void onCreate() {
         super.onCreate();
-        OneSignal.startInit(this).init();
-        OneSignal.startInit(this)
-                .setNotificationOpenedHandler(new ExampleNotificationOpenedHandler())
-                .setAutoPromptLocation(true)
-                .init();
+        try {
+            OneSignal.startInit(this)
+                    .setNotificationOpenedHandler(new ExampleNotificationOpenedHandler())
+                    .setAutoPromptLocation(true)
+                    .init();
+        } catch (Exception e) {
+            Log.e(TAG, "Error to open signal");
+        }
+
     }
 
     private class ExampleNotificationOpenedHandler implements OneSignal.NotificationOpenedHandler {
@@ -44,7 +50,7 @@ public class TradeNowApplication extends Application {
                     additionalMessage = message + "\nFull additionalData:\n" + additionalData.toString();
                 }
 
-                Log.d("OneSignalExample", "message:\n" + message + "\nadditionalMessage:\n" + additionalMessage);
+                Log.d(TAG, "message:\n" + message + "\nadditionalMessage:\n" + additionalMessage);
             } catch (Throwable t) {
                 t.printStackTrace();
             }

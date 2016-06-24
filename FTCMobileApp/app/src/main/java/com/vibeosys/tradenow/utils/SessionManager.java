@@ -63,6 +63,8 @@ public class SessionManager {
         editor.putString(PropertyTypeConstants.DATABASE_FILE_NAME, mPropertyFileReader.getDatabaseFileName());
         editor.putString(PropertyTypeConstants.VERSION_NUMBER, String.valueOf(mPropertyFileReader.getVersion()));
         editor.putInt(PropertyTypeConstants.DATABASE_VERSION_NUMBER, mPropertyFileReader.getDbVersion());
+        editor.putString(PropertyTypeConstants.USER_NAME_AVAILABLE, mPropertyFileReader.getUserNameAvail());
+        editor.putString(PropertyTypeConstants.USER_REGISTRATION, mPropertyFileReader.getUserRegistrationUrl());
         editor.apply();
         return true;
     }
@@ -115,5 +117,13 @@ public class SessionManager {
 
     public String getClientLoginUrl() {
         return mProjectSharedPref.getString(PropertyTypeConstants.CLIENT_LOGIN_URL, null);
+    }
+
+    public String getAvailableUserUrl() {
+        return mProjectSharedPref.getString(PropertyTypeConstants.USER_NAME_AVAILABLE, null);
+    }
+
+    public String getRegisterUserUrl() {
+        return mProjectSharedPref.getString(PropertyTypeConstants.USER_REGISTRATION, null);
     }
 }
