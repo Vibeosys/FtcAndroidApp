@@ -97,4 +97,8 @@ public class PropertyFileReader {
     public String getClientForgotPassUrl() {
         return getEndPointUri() + mProperties.getProperty(PropertyTypeConstants.CLIENT_FORGOT_PASS);
     }
+
+    public String getResetPassUrl() {
+        return getEndPointUri() + mProperties.getProperty(PropertyTypeConstants.RESET_PASS);
+    }
 }

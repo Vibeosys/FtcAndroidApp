@@ -95,4 +95,10 @@
     <string name="str_register_success">Congratulation you are successfully registered !!..</string>
     <string name="str_dlg_result_forgot_pass">Reset Password</string>
     <string name="str_msg_pass">Please check your mailbox and follow instruction.</string>
+    <string name="str_err_old_pass_empty">Please enter your old password</string>
+    <string name="str_err_new_pass_empty">Please enter the new password</string>
+    <string name="str_err_confirm_pass_empty">Please reenter your new password</string>
+    <string name="str_err_old_pass_wrong">Old password is wrong</string>
+    <string name="str_err_pass_not_match">Password does not match</string>
+    <string name="str_err_old_new_match">Do not use the previous password</string>
 </resources>
