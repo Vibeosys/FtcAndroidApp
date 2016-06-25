@@ -48,7 +48,9 @@
         <activity
             android:name=".activities.TradeHistoryDetailsActivity"
             android:parentActivityName=".activities.TradeHistoryDateActivity" />
-        <activity android:name=".activities.TradeDetailViewActivity" />
+        <activity
+            android:name=".activities.TradeDetailViewActivity"
+            android:parentActivityName=".activities.TradeHistoryDateActivity" />
         <activity android:name=".activities.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

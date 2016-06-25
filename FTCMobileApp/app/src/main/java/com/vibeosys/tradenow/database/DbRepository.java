@@ -158,15 +158,9 @@ public class DbRepository extends SQLiteOpenHelper {
                 }
 
             }
-        } catch (
-                Exception e
-                )
-
-        {
+        } catch (Exception e) {
             e.printStackTrace();
-        } finally
-
-        {
+        } finally {
             if (cursor != null)
                 cursor.close();
             if (sqLiteDatabase != null && sqLiteDatabase.isOpen())
@@ -193,7 +187,7 @@ public class DbRepository extends SQLiteOpenHelper {
                         cursor.moveToFirst();
 
                         do {
-                            int ticket = cursor.getInt(cursor.getColumnIndex(SqlContract.SqlSignal.TICKET));
+                            long ticket = cursor.getLong(cursor.getColumnIndex(SqlContract.SqlSignal.TICKET));
                             String symbol = cursor.getString(cursor.getColumnIndex(SqlContract.SqlSignal.SYMBOL));
                             int sType = cursor.getInt(cursor.getColumnIndex(SqlContract.SqlSignal.S_TYPE));
                             double lot = cursor.getDouble(cursor.getColumnIndex(SqlContract.SqlSignal.LOT));
@@ -228,5 +222,53 @@ public class DbRepository extends SQLiteOpenHelper {
         }
         return signalDataList;
     }
+
+    public SignalDataDTO getSignalData(long ticketNo) {
+        SQLiteDatabase sqLiteDatabase = null;
+        Cursor cursor = null;
+        SignalDataDTO signalDataDTO = null;
+        try {
+            String[] whereClause = new String[]{String.valueOf(ticketNo)};
+            sqLiteDatabase = getReadableDatabase();
+            synchronized (sqLiteDatabase) {
+                cursor = sqLiteDatabase.rawQuery("SELECT * From " + SqlContract.SqlSignal.TABLE_NAME + " where " +
+                        SqlContract.SqlSignal.TICKET + "=?", whereClause);
+                if (cursor != null) {
+                    if (cursor.getCount() > 0) {
+                        cursor.moveToFirst();
+                        int ticket = cursor.getInt(cursor.getColumnIndex(SqlContract.SqlSignal.TICKET));
+                        String symbol = cursor.getString(cursor.getColumnIndex(SqlContract.SqlSignal.SYMBOL));
+                        int sType = cursor.getInt(cursor.getColumnIndex(SqlContract.SqlSignal.S_TYPE));
+                        double lot = cursor.getDouble(cursor.getColumnIndex(SqlContract.SqlSignal.LOT));
+                        double price = cursor.getDouble(cursor.getColumnIndex(SqlContract.SqlSignal.PRICE));
+                        double sl = cursor.getDouble(cursor.getColumnIndex(SqlContract.SqlSignal.SL));
+                        double tp = cursor.getDouble(cursor.getColumnIndex(SqlContract.SqlSignal.TP));
+                        double closePrice = cursor.getDouble(cursor.getColumnIndex(SqlContract.SqlSignal.CLOSE_PRICE));
+                        double swap = cursor.getDouble(cursor.getColumnIndex(SqlContract.SqlSignal.SWAP));
+                        double profit = cursor.getDouble(cursor.getColumnIndex(SqlContract.SqlSignal.PROFIT));
+                        String openTimeData = cursor.getString(cursor.getColumnIndex(SqlContract.SqlSignal.OPEN_TIME));
+                        String closeTime = cursor.getString(cursor.getColumnIndex(SqlContract.SqlSignal.CLOSE_TIME));
+                        String statusData = cursor.getString(cursor.getColumnIndex(SqlContract.SqlSignal.STATUS));
+                        int copy = cursor.getInt(cursor.getColumnIndex(SqlContract.SqlSignal.COPY));
+                        String expTime = cursor.getString(cursor.getColumnIndex(SqlContract.SqlSignal.EXP_TIME));
+                        signalDataDTO = new SignalDataDTO(ticket, symbol, sType, lot, price, sl, tp, closePrice, swap, profit, openTimeData, closeTime, statusData
+                                , copy, expTime);
+                    }
+                } else {
+                    signalDataDTO = new SignalDataDTO();
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (cursor != null)
+                cursor.close();
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen())
+                sqLiteDatabase.close();
+        }
+        return signalDataDTO;
+    }
+
 
 }

@@ -82,17 +82,17 @@ public class TradeAlertAdapter extends BaseAdapter {
         DateUtils dateUtils = new DateUtils();
         Date openDate = dateUtils.getFormattedDate(signalDataDTO.getOpenTime());
         viewHolder.txtTime.setText(dateUtils.getLocalTimeInReadableFormat(openDate));
-        /*if (i % 2 == 0) {
+        if (signalDataDTO.getSType() == 0) {
             viewHolder.txtBuyOrSell.setTextColor(mContext.getResources().getColor(R.color.cancel_btn_colour));
             viewHolder.txtBuyOrSell.setText("SELL");
-            *//*viewHolder.shutterHeader.setTxtBuyOrSell("SELL");
-            viewHolder.shutterHeader.setTxtBuyOrSellColor(mContext.getResources().getColor(R.color.cancel_btn_colour));*//*
-        } else {
+            /*viewHolder.shutterHeader.setTxtBuyOrSell("SELL");
+            viewHolder.shutterHeader.setTxtBuyOrSellColor(mContext.getResources().getColor(R.color.cancel_btn_colour));*/
+        } else if (signalDataDTO.getSType() == 1) {
             viewHolder.txtBuyOrSell.setTextColor(mContext.getResources().getColor(R.color.ok_btn_colour));
             viewHolder.txtBuyOrSell.setText("BUY");
-           *//* viewHolder.shutterHeader.setTxtBuyOrSell("BUY");
-            viewHolder.shutterHeader.setTxtBuyOrSellColor(mContext.getResources().getColor(R.color.ok_btn_colour));*//*
-        }*/
+           /* viewHolder.shutterHeader.setTxtBuyOrSell("BUY");
+            viewHolder.shutterHeader.setTxtBuyOrSellColor(mContext.getResources().getColor(R.color.ok_btn_colour));*/
+        }
 
         return row;
     }

@@ -68,7 +68,7 @@ public class TradeHistoryAdapter extends BaseAdapter {
 
         } else
             viewHolder = (ViewHolder) convertView.getTag();
-        SignalDataDTO signalDataDTO = data.get(position);
+        final SignalDataDTO signalDataDTO = data.get(position);
         String symbol = signalDataDTO.getSymbol();
         if (symbol.length() == 6) {
             StringBuffer sb = new StringBuffer(symbol);
@@ -98,7 +98,7 @@ public class TradeHistoryAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 if (viewDetailsListener != null)
-                    viewDetailsListener.onViewClickListener(v.getId(), 1, new Object());
+                    viewDetailsListener.onViewClickListener(v.getId(), signalDataDTO.getTicket(), new Object());
             }
         });
         return row;
@@ -123,6 +123,6 @@ public class TradeHistoryAdapter extends BaseAdapter {
     }
 
     public interface ViewDetailsListener {
-        public void onViewClickListener(int id, int value, Object object);
+        public void onViewClickListener(int id, long value, Object object);
     }
 }

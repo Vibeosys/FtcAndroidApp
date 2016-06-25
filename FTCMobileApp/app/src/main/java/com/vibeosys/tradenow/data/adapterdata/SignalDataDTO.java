@@ -7,7 +7,7 @@ import java.sql.Time;
  */
 public class SignalDataDTO {
 
-    private int mTicket;
+    private long mTicket;
     private String mSymbol;
     private int mSType;
     private double mLot;
@@ -23,7 +23,10 @@ public class SignalDataDTO {
     private int mCopy;
     private String mExpTime;
 
-    public SignalDataDTO(int mTicket, String mSymbol, int mSType, double mLot, double mPrice,
+    public SignalDataDTO() {
+    }
+
+    public SignalDataDTO(long mTicket, String mSymbol, int mSType, double mLot, double mPrice,
                          double mSl, double mTp, double mClosePrice, double mSwap, double mProfit,
                          String mOpenTime, String mCloseTime, String mStatus, int mCopy,
                          String mExpTime) {
@@ -44,11 +47,11 @@ public class SignalDataDTO {
         this.mExpTime = mExpTime;
     }
 
-    public int getTicket() {
+    public long getTicket() {
         return mTicket;
     }
 
-    public void setTicket(int mTicket) {
+    public void setTicket(long mTicket) {
         this.mTicket = mTicket;
     }
 

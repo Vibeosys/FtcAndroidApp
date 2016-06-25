@@ -46,6 +46,7 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/txtMasterAccNo"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
@@ -75,6 +76,7 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/txtTicketNo"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
@@ -111,6 +113,7 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/txtLotSize"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
@@ -141,6 +144,7 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/txtPrice"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
@@ -177,6 +181,7 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/txtClosePrice"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
@@ -207,6 +212,7 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/txtSp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
@@ -243,6 +249,7 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/txtTp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
@@ -273,6 +280,7 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/txtSwap"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
@@ -309,6 +317,7 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/txtProfit"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
@@ -339,6 +348,7 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/txtProfitLoss"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
@@ -369,6 +379,7 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/txtOpenTime"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
@@ -398,6 +409,7 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/txtCloseTime"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
