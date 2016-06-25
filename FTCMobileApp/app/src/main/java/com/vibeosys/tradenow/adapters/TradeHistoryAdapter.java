@@ -60,7 +60,7 @@ public class TradeHistoryAdapter extends BaseAdapter {
             viewHolder.txtTP = (TextView) row.findViewById(R.id.txtTP);
             viewHolder.txtTime = (TextView) row.findViewById(R.id.txtTime);
             viewHolder.txtCloseTime = (TextView) row.findViewById(R.id.txtCloseTime);
-            viewHolder.txtBuyOrSell = (TextView) row.findViewById(R.id.txtBuyOrSell);
+            viewHolder.txtProfitOrLoss = (TextView) row.findViewById(R.id.txtBuyOrSell);
             viewHolder.txtViewAll = (TextView) row.findViewById(R.id.txtViewAll);
             viewHolder.txtClosePrice = (TextView) row.findViewById(R.id.txtClosePrice);
             viewHolder.txtType = (TextView) row.findViewById(R.id.txtType);
@@ -87,13 +87,13 @@ public class TradeHistoryAdapter extends BaseAdapter {
         Date closeDate = dateUtils.getFormattedDate(signalDataDTO.getCloseTime());
         viewHolder.txtCloseTime.setText(dateUtils.getLocalTimeInReadableFormat(closeDate));
         viewHolder.txtClosePrice.setText("" + signalDataDTO.getClosePrice());
-        /*if (i % 2 == 0) {
-            viewHolder.txtBuyOrSell.setTextColor(mContext.getResources().getColor(R.color.cancel_btn_colour));
-            viewHolder.txtBuyOrSell.setText("LOSS");
+        if (signalDataDTO.getProfit() < 0) {
+            viewHolder.txtProfitOrLoss.setTextColor(mContext.getResources().getColor(R.color.cancel_btn_colour));
+            viewHolder.txtProfitOrLoss.setText("LOSS");
         } else {
-            viewHolder.txtBuyOrSell.setTextColor(mContext.getResources().getColor(R.color.ok_btn_colour));
-            viewHolder.txtBuyOrSell.setText("PROFIT");
-        }*/
+            viewHolder.txtProfitOrLoss.setTextColor(mContext.getResources().getColor(R.color.ok_btn_colour));
+            viewHolder.txtProfitOrLoss.setText("PROFIT");
+        }
         viewHolder.txtViewAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,7 +105,7 @@ public class TradeHistoryAdapter extends BaseAdapter {
     }
 
     private class ViewHolder {
-        TextView txtPrice, txtSL, txtPlPip, txtTP, txtTime, txtCloseTime, txtBuyOrSell,
+        TextView txtPrice, txtSL, txtPlPip, txtTP, txtTime, txtCloseTime, txtProfitOrLoss,
                 txtViewAll, txtClosePrice, txtType;
     }
 
