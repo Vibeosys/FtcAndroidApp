@@ -11,13 +11,17 @@ import com.vibeosys.tradenow.adapters.NewsAdapter;
 import com.vibeosys.tradenow.newutils.News;
 import com.vibeosys.tradenow.newutils.NewsFactory;
 import com.vibeosys.tradenow.newutils.NewsStandConstants;
+import com.vibeosys.tradenow.newutils.data.XMLObject;
 import com.vibeosys.tradenow.newutils.interfaces.NewsReader;
 import com.vibeosys.tradenow.newutils.parser.NewsForexFactoryParser;
+import com.vibeosys.tradenow.newutils.parser.XmlParser;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class NewsActivity extends BaseActivity {
@@ -73,12 +77,24 @@ public class NewsActivity extends BaseActivity {
 
                 /*NewsForexFactoryParser parser = new NewsForexFactoryParser();
                 newses = parser.parse(stream);*/
-                NewsFactory newsFactory = new NewsFactory();
+               /* NewsFactory newsFactory = new NewsFactory();
                 NewsReader newsReader = newsFactory.getNews(NewsStandConstants.FOREX_FACTORY_NEWS);
-                newses = newsReader.parse(stream);
+                newses = newsReader.parse(stream);*/
+                XMLObject mObject = XmlParser.parseXml(stream);
+                if (mObject != null) {
+                    display(mObject);
+                }
+
                 stream.close();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             }
+
+
             return null;
         }
 
@@ -91,6 +107,47 @@ public class NewsActivity extends BaseActivity {
             adapter.notifyDataSetChanged();
             showProgress(false, formView, progressBar);
 
+        }
+    }
+
+    public void display(XMLObject mObject) {
+        if (mObject != null) {
+            /*HashMap<String, String> atts = mObject.getParams();*/
+            /*if (atts != null && atts.size() > 0) {
+                for (String s : atts.keySet()) {
+                    Log.d("##KEY:" + mObject.getName() + " :: Attribute: ", "##"+s + "=" + atts.get(s));
+                }
+            }*/
+            //Log.d("##KEY:" + mObject.getName() + " :: Value=", "##" + mObject.getValue());
+            if (mObject.getName().equals("item")) {
+                List<XMLObject> mObjectChilds = mObject.getChilds();
+                String title = null, link = null, guid = null, pubdate = null, description = null;
+                for (XMLObject child : mObjectChilds) {
+                    if (child.getName().equals("title")) {
+                        title = child.getValue();
+                    }
+                    if (child.getName().equals("link")) {
+                        link = child.getValue();
+                    }
+                    if (child.getName().equals("guid")) {
+                        guid = child.getValue();
+                    }
+                    if (child.getName().equals("pubDate")) {
+                        pubdate = child.getValue();
+                    }
+                    if (child.getName().equals("description")) {
+                        description = child.getValue();
+                    }
+                }
+                News news = new News(title, link, guid, pubdate, description);
+                newses.add(news);
+            }
+            List<XMLObject> mXmlObjects = mObject.getChilds();
+            if (mXmlObjects != null && mXmlObjects.size() > 0) {
+                for (XMLObject xmlObject : mXmlObjects) {
+                    display(xmlObject);
+                }
+            }
         }
     }
 }

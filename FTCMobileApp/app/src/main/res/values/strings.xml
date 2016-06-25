@@ -53,7 +53,7 @@
     <string name="demo_activity">Demo View</string>
     <string name="not_register">New to trade now?</string>
     <string name="str_mob_no">Mobile Number</string>
-    <string name="str_agency_name">Agency Name</string>
+    <string name="str_agency_name">Company Name</string>
     <string name="nav_str_my_profile">My Profile</string>
     <string name="str_change_pass">Change Password</string>
     <string name="nav_demo_view">Demo Views</string>
@@ -101,4 +101,8 @@
     <string name="str_err_old_pass_wrong">Old password is wrong</string>
     <string name="str_err_pass_not_match">Password does not match</string>
     <string name="str_err_old_new_match">Do not use the previous password</string>
+    <string name="str_user_id">User Id</string>
+    <string name="str_user_full_name">Full Name</string>
+    <string name="str_ph_no">Phone Number</string>
+    <string name="str_user_plan">Plan</string>
 </resources>

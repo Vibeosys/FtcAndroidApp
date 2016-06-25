@@ -69,6 +69,7 @@ public class SessionManager {
         editor.putString(PropertyTypeConstants.USER_FORGOT_PASS, mPropertyFileReader.getUserForgotPassUrl());
         editor.putString(PropertyTypeConstants.CLIENT_FORGOT_PASS, mPropertyFileReader.getClientForgotPassUrl());
         editor.putString(PropertyTypeConstants.RESET_PASS, mPropertyFileReader.getResetPassUrl());
+        editor.putString(PropertyTypeConstants.GET_PROFILE_URL, mPropertyFileReader.getProfileUrl());
         editor.apply();
         return true;
     }
@@ -194,5 +195,9 @@ public class SessionManager {
 
     public String getResetPassUrl() {
         return mProjectSharedPref.getString(PropertyTypeConstants.RESET_PASS, null);
+    }
+
+    public String getProfileUrl() {
+        return mProjectSharedPref.getString(PropertyTypeConstants.GET_PROFILE_URL, null);
     }
 }

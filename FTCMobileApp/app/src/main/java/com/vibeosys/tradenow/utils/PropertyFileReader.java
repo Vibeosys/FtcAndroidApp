@@ -101,4 +101,8 @@ public class PropertyFileReader {
     public String getResetPassUrl() {
         return getEndPointUri() + mProperties.getProperty(PropertyTypeConstants.RESET_PASS);
     }
+
+    public String getProfileUrl() {
+        return getEndPointUri() + mProperties.getProperty(PropertyTypeConstants.GET_PROFILE_URL);
+    }
 }

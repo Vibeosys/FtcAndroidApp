@@ -21,6 +21,8 @@ public final class PropertyTypeConstants {
     public static final String USER_FORGOT_PASS = "api.endpoint.user.forgotpass";
     public static final String CLIENT_FORGOT_PASS = "api.endpoint.client.forgotpass";
     public static final String RESET_PASS = "api.endpoint.resetpass";
+    public static final String GET_PROFILE_URL = "api.endpoint.getprofile";
+
     public static final String USER_ID = "user.id";
     public static final String USER_FULL_NAME = "user.fullname";
     public static final String USER_USER_NAME = "user.username";

@@ -13,4 +13,5 @@ public class ServerRequestConstants {
     public static final int REQUEST_FORGOT_USER_PASS = 116;
     public static final int REQUEST_FORGOT_CLIENT_PASS = 117;
     public static final int REQUEST_RESET_PASS = 118;
+    public static final int REQUEST_GET_PROFILE = 119;
 }
