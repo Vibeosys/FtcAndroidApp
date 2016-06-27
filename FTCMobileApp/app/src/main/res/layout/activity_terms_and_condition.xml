@@ -10,25 +10,36 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.vibeosys.tradenow.activities.TermsAndConditionActivity">
 
-    <TextView
-        android:id="@+id/txtDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="3dp"
-        android:text="@string/demo_text"
-        android:textColor="@color/secondaryText" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="3dp"
-        android:text="@string/demo_text"
-        android:textColor="@color/secondaryText" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="3dp"
-        android:text="@string/demo_text"
-        android:textColor="@color/secondaryText" />
+            <TextView
+                android:id="@+id/txtDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:text="@string/demo_text"
+                android:textColor="@color/secondaryText" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:text="@string/demo_text"
+                android:textColor="@color/secondaryText" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:text="@string/demo_text"
+                android:textColor="@color/secondaryText" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

@@ -181,10 +181,14 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         switch (requestToken) {
             case ServerRequestConstants.REQUEST_USER_NAME_AVAIL:
                 progressCheck.setVisibility(View.GONE);
+                customAlterDialog(getResources().getString(R.string.str_err_server_err),
+                        getResources().getString(R.string.str_err_server_msg));
                 Log.e(TAG, "Error at check User Name" + error.toString());
                 break;
             case ServerRequestConstants.REQUEST_REGISTER_USER:
                 showProgress(false, registerForm, progressBar);
+                customAlterDialog(getResources().getString(R.string.str_err_server_err),
+                        getResources().getString(R.string.str_err_server_msg));
                 Log.e(TAG, "Error at check User Name" + error.toString());
                 break;
         }

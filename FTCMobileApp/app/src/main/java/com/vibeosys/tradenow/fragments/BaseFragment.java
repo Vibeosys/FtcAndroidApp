@@ -73,4 +73,18 @@ public class BaseFragment extends Fragment {
             hideFormView.setVisibility(show ? View.GONE : View.VISIBLE);
         }
     }
+
+    protected void customAlterDialog(String title, String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("" + title);
+        builder.setMessage(message);
+        builder.setCancelable(false);
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.show();
+    }
 }

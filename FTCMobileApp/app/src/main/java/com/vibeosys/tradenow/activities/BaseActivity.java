@@ -46,6 +46,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         mDbRepository = new DbRepository(getApplicationContext(), mSessionManager);
         mSignalSyncManager = new SignalSyncManager(getApplicationContext(),
                 mSessionManager, mServerSyncManager);
+        mDbRepository.getDatabaseStructure();
     }
 
     protected void customAlterDialog(String title, String message) {

@@ -60,7 +60,7 @@
     <string name="str_profit_n_loss">Profit n Loss</string>
     <string name="str_profit_n_loss_in_pips">P/L in pips</string>
     <string name="view_all">View Details</string>
-    <string name="subscriber_id">Subscriber Id</string>
+    <string name="subscriber_id">Subscription Id</string>
     <string name="nav_str_log_out">Log Out</string>
     <string name="privacy_text_check"><![CDATA[ I have read and agree to the
     <font color="#23E763">Terms and Conditions</font of Trade Now ]]></string>
@@ -110,4 +110,5 @@
     <string name="str_news_details_title">News Details</string>
     <string name="str_err_server_err">Server Error</string>
     <string name="str_err_server_msg">Something went wrong on server</string>
+    <string name="str_err_chek_privacy">Please accept terms and condition before login</string>
 </resources>

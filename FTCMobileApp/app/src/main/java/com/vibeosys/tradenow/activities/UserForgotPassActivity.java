@@ -108,6 +108,8 @@ public class UserForgotPassActivity extends BaseActivity implements View.OnClick
         switch (requestToken) {
             case ServerRequestConstants.REQUEST_FORGOT_USER_PASS:
                 showProgress(false, formView, progressView);
+                customAlterDialog(getResources().getString(R.string.str_err_server_err),
+                        getResources().getString(R.string.str_err_server_msg));
                 break;
         }
     }

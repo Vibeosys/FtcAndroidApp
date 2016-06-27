@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -38,10 +39,11 @@ import com.vibeosys.tradenow.utils.UserAuth;
 public class NewUserLoginFragment extends BaseFragment implements View.OnClickListener,
         ServerSyncManager.OnErrorResultReceived, ServerSyncManager.OnSuccessResultReceived {
     private static final String TAG = NewUserLoginFragment.class.getSimpleName();
-    EditText txtUserName, txtPassword;
-    TextView txtRegister, txtForgotPass, txtTerms;
-    Button btnLogIn;
-    View formView, progressView;
+    private EditText txtUserName, txtPassword;
+    private TextView txtRegister, txtForgotPass, txtTerms, txtError;
+    private Button btnLogIn;
+    private View formView, progressView;
+    private CheckBox chkPrivacy;
 
     @Nullable
     @Override
@@ -57,7 +59,8 @@ public class NewUserLoginFragment extends BaseFragment implements View.OnClickLi
         btnLogIn = (Button) view.findViewById(R.id.btnLogIn);
         formView = view.findViewById(R.id.formLogin);
         progressView = view.findViewById(R.id.progressBar);
-
+        chkPrivacy = (CheckBox) view.findViewById(R.id.privacyCheck);
+        txtError = (TextView) view.findViewById(R.id.txtError);
         btnLogIn.setOnClickListener(this);
         txtRegister.setOnClickListener(this);
         txtForgotPass.setOnClickListener(this);
@@ -74,7 +77,8 @@ public class NewUserLoginFragment extends BaseFragment implements View.OnClickLi
             case R.id.btnLogIn:
                 String userName = txtUserName.getText().toString();
                 String password = txtPassword.getText().toString();
-                callLogin(userName, password);
+                boolean checkPrivacy = chkPrivacy.isChecked();
+                callLogin(userName, password, checkPrivacy);
                 break;
             case R.id.txtRegister:
                 startActivity(new Intent(getActivity().getApplicationContext(), RegisterActivity.class));
@@ -88,12 +92,13 @@ public class NewUserLoginFragment extends BaseFragment implements View.OnClickLi
         }
     }
 
-    private void callLogin(String userName, String password) {
+    private void callLogin(String userName, String password, boolean checkPrivacy) {
 
         boolean cancelFlag = false;
         View focusView = null;
         txtUserName.setError(null);
         txtPassword.setError(null);
+        txtError.setVisibility(View.GONE);
 
         if (TextUtils.isEmpty(userName)) {
             cancelFlag = true;
@@ -103,11 +108,16 @@ public class NewUserLoginFragment extends BaseFragment implements View.OnClickLi
             cancelFlag = true;
             focusView = txtPassword;
             txtPassword.setError(getResources().getString(R.string.str_err_pass_empty));
+        } else if (!checkPrivacy) {
+            cancelFlag = true;
+            focusView = chkPrivacy;
+            txtError.setVisibility(View.VISIBLE);
         }
 
         if (cancelFlag) {
             focusView.requestFocus();
         } else {
+            txtError.setVisibility(View.GONE);
             showProgress(true, formView, progressView);
             GetUserLogin userLogin = new GetUserLogin(userName, password);
             Gson gson = new Gson();
@@ -125,6 +135,8 @@ public class NewUserLoginFragment extends BaseFragment implements View.OnClickLi
         switch (requestToken) {
             case ServerRequestConstants.REQUEST_USER_LOGIN:
                 showProgress(false, formView, progressView);
+                customAlterDialog(getResources().getString(R.string.str_err_server_err),
+                        getResources().getString(R.string.str_err_server_msg));
                 Log.e(TAG, "Error in User Login data" + error.getMessage());
                 break;
         }

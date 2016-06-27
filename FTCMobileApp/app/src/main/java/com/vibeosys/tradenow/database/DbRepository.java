@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
@@ -14,6 +15,7 @@ import com.vibeosys.tradenow.utils.DateUtils;
 import com.vibeosys.tradenow.utils.SessionManager;
 
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +44,30 @@ public class DbRepository extends SQLiteOpenHelper {
             "  copy int(10) DEFAULT NULL," +
             "  exp_time datetime DEFAULT NULL,signal_date datetime DEFAULT NULL," +
             "  PRIMARY KEY (Ticket)" +
-            ")";
+            ");";
+    private final String CREATE_PAGE_TYPE = "CREATE TABLE IF NOT EXISTS page_type (" +
+            " PageTypeId INT NOT NULL," +
+            " PageTypeDesc VARCHAR(45) NULL," +
+            " Active INT(1) NULL," +
+            " PRIMARY KEY (PageTypeId));";
+
+    private final String CREATE_PAGE = "CREATE TABLE IF NOT EXISTS pages(" +
+            "  PageId VARCHAR(50) NOT NULL ," +
+            "  PageTitle VARCHAR(45) NULL," +
+            "  Status INT(1) NULL," +
+            "  PageTypeId INT NULL," +
+            "  CreatedDate DATETIME NULL," +
+            "  UpdatedDate DATETIME NULL," +
+            "  Active INT(1) NULL," +
+            "  PRIMARY KEY (PageId));";
+
+    private final String CREATE_WIDGET = "CREATE TABLE widget (" +
+            "  WidgetId INT NOT NULL AUTO_INCREMENT," +
+            "  WidgetTitle VARCHAR(45) NOT NULL ," +
+            "  Position INT NULL," +
+            "  WidgetData TEXT NULL ," +
+            "  PageId VARCHAR(50) NOT NULL," +
+            "  PRIMARY KEY (WidgetId));";
 
     public DbRepository(Context context, SessionManager sessionManager) {
         super(context, DATABASE_NAME, null, sessionManager.getDatabaseVersion());
@@ -50,8 +75,32 @@ public class DbRepository extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(CREATE_SIGNAL);
-        Log.d(TAG, "Signal Table Create" + CREATE_SIGNAL);
+        try {
+            db.execSQL(CREATE_SIGNAL);
+            Log.d(TAG, "##Signal Table Create " + CREATE_SIGNAL);
+        } catch (SQLiteException e) {
+            Log.e(TAG, "##Could not create signal table" + e.toString());
+        }
+        try {
+            db.execSQL(CREATE_PAGE_TYPE);
+            Log.d(TAG, "##Page type Table Create " + CREATE_PAGE_TYPE);
+        } catch (SQLiteException e) {
+            Log.e(TAG, "##Could not create Page type table" + e.toString());
+        }
+        try {
+            db.execSQL(CREATE_PAGE);
+            Log.d(TAG, "##Page Table Create " + CREATE_PAGE);
+        } catch (SQLiteException e) {
+            Log.e(TAG, "##Could not create Page Table" + e.toString());
+        }
+
+        try {
+            db.execSQL(CREATE_WIDGET);
+            Log.d(TAG, "##Widget Table created" + CREATE_WIDGET);
+        } catch (SQLiteException e) {
+            Log.e(TAG, "##could not create widget table" + e.toString());
+        }
+
     }
 
     @Override

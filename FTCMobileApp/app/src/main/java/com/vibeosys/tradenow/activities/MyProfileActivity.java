@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
@@ -33,6 +34,7 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
     private Button mBtnCancel, mBtnUpdate;
     View formView, progressBar;
     Validator validator = new Validator();
+    LinearLayout laySub, layoutPlan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,8 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
         mTxtCompanyname = (EditText) findViewById(R.id.txtAgencyName);
         mTxtPlan = (EditText) findViewById(R.id.txtPlanName);
         mTxtSubId = (EditText) findViewById(R.id.txtSubscriptionId);
+        layoutPlan = (LinearLayout) findViewById(R.id.layoutPlan);
+        laySub = (LinearLayout) findViewById(R.id.laySubId);
         mBtnCancel.setOnClickListener(this);
         mBtnUpdate.setOnClickListener(this);
         mServerSyncManager.setOnStringErrorReceived(this);
@@ -176,10 +180,14 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
         switch (requestToken) {
             case ServerRequestConstants.REQUEST_GET_PROFILE:
                 showProgress(false, formView, progressBar);
+                customAlterDialog(getResources().getString(R.string.str_err_server_err),
+                        getResources().getString(R.string.str_err_server_msg));
                 Log.e(TAG, "error in get profile" + error.toString());
                 break;
             case ServerRequestConstants.REQUEST_UPDATE_PROFILE:
                 showProgress(false, formView, progressBar);
+                customAlterDialog(getResources().getString(R.string.str_err_server_err),
+                        getResources().getString(R.string.str_err_server_msg));
                 Log.e(TAG, "error in update profile" + error.toString());
                 break;
             default:
@@ -248,5 +256,12 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
         mTxtCompanyname.setText(data.getCompanyName());
         mTxtPlan.setText(data.getPlan());
         mTxtSubId.setText("" + data.getSubscriberId());
+        if (data.getSubscriberId() == 0) {
+            laySub.setVisibility(View.GONE);
+            layoutPlan.setVisibility(View.GONE);
+        } else {
+            laySub.setVisibility(View.VISIBLE);
+            layoutPlan.setVisibility(View.VISIBLE);
+        }
     }
 }

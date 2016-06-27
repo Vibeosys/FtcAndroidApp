@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -39,10 +40,11 @@ public class ClientUserLoginFragment extends BaseFragment implements View.OnClic
         ServerSyncManager.OnErrorResultReceived, ServerSyncManager.OnSuccessResultReceived {
 
     private static final String TAG = ClientUserLoginFragment.class.getSimpleName();
-    EditText txtUserName, txtPassword, txtSubscriberId;
-    TextView txtForgotPass, txtTerms;
-    Button btnLogIn;
-    View formView, progressView;
+    private EditText txtUserName, txtPassword, txtSubscriberId;
+    private TextView txtForgotPass, txtTerms, txtError;
+    private Button btnLogIn;
+    private View formView, progressView;
+    private CheckBox chkPrivacy;
 
     @Nullable
     @Override
@@ -56,8 +58,11 @@ public class ClientUserLoginFragment extends BaseFragment implements View.OnClic
         txtTerms = (TextView) view.findViewById(R.id.txtTerms);
         txtTerms.setText(Html.fromHtml(getResources().getString(R.string.privacy_text_check)));
         btnLogIn = (Button) view.findViewById(R.id.btnLogIn);
+        chkPrivacy = (CheckBox) view.findViewById(R.id.privacyCheck);
         formView = view.findViewById(R.id.formLogin);
         progressView = view.findViewById(R.id.progressBar);
+        txtError = (TextView) view.findViewById(R.id.txtError);
+
         btnLogIn.setOnClickListener(this);
         txtForgotPass.setOnClickListener(this);
         txtTerms.setOnClickListener(this);
@@ -74,7 +79,8 @@ public class ClientUserLoginFragment extends BaseFragment implements View.OnClic
                 String userName = txtUserName.getText().toString();
                 String password = txtPassword.getText().toString();
                 String subId = txtSubscriberId.getText().toString();
-                callLogin(userName, password, subId);
+                boolean checkPrivacy = chkPrivacy.isChecked();
+                callLogin(userName, password, subId, checkPrivacy);
                 break;
             case R.id.txtForgotPass:
                 startActivity(new Intent(getActivity().getApplicationContext(), ClientForgotPassActivity.class));
@@ -85,13 +91,14 @@ public class ClientUserLoginFragment extends BaseFragment implements View.OnClic
         }
     }
 
-    private void callLogin(String userName, String password, String subId) {
+    private void callLogin(String userName, String password, String subId, boolean checkPrivacy) {
 
         boolean cancelFlag = false;
         View focusView = null;
         txtUserName.setError(null);
         txtPassword.setError(null);
         txtSubscriberId.setError(null);
+        txtError.setVisibility(View.GONE);
         if (TextUtils.isEmpty(userName)) {
             cancelFlag = true;
             focusView = txtUserName;
@@ -104,11 +111,16 @@ public class ClientUserLoginFragment extends BaseFragment implements View.OnClic
             cancelFlag = true;
             focusView = txtSubscriberId;
             txtSubscriberId.setError(getResources().getString(R.string.str_err_sub_empty));
+        } else if (!checkPrivacy) {
+            cancelFlag = true;
+            focusView = chkPrivacy;
+            txtError.setVisibility(View.VISIBLE);
         }
 
         if (cancelFlag) {
             focusView.requestFocus();
         } else {
+            txtError.setVisibility(View.GONE);
             try {
                 showProgress(true, formView, progressView);
                 int userSubId = Integer.parseInt(subId);
@@ -132,6 +144,8 @@ public class ClientUserLoginFragment extends BaseFragment implements View.OnClic
         switch (requestToken) {
             case ServerRequestConstants.REQUEST_CLIENT_LOGIN:
                 showProgress(false, formView, progressView);
+                customAlterDialog(getResources().getString(R.string.str_err_server_err),
+                        getResources().getString(R.string.str_err_server_msg));
                 Log.e(TAG, "Error in Client Login" + error.toString());
                 break;
         }

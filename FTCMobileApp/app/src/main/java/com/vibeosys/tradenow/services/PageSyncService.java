@@ -6,19 +6,20 @@ import android.util.Log;
 
 import com.vibeosys.tradenow.utils.AppConstants;
 import com.vibeosys.tradenow.utils.NetworkUtils;
+import com.vibeosys.tradenow.utils.PagesSyncManager;
 import com.vibeosys.tradenow.utils.ServerSyncManager;
 import com.vibeosys.tradenow.utils.SessionManager;
 import com.vibeosys.tradenow.utils.SignalSyncManager;
 
 /**
- * Created by akshay on 22-06-2016.
+ * Created by akshay on 27-06-2016.
  */
-public class SignalSyncService extends IntentService {
+public class PageSyncService extends IntentService {
 
-    private static final String TAG = SignalSyncService.class.getSimpleName();
+    private static final String TAG = PageSyncService.class.getSimpleName();
 
-    public SignalSyncService() {
-        super(SignalSyncService.class.getName());
+    public PageSyncService() {
+        super(PageSyncService.class.getName());
     }
 
     boolean flagStop = false;
@@ -34,7 +35,7 @@ public class SignalSyncService extends IntentService {
         SessionManager mSessionManager = SessionManager.getInstance(getApplicationContext());
         ServerSyncManager mServerSyncManager = new ServerSyncManager(getApplicationContext(),
                 mSessionManager);
-        SignalSyncManager mSignalSyncManager = new SignalSyncManager(getApplicationContext(),
+        PagesSyncManager mPagesSyncManager = new PagesSyncManager(getApplicationContext(),
                 mSessionManager, mServerSyncManager);
 
         while (true) {
@@ -43,13 +44,13 @@ public class SignalSyncService extends IntentService {
                     if (flagStop)
                         break;
                     if (NetworkUtils.isActiveNetworkAvailable(getApplicationContext()))
-                        mSignalSyncManager.syncWithServer();
+                        mPagesSyncManager.syncWithServer();
 
-                    Log.d(TAG, "##In Signal sync service");
+                    Log.d(TAG, "##In page service");
                     //TODO: Hardcoded time for now, need to read from properties
-                    wait(AppConstants.SERVICE_TIME_OUT * 1000);
+                    wait(AppConstants.PAGE_SERVICE_TIME_OUT * 1000);
                 } catch (Exception e) {
-                    Log.e(TAG, "##Error occurred in Signal Sync service " + e.toString());
+                    Log.e(TAG, "##Error occurred in page service " + e.toString());
                 }
             }
         }
