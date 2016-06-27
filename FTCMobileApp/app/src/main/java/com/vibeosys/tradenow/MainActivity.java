@@ -39,7 +39,7 @@ public class MainActivity extends BaseActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        syncServiceIntent = new Intent(Intent.ACTION_SYNC, null, this, SignalSyncService.class);
         if (!UserAuth.isUserLoggedIn()) {
             callToLogOut();
         } else {
@@ -72,7 +72,7 @@ public class MainActivity extends BaseActivity
             if (mSessionManager.getSubId() > 0) {
                 navigationView.getMenu().clear(); //clear old inflated items.
                 navigationView.inflateMenu(R.menu.activity_main_drawer);
-                syncServiceIntent = new Intent(Intent.ACTION_SYNC, null, this, SignalSyncService.class);
+
                 startService(syncServiceIntent);
             } else {
                 navigationView.getMenu().clear(); //clear old inflated items.
@@ -143,6 +143,14 @@ public class MainActivity extends BaseActivity
         } else if (id == R.id.nav_demo) {
             startActivity(new Intent(getApplicationContext(), DemoActivity.class));
         } else if (id == R.id.nav_log_out) {
+            if (isMyServiceRunning(SignalSyncService.class)) {
+                try {
+                    stopService(syncServiceIntent);
+                } catch (NullPointerException e) {
+
+                }
+
+            }
             callToLogOut();
         } else if (id == R.id.nav_news) {
             startActivity(new Intent(getApplicationContext(), NewsActivity.class));
@@ -154,9 +162,8 @@ public class MainActivity extends BaseActivity
     }
 
     private void callToLogOut() {
-        if (isMyServiceRunning(SignalSyncService.class)) {
-            stopService(syncServiceIntent);
-        }
+
+        mDbRepository.deleteAllData();
         UserAuth.CleanAuthenticationInfo();
         Intent loginIntent = new Intent(getApplicationContext(), LoginActivity.class);
         loginIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

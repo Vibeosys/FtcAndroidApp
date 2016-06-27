@@ -19,6 +19,14 @@ public class SignalSyncService extends IntentService {
         super(SignalSyncService.class.getName());
     }
 
+    boolean flagStop = false;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        flagStop = false;
+    }
+
     @Override
     protected void onHandleIntent(Intent intent) {
         SessionManager mSessionManager = SessionManager.getInstance(getApplicationContext());
@@ -30,6 +38,8 @@ public class SignalSyncService extends IntentService {
         while (true) {
             synchronized (this) {
                 try {
+                    if (flagStop)
+                        break;
                     if (NetworkUtils.isActiveNetworkAvailable(getApplicationContext()))
                         mSignalSyncManager.syncWithServer();
 
@@ -41,5 +51,11 @@ public class SignalSyncService extends IntentService {
                 }
             }
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        flagStop = true;
     }
 }

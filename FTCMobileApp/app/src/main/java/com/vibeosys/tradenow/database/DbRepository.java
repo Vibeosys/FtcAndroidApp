@@ -59,6 +59,10 @@ public class DbRepository extends SQLiteOpenHelper {
 
     }
 
+    public void deleteAllData() {
+        deleteSignal();
+    }
+
     public void getDatabaseStructure() {
         final ArrayList<String> dirArray = new ArrayList<String>();
 
@@ -270,5 +274,25 @@ public class DbRepository extends SQLiteOpenHelper {
         return signalDataDTO;
     }
 
+    public boolean deleteSignal() {
+        SQLiteDatabase sqLiteDatabase = null;
+        sqLiteDatabase = getWritableDatabase();
+        long count = -1;
 
+        try {
+            synchronized (sqLiteDatabase) {
+                count = sqLiteDatabase.delete(SqlContract.SqlSignal.TABLE_NAME, null, null);
+                Log.d(TAG, " ## delete Signal data successfully");
+            }
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            Log.d(TAG, "## Error to delete Signal data" + e.toString());
+        } finally {
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen())
+                sqLiteDatabase.close();
+        }
+        return count != -1;
+    }
 }
