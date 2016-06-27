@@ -72,7 +72,7 @@
     <string name="str_close_price">Close Price</string>
     <string name="str_swap">Swap</string>
     <string name="str_profit">Profit</string>
-    <string name="str_pl_pips">Profit / Loss</string>
+    <string name="str_pl_pips">P/L in Pips</string>
     <string name="str_master_acc_id">Master Account Id</string>
     <string name="subscription_id">Subscription Id</string>
     <string name="splash_trade">Trade</string>
