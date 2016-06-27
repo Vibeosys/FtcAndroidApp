@@ -36,36 +36,24 @@
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
                            android:src="@drawable/ic_person_black_24dp" />-->
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:padding="3dp"
-                        android:text="@string/str_master_acc_id"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="14sp" />
+                    <!-- <TextView
+                         android:layout_width="match_parent"
+                         android:layout_height="match_parent"
+                         android:gravity="center_vertical"
+                         android:padding="3dp"
+                         android:text="@string/str_master_acc_id"
+                         android:textColor="@color/colorPrimary"
+                         android:textSize="14sp" />
 
-                    <TextView
-                        android:id="@+id/txtMasterAccNo"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:padding="3dp"
-                        android:text="334269"
-                        android:textSize="18sp" />
-                </LinearLayout>
+                     <TextView
+                         android:id="@+id/txtMasterAccNo"
+                         android:layout_width="match_parent"
+                         android:layout_height="match_parent"
+                         android:gravity="center_vertical"
+                         android:padding="3dp"
+                         android:text="334269"
+                         android:textSize="18sp" />-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.4"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical">
-
-                    <!--   <ImageView
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:src="@drawable/ic_person_black_24dp" />-->
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -83,6 +71,37 @@
                         android:padding="3dp"
                         android:text="168993075"
                         android:textSize="18sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.4"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <!--   <ImageView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:src="@drawable/ic_person_black_24dp" />-->
+                    <!-- <TextView
+                         android:layout_width="match_parent"
+                         android:layout_height="match_parent"
+                         android:gravity="center_vertical"
+                         android:padding="3dp"
+                         android:text="@string/str_ticket_no"
+                         android:textColor="@color/colorPrimary"
+                         android:textSize="14sp" />
+
+                     <TextView
+                         android:id="@+id/txtTicketNo"
+                         android:layout_width="match_parent"
+                         android:layout_height="match_parent"
+                         android:gravity="center_vertical"
+                         android:padding="3dp"
+                         android:text="168993075"
+                         android:textSize="18sp" />-->
                 </LinearLayout>
             </LinearLayout>
 

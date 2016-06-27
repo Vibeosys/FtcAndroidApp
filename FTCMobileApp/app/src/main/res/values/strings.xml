@@ -105,4 +105,7 @@
     <string name="str_user_full_name">Full Name</string>
     <string name="str_ph_no">Phone Number</string>
     <string name="str_user_plan">Plan</string>
+    <string name="str_net_err">Network Error</string>
+    <string name="str_err_net_msg">Please connect to the internet</string>
+    <string name="str_news_details_title">News Details</string>
 </resources>

@@ -72,7 +72,10 @@
             android:name=".services.SignalSyncService"
             android:exported="false" />
 
-        <activity android:name=".activities.ClientForgotPassActivity"></activity>
+        <activity android:name=".activities.ClientForgotPassActivity" />
+        <activity
+            android:name=".activities.NewsDetailsActivity"
+            android:parentActivityName=".activities.NewsActivity"></activity>
     </application>
 
 </manifest>

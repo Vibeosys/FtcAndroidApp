@@ -15,7 +15,10 @@ public class Validator {
     }
 
     public static boolean isValidPhone(String phone) {
-        return Patterns.PHONE.matcher(phone).matches();
+        if (phone.length() > 10||phone.length()<10)
+            return false;
+        else
+            return Patterns.PHONE.matcher(phone).matches();
     }
 
     public boolean validateUserName(final String username) {

@@ -14,7 +14,7 @@ import java.util.Date;
 public class TradeDetailViewActivity extends BaseActivity {
 
 
-    private TextView txtMasterAccNo, txtTicketNo, txtLotSize, txtPrice, txtClosePrice, txtSp,
+    private TextView /*txtMasterAccNo,*/ txtTicketNo, txtLotSize, txtPrice, txtClosePrice, txtSp,
             txtTp, txtSwap, txtProfit, txtProfitLoss, txtOpenTime, txtCloseTime;
     private long ticketNo;
     private DateUtils dateUtils;
@@ -25,7 +25,7 @@ public class TradeDetailViewActivity extends BaseActivity {
         setContentView(R.layout.activity_trade_detail_view);
         setTitle("INR TO USD");
         ticketNo = getIntent().getExtras().getLong("ticketNo");
-        txtMasterAccNo = (TextView) findViewById(R.id.txtMasterAccNo);
+        //txtMasterAccNo = (TextView) findViewById(R.id.txtMasterAccNo);
         txtTicketNo = (TextView) findViewById(R.id.txtTicketNo);
         txtLotSize = (TextView) findViewById(R.id.txtLotSize);
         txtPrice = (TextView) findViewById(R.id.txtPrice);
@@ -43,7 +43,7 @@ public class TradeDetailViewActivity extends BaseActivity {
     }
 
     private void updateUi(SignalDataDTO signalDataDTO) {
-        txtMasterAccNo.setText("");
+        //txtMasterAccNo.setText("");
         txtTicketNo.setText("" + signalDataDTO.getTicket());
         txtLotSize.setText("" + signalDataDTO.getLot());
         txtPrice.setText("" + signalDataDTO.getPrice());

@@ -105,4 +105,8 @@ public class PropertyFileReader {
     public String getProfileUrl() {
         return getEndPointUri() + mProperties.getProperty(PropertyTypeConstants.GET_PROFILE_URL);
     }
+
+    public String getUpdateProfileUrl() {
+        return getEndPointUri() + mProperties.getProperty(PropertyTypeConstants.GET_UPDATE_PROFILE_URL);
+    }
 }

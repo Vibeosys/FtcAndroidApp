@@ -1,9 +1,11 @@
 package com.vibeosys.tradenow.activities;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.vibeosys.tradenow.R;
@@ -44,6 +46,16 @@ public class NewsActivity extends BaseActivity {
         mainNewsView = findViewById(R.id.mainNewsView);
         AsyncNewsFetch fetch = new AsyncNewsFetch();
         fetch.execute();
+
+        listNews.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                News news = (News) adapter.getItem(position);
+                Intent iDetails = new Intent(getApplicationContext(), NewsDetailsActivity.class);
+                iDetails.putExtra("link", news.getLink());
+                startActivity(iDetails);
+            }
+        });
 
     }
 
