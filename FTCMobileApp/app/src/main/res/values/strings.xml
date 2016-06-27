@@ -108,4 +108,6 @@
     <string name="str_net_err">Network Error</string>
     <string name="str_err_net_msg">Please connect to the internet</string>
     <string name="str_news_details_title">News Details</string>
+    <string name="str_err_server_err">Server Error</string>
+    <string name="str_err_server_msg">Something went wrong on server</string>
 </resources>

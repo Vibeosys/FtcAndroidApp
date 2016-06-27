@@ -111,7 +111,7 @@ public class ServerSyncManager
                     mErrorReceived.onVolleyErrorReceived(error, requestToken);
             }
         });
-        uploadRequest.setRetryPolicy(new DefaultRetryPolicy(15000,
+        uploadRequest.setRetryPolicy(new DefaultRetryPolicy(20000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         vollyRequest.add(uploadRequest);

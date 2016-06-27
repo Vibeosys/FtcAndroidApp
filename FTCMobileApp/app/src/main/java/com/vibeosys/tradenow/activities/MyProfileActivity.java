@@ -221,6 +221,7 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
                 showProgress(false, formView, progressBar);
                 Toast.makeText(getApplicationContext(), "Profile updated successfully.",
                         Toast.LENGTH_LONG).show();
+                hideVisibility();
                 break;
             default:
                 break;

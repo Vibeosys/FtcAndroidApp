@@ -123,6 +123,8 @@ public class ClientForgotPassActivity extends BaseActivity implements View.OnCli
         switch (requestToken) {
             case ServerRequestConstants.REQUEST_FORGOT_CLIENT_PASS:
                 showProgress(false, formView, progressView);
+                customAlterDialog(getResources().getString(R.string.str_err_server_err),
+                        getResources().getString(R.string.str_err_server_msg));
                 break;
         }
     }
