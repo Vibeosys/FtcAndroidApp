@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.vibeosys.tradenow.R;
 import com.vibeosys.tradenow.data.adapterdata.SignalDataDTO;
+import com.vibeosys.tradenow.data.adapterdata.TradeBackupDataDTO;
+import com.vibeosys.tradenow.data.adapterdata.TradeBackupDateDTO;
 import com.vibeosys.tradenow.utils.DateUtils;
 
 import java.util.ArrayList;
@@ -19,12 +21,12 @@ import java.util.Date;
  */
 public class TradeHistoryAdapter extends BaseAdapter {
 
-    private ArrayList<SignalDataDTO> data;
+    private ArrayList<TradeBackupDataDTO> data;
     private Context mContext;
     ViewDetailsListener viewDetailsListener;
     DateUtils dateUtils = new DateUtils();
 
-    public TradeHistoryAdapter(ArrayList<SignalDataDTO> data, Context mContext) {
+    public TradeHistoryAdapter(ArrayList<TradeBackupDataDTO> data, Context mContext) {
         this.data = data;
         this.mContext = mContext;
     }
@@ -68,26 +70,26 @@ public class TradeHistoryAdapter extends BaseAdapter {
 
         } else
             viewHolder = (ViewHolder) convertView.getTag();
-        final SignalDataDTO signalDataDTO = data.get(position);
-        String symbol = signalDataDTO.getSymbol();
+        final TradeBackupDataDTO tradeBackupDataDTO = data.get(position);
+        String symbol = tradeBackupDataDTO.getSymbol();
         if (symbol.length() == 6) {
             StringBuffer sb = new StringBuffer(symbol);
-            sb.insert(3, " To ");
+            sb.insert(3, " / ");
             symbol = sb.toString();
         }
         viewHolder.txtType.setText(symbol);
-        viewHolder.txtPrice.setText("" + signalDataDTO.getPrice());
-        viewHolder.txtSL.setText("" + signalDataDTO.getSl());
-        viewHolder.txtPlPip.setText("" + signalDataDTO.getProfit());
-        viewHolder.txtTP.setText("" + signalDataDTO.getTp());
+        viewHolder.txtPrice.setText("" + tradeBackupDataDTO.getPrice());
+        viewHolder.txtSL.setText("" + tradeBackupDataDTO.getSl());
+        viewHolder.txtPlPip.setText("" + tradeBackupDataDTO.getProfit());
+        viewHolder.txtTP.setText("" + tradeBackupDataDTO.getTp());
 
-        Date openDate = dateUtils.getFormattedDate(signalDataDTO.getOpenTime());
+        Date openDate = dateUtils.getFormattedDate(tradeBackupDataDTO.getOpenTime());
         viewHolder.txtTime.setText(dateUtils.getLocalTimeInReadableFormat(openDate));
 
-        Date closeDate = dateUtils.getFormattedDate(signalDataDTO.getCloseTime());
+        Date closeDate = dateUtils.getFormattedDate(tradeBackupDataDTO.getCloseTime());
         viewHolder.txtCloseTime.setText(dateUtils.getLocalTimeInReadableFormat(closeDate));
-        viewHolder.txtClosePrice.setText("" + signalDataDTO.getClosePrice());
-        if (signalDataDTO.getProfit() < 0) {
+        viewHolder.txtClosePrice.setText("" + tradeBackupDataDTO.getClosePrice());
+        if (tradeBackupDataDTO.getProfit() < 0) {
             viewHolder.txtProfitOrLoss.setTextColor(mContext.getResources().getColor(R.color.cancel_btn_colour));
             viewHolder.txtProfitOrLoss.setText("LOSS");
         } else {
@@ -98,7 +100,7 @@ public class TradeHistoryAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 if (viewDetailsListener != null)
-                    viewDetailsListener.onViewClickListener(v.getId(), signalDataDTO.getTicket(), new Object());
+                    viewDetailsListener.onViewClickListener(v.getId(), tradeBackupDataDTO.getTicket(), new Object());
             }
         });
         return row;
@@ -109,7 +111,7 @@ public class TradeHistoryAdapter extends BaseAdapter {
                 txtViewAll, txtClosePrice, txtType;
     }
 
-    public void addItem(final SignalDataDTO item) {
+    public void addItem(final TradeBackupDataDTO item) {
         data.add(item);
         notifyDataSetChanged();
     }

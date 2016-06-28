@@ -70,7 +70,7 @@ public class TradeAlertAdapter extends BaseAdapter {
         String symbol = signalDataDTO.getSymbol();
         if (symbol.length() == 6) {
             StringBuffer sb = new StringBuffer(symbol);
-            sb.insert(3, " To ");
+            sb.insert(3, " / ");
             symbol = sb.toString();
         }
 

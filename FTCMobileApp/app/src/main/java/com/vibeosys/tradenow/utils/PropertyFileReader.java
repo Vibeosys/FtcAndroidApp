@@ -109,4 +109,8 @@ public class PropertyFileReader {
     public String getUpdateProfileUrl() {
         return getEndPointUri() + mProperties.getProperty(PropertyTypeConstants.GET_UPDATE_PROFILE_URL);
     }
+
+    public String getTradeBackUpUrl() {
+        return getEndPointUri() + mProperties.getProperty(PropertyTypeConstants.GET_TRADE_BACKUP_URL);
+    }
 }

@@ -10,7 +10,10 @@ import android.util.Log;
 
 import com.vibeosys.tradenow.data.adapterdata.SignalDataDTO;
 import com.vibeosys.tradenow.data.adapterdata.SignalDateDTO;
+import com.vibeosys.tradenow.data.adapterdata.TradeBackupDataDTO;
+import com.vibeosys.tradenow.data.adapterdata.TradeBackupDateDTO;
 import com.vibeosys.tradenow.data.responsedata.ResponseSignalDTO;
+import com.vibeosys.tradenow.data.responsedata.ResponseTradeBackUp;
 import com.vibeosys.tradenow.utils.DateUtils;
 import com.vibeosys.tradenow.utils.SessionManager;
 
@@ -45,6 +48,26 @@ public class DbRepository extends SQLiteOpenHelper {
             "  exp_time datetime DEFAULT NULL,signal_date datetime DEFAULT NULL," +
             "  PRIMARY KEY (Ticket)" +
             ");";
+
+    private final String CREATE_TRADE_BACKUP = "CREATE TABLE IF NOT EXISTS trade_backup (" +
+            "  masteraccountid int(11) NOT NULL DEFAULT '0'," +
+            "  Ticket int(10) DEFAULT NULL," +
+            "  Symbol varchar(45) DEFAULT NULL," +
+            "  sType int(10) DEFAULT NULL," +
+            "  lot double(17,10) DEFAULT NULL," +
+            "  price double(17,10) DEFAULT NULL," +
+            "  sl double(17,10) DEFAULT NULL," +
+            "  tp double(17,10) DEFAULT NULL," +
+            "  close_price double(17,10) DEFAULT NULL," +
+            "  swap double(17,10) DEFAULT NULL," +
+            "  profit double(17,10) DEFAULT NULL," +
+            "  open_time datetime DEFAULT NULL," +
+            "  close_time datetime DEFAULT NULL," +
+            "  status varchar(25) DEFAULT NULL," +
+            "  pl_pips int(11) DEFAULT NULL,tradeBackupDate datetime DEFAULT NULL" +
+            ") ";
+
+
     private final String CREATE_PAGE_TYPE = "CREATE TABLE IF NOT EXISTS page_type (" +
             " PageTypeId INT NOT NULL," +
             " PageTypeDesc VARCHAR(45) NULL," +
@@ -62,7 +85,7 @@ public class DbRepository extends SQLiteOpenHelper {
             "  PRIMARY KEY (PageId));";
 
     private final String CREATE_WIDGET = "CREATE TABLE widget (" +
-            "  WidgetId INT NOT NULL AUTO_INCREMENT," +
+            "  WidgetId INT NOT NULL," +
             "  WidgetTitle VARCHAR(45) NOT NULL ," +
             "  Position INT NULL," +
             "  WidgetData TEXT NULL ," +
@@ -77,6 +100,12 @@ public class DbRepository extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         try {
             db.execSQL(CREATE_SIGNAL);
+            Log.d(TAG, "##Signal Table Create " + CREATE_SIGNAL);
+        } catch (SQLiteException e) {
+            Log.e(TAG, "##Could not create signal table" + e.toString());
+        }
+        try {
+            db.execSQL(CREATE_TRADE_BACKUP);
             Log.d(TAG, "##Signal Table Create " + CREATE_SIGNAL);
         } catch (SQLiteException e) {
             Log.e(TAG, "##Could not create signal table" + e.toString());
@@ -183,6 +212,60 @@ public class DbRepository extends SQLiteOpenHelper {
         }
         return flagError;
     }
+
+
+    public boolean insertTradeBackUp(List<ResponseTradeBackUp> tradebackupList) {
+        boolean flagError = false;
+        String errorMessage = "";
+        SQLiteDatabase sqLiteDatabase = null;
+        ContentValues contentValues = null;
+        DateUtils dateUtils = new DateUtils();
+        long count = -1;
+        try {
+            sqLiteDatabase = getWritableDatabase();
+            synchronized (sqLiteDatabase) {
+                contentValues = new ContentValues();
+                for (ResponseTradeBackUp tradeBackUp : tradebackupList) {
+                    contentValues.put(SqlContract.SqlTradeBackUp.MASTER_ACC_ID, tradeBackUp.getMasterAccountId());
+                    contentValues.put(SqlContract.SqlTradeBackUp.TICKET, tradeBackUp.getTicket());
+                    contentValues.put(SqlContract.SqlTradeBackUp.SYMBOL, tradeBackUp.getSymbol());
+                    contentValues.put(SqlContract.SqlTradeBackUp.S_TYPE, tradeBackUp.getsType());
+                    contentValues.put(SqlContract.SqlTradeBackUp.LOT, tradeBackUp.getLot());
+                    contentValues.put(SqlContract.SqlTradeBackUp.PRICE, tradeBackUp.getPrice());
+                    contentValues.put(SqlContract.SqlTradeBackUp.SL, tradeBackUp.getSl());
+                    contentValues.put(SqlContract.SqlTradeBackUp.TP, tradeBackUp.getTp());
+                    contentValues.put(SqlContract.SqlTradeBackUp.CLOSE_PRICE, tradeBackUp.getClosePrice());
+                    contentValues.put(SqlContract.SqlTradeBackUp.SWAP, tradeBackUp.getSwap());
+                    contentValues.put(SqlContract.SqlTradeBackUp.PROFIT, tradeBackUp.getProfit());
+                    contentValues.put(SqlContract.SqlTradeBackUp.OPEN_TIME,
+                            dateUtils.getDateAndTimeFromLong(tradeBackUp.getOpenTime()));
+                    contentValues.put(SqlContract.SqlTradeBackUp.CLOSE_TIME,
+                            dateUtils.getDateAndTimeFromLong(tradeBackUp.getCloseTime()));
+                    contentValues.put(SqlContract.SqlTradeBackUp.STATUS, tradeBackUp.getStatus());
+                    contentValues.put(SqlContract.SqlTradeBackUp.TRADE_BACK_DATE,
+                            dateUtils.getReadableDateFromLong(tradeBackUp.getCloseTime()));
+                    contentValues.put(SqlContract.SqlTradeBackUp.PL_IN_PIPS, tradeBackUp.getPips());
+                    if (!sqLiteDatabase.isOpen())
+                        sqLiteDatabase = getWritableDatabase();
+                    count = sqLiteDatabase.insert(SqlContract.SqlTradeBackUp.TABLE_NAME, null, contentValues);
+                    contentValues.clear();
+                    Log.d(TAG, "## Trade backup is Added Successfully");
+                    flagError = true;
+                }
+            }
+        } catch (Exception e) {
+            flagError = false;
+            errorMessage = e.getMessage();
+            Log.e(TAG, "##Error while insert Trade backup " + e.toString());
+        } finally {
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen())
+                sqLiteDatabase.close();
+            if (!flagError)
+                Log.e(TAG, "##Insert Trade backup" + errorMessage);
+        }
+        return flagError;
+    }
+
 
     public ArrayList<SignalDateDTO> getSignalDateList(String status) {
         SQLiteDatabase sqLiteDatabase = null;
@@ -321,6 +404,145 @@ public class DbRepository extends SQLiteOpenHelper {
                 sqLiteDatabase.close();
         }
         return signalDataDTO;
+    }
+
+    public ArrayList<TradeBackupDateDTO> getTradeDateList() {
+        SQLiteDatabase sqLiteDatabase = null;
+        Cursor cursor = null;
+        ArrayList<TradeBackupDateDTO> tradeBackupDateList = null;
+        try {
+            //String[] whereClause = new String[]{status};
+            sqLiteDatabase = getReadableDatabase();
+            synchronized (sqLiteDatabase) {
+                cursor = sqLiteDatabase.rawQuery("SELECT Distinct " + SqlContract.SqlTradeBackUp.
+                        TRADE_BACK_DATE + " From " + SqlContract.SqlTradeBackUp.TABLE_NAME, null);
+                tradeBackupDateList = new ArrayList<>();
+                if (cursor != null) {
+                    if (cursor.getCount() > 0) {
+                        cursor.moveToFirst();
+
+                        do {
+                            //Log.i(TAG, "##" + cursor.getCount() + " " + cursor.getInt(1));
+                            String tradeDate = cursor.getString(cursor.getColumnIndex(SqlContract.SqlTradeBackUp.
+                                    TRADE_BACK_DATE));
+                            TradeBackupDateDTO backupDateDTO = new TradeBackupDateDTO(tradeDate);
+                            tradeBackupDateList.add(backupDateDTO);
+
+                        } while (cursor.moveToNext());
+                    }
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (cursor != null)
+                cursor.close();
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen())
+                sqLiteDatabase.close();
+        }
+
+        return tradeBackupDateList;
+    }
+
+
+    public ArrayList<TradeBackupDataDTO> getTradeBackupDataList(String openTime) {
+        SQLiteDatabase sqLiteDatabase = null;
+        Cursor cursor = null;
+        ArrayList<TradeBackupDataDTO> backupDataDTOs = null;
+        try {
+            String[] whereClause = new String[]{openTime};
+            sqLiteDatabase = getReadableDatabase();
+            synchronized (sqLiteDatabase) {
+                cursor = sqLiteDatabase.rawQuery("SELECT * From " + SqlContract.SqlTradeBackUp.TABLE_NAME + " where "
+                        + SqlContract.SqlTradeBackUp.TRADE_BACK_DATE + "=?", whereClause);
+                backupDataDTOs = new ArrayList<>();
+                if (cursor != null) {
+                    if (cursor.getCount() > 0) {
+                        cursor.moveToFirst();
+
+                        do {
+                            long masterAccountNo = cursor.getLong(cursor.getColumnIndex(SqlContract.SqlTradeBackUp.MASTER_ACC_ID));
+                            long ticket = cursor.getLong(cursor.getColumnIndex(SqlContract.SqlTradeBackUp.TICKET));
+                            String symbol = cursor.getString(cursor.getColumnIndex(SqlContract.SqlTradeBackUp.SYMBOL));
+                            int sType = cursor.getInt(cursor.getColumnIndex(SqlContract.SqlTradeBackUp.S_TYPE));
+                            double lot = cursor.getDouble(cursor.getColumnIndex(SqlContract.SqlTradeBackUp.LOT));
+                            double price = cursor.getDouble(cursor.getColumnIndex(SqlContract.SqlTradeBackUp.PRICE));
+                            double sl = cursor.getDouble(cursor.getColumnIndex(SqlContract.SqlTradeBackUp.SL));
+                            double tp = cursor.getDouble(cursor.getColumnIndex(SqlContract.SqlTradeBackUp.TP));
+                            double closePrice = cursor.getDouble(cursor.getColumnIndex(SqlContract.SqlTradeBackUp.CLOSE_PRICE));
+                            double swap = cursor.getDouble(cursor.getColumnIndex(SqlContract.SqlTradeBackUp.SWAP));
+                            double profit = cursor.getDouble(cursor.getColumnIndex(SqlContract.SqlTradeBackUp.PROFIT));
+                            String openTimeData = cursor.getString(cursor.getColumnIndex(SqlContract.SqlTradeBackUp.OPEN_TIME));
+                            String closeTime = cursor.getString(cursor.getColumnIndex(SqlContract.SqlTradeBackUp.CLOSE_TIME));
+                            String statusData = cursor.getString(cursor.getColumnIndex(SqlContract.SqlTradeBackUp.STATUS));
+                            double pips = cursor.getDouble(cursor.getColumnIndex(SqlContract.SqlTradeBackUp.PL_IN_PIPS));
+
+                            TradeBackupDataDTO tradeBackupDataDTO = new TradeBackupDataDTO(masterAccountNo, ticket, symbol, sType, lot, price, sl, tp, closePrice, swap, profit, openTimeData, closeTime, statusData
+                                    , pips);
+                            backupDataDTOs.add(tradeBackupDataDTO);
+
+                        } while (cursor.moveToNext());
+                    }
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (cursor != null)
+                cursor.close();
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen())
+                sqLiteDatabase.close();
+        }
+        return backupDataDTOs;
+    }
+
+    public TradeBackupDataDTO getTradeBackUp(long ticketNo) {
+        SQLiteDatabase sqLiteDatabase = null;
+        Cursor cursor = null;
+        TradeBackupDataDTO tradeBackupDTO = null;
+        try {
+            String[] whereClause = new String[]{String.valueOf(ticketNo)};
+            sqLiteDatabase = getReadableDatabase();
+            synchronized (sqLiteDatabase) {
+                cursor = sqLiteDatabase.rawQuery("SELECT * From " + SqlContract.SqlTradeBackUp.TABLE_NAME + " where " +
+                        SqlContract.SqlTradeBackUp.TICKET + "=?", whereClause);
+                if (cursor != null) {
+                    if (cursor.getCount() > 0) {
+                        cursor.moveToFirst();
+                        long masterId = cursor.getLong(cursor.getColumnIndex(SqlContract.SqlTradeBackUp.MASTER_ACC_ID));
+                        int ticket = cursor.getInt(cursor.getColumnIndex(SqlContract.SqlTradeBackUp.TICKET));
+                        String symbol = cursor.getString(cursor.getColumnIndex(SqlContract.SqlTradeBackUp.SYMBOL));
+                        int sType = cursor.getInt(cursor.getColumnIndex(SqlContract.SqlTradeBackUp.S_TYPE));
+                        double lot = cursor.getDouble(cursor.getColumnIndex(SqlContract.SqlTradeBackUp.LOT));
+                        double price = cursor.getDouble(cursor.getColumnIndex(SqlContract.SqlTradeBackUp.PRICE));
+                        double sl = cursor.getDouble(cursor.getColumnIndex(SqlContract.SqlTradeBackUp.SL));
+                        double tp = cursor.getDouble(cursor.getColumnIndex(SqlContract.SqlTradeBackUp.TP));
+                        double closePrice = cursor.getDouble(cursor.getColumnIndex(SqlContract.SqlTradeBackUp.CLOSE_PRICE));
+                        double swap = cursor.getDouble(cursor.getColumnIndex(SqlContract.SqlTradeBackUp.SWAP));
+                        double profit = cursor.getDouble(cursor.getColumnIndex(SqlContract.SqlTradeBackUp.PROFIT));
+                        String openTimeData = cursor.getString(cursor.getColumnIndex(SqlContract.SqlTradeBackUp.OPEN_TIME));
+                        String closeTime = cursor.getString(cursor.getColumnIndex(SqlContract.SqlTradeBackUp.CLOSE_TIME));
+                        String statusData = cursor.getString(cursor.getColumnIndex(SqlContract.SqlTradeBackUp.STATUS));
+                        double pips = cursor.getDouble(cursor.getColumnIndex(SqlContract.SqlTradeBackUp.PL_IN_PIPS));
+                        tradeBackupDTO = new TradeBackupDataDTO(masterId, ticket, symbol, sType, lot, price, sl, tp, closePrice, swap, profit, openTimeData, closeTime, statusData
+                                , pips);
+                    }
+                } else {
+                    tradeBackupDTO = new TradeBackupDataDTO();
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (cursor != null)
+                cursor.close();
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen())
+                sqLiteDatabase.close();
+        }
+        return tradeBackupDTO;
     }
 
     public boolean deleteSignal() {

@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.vibeosys.tradenow.R;
 import com.vibeosys.tradenow.data.adapterdata.SignalDataDTO;
+import com.vibeosys.tradenow.data.adapterdata.TradeBackupDataDTO;
 import com.vibeosys.tradenow.utils.DateUtils;
 
 import java.util.Date;
@@ -38,24 +39,24 @@ public class TradeDetailViewActivity extends BaseActivity {
         txtOpenTime = (TextView) findViewById(R.id.txtOpenTime);
         txtCloseTime = (TextView) findViewById(R.id.txtCloseTime);
 
-        SignalDataDTO signalDataDTO = mDbRepository.getSignalData(ticketNo);
+        TradeBackupDataDTO signalDataDTO = mDbRepository.getTradeBackUp(ticketNo);
         updateUi(signalDataDTO);
     }
 
-    private void updateUi(SignalDataDTO signalDataDTO) {
+    private void updateUi(TradeBackupDataDTO traeBackupDTO) {
         //txtMasterAccNo.setText("");
-        txtTicketNo.setText("" + signalDataDTO.getTicket());
-        txtLotSize.setText("" + signalDataDTO.getLot());
-        txtPrice.setText("" + signalDataDTO.getPrice());
-        txtClosePrice.setText("" + signalDataDTO.getClosePrice());
-        txtSp.setText("" + signalDataDTO.getSl());
-        txtTp.setText("" + signalDataDTO.getTp());
-        txtSwap.setText("" + signalDataDTO.getSwap());
-        txtProfit.setText("" + signalDataDTO.getProfit());
-        txtProfitLoss.setText("" + signalDataDTO.getProfit());
+        txtTicketNo.setText("" + traeBackupDTO.getTicket());
+        txtLotSize.setText("" + traeBackupDTO.getLot());
+        txtPrice.setText("" + traeBackupDTO.getPrice());
+        txtClosePrice.setText("" + traeBackupDTO.getClosePrice());
+        txtSp.setText("" + traeBackupDTO.getSl());
+        txtTp.setText("" + traeBackupDTO.getTp());
+        txtSwap.setText("" + traeBackupDTO.getSwap());
+        txtProfit.setText("" + traeBackupDTO.getProfit());
+        txtProfitLoss.setText("" + traeBackupDTO.getPips());
         DateUtils dateUtils = new DateUtils();
-        Date signalDate = dateUtils.getFormattedDate(signalDataDTO.getOpenTime());
-        Date closeDate = dateUtils.getFormattedDate(signalDataDTO.getExpTime());
+        Date signalDate = dateUtils.getFormattedDate(traeBackupDTO.getOpenTime());
+        Date closeDate = dateUtils.getFormattedDate(traeBackupDTO.getCloseTime());
         txtOpenTime.setText("" + dateUtils.getLocalDateInReadableFormat(signalDate) + " "
                 + dateUtils.getLocalTimeInReadableFormat(signalDate));
         txtCloseTime.setText("" + dateUtils.getLocalDateInReadableFormat(closeDate) + " "

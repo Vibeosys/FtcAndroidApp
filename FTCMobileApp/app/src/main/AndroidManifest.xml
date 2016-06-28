@@ -71,6 +71,12 @@
         <service
             android:name=".services.SignalSyncService"
             android:exported="false" />
+        <service
+            android:name=".services.TradeBackupSyncService"
+            android:exported="false" />
+        <service
+            android:name=".services.PageSyncService"
+            android:exported="false" />
 
         <activity android:name=".activities.ClientForgotPassActivity" />
         <activity

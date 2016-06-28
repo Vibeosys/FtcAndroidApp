@@ -71,6 +71,7 @@ public class SessionManager {
         editor.putString(PropertyTypeConstants.RESET_PASS, mPropertyFileReader.getResetPassUrl());
         editor.putString(PropertyTypeConstants.GET_PROFILE_URL, mPropertyFileReader.getProfileUrl());
         editor.putString(PropertyTypeConstants.GET_UPDATE_PROFILE_URL, mPropertyFileReader.getUpdateProfileUrl());
+        editor.putString(PropertyTypeConstants.GET_TRADE_BACKUP_URL, mPropertyFileReader.getTradeBackUpUrl());
         editor.apply();
         return true;
     }
@@ -101,6 +102,14 @@ public class SessionManager {
 
     public void setLastSyncDate(long date) {
         setValuesInSharedPrefs(PropertyTypeConstants.DATE_TO_SYNC, date);
+    }
+
+    public long getLastBackupSyncDate() {
+        return mProjectSharedPref.getLong(PropertyTypeConstants.TRADE_BACKUP_SYNC, 0);
+    }
+
+    public void setLastBackupSyncDate(long date) {
+        setValuesInSharedPrefs(PropertyTypeConstants.TRADE_BACKUP_SYNC, date);
     }
 
     private static void setValuesInSharedPrefs(String sharedPrefKey, String sharedPrefValue) {
@@ -205,5 +214,9 @@ public class SessionManager {
 
     public String getUpdateProfileUrl() {
         return mProjectSharedPref.getString(PropertyTypeConstants.GET_UPDATE_PROFILE_URL, null);
+    }
+
+    public String getTradeBackupUrl() {
+        return mProjectSharedPref.getString(PropertyTypeConstants.GET_TRADE_BACKUP_URL, null);
     }
 }

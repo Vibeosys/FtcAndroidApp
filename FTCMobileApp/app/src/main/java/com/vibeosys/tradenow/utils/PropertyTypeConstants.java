@@ -14,6 +14,7 @@ public final class PropertyTypeConstants {
     public static final String PAGES_URL = "api.endpoint.pages";
     public static final String DATABASE_VERSION_NUMBER = "database.version.number";
     public static final String DATE_TO_SYNC = "syncdate";
+    public static final String TRADE_BACKUP_SYNC = "trade.backup.syncdate";
     public static final String CLIENT_LOGIN_URL = "api.endpoint.client.login";
     public static final String USER_LOGIN_URL = "api.endpoint.user.login";
     public static final String USER_NAME_AVAILABLE = "api.endpoint.user.check";
@@ -23,6 +24,7 @@ public final class PropertyTypeConstants {
     public static final String RESET_PASS = "api.endpoint.resetpass";
     public static final String GET_PROFILE_URL = "api.endpoint.getprofile";
     public static final String GET_UPDATE_PROFILE_URL = "api.endpoint.updateprofile";
+    public static final String GET_TRADE_BACKUP_URL = "api.endpoint.tradebackup";
 
     public static final String USER_ID = "user.id";
     public static final String USER_FULL_NAME = "user.fullname";

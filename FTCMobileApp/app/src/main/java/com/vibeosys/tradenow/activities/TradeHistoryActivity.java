@@ -11,6 +11,7 @@ import com.vibeosys.tradenow.R;
 import com.vibeosys.tradenow.adapters.TradeHistoryAdapter;
 import com.vibeosys.tradenow.data.adapterdata.SignalDataDTO;
 import com.vibeosys.tradenow.data.adapterdata.SignalDateDTO;
+import com.vibeosys.tradenow.data.adapterdata.TradeBackupDataDTO;
 import com.vibeosys.tradenow.utils.DateUtils;
 
 import java.util.ArrayList;
@@ -38,8 +39,8 @@ public class TradeHistoryActivity extends BaseActivity implements TradeHistoryAd
         txtError = (TextView) findViewById(R.id.txtError);
         mainTradHistoryView = findViewById(R.id.mainTradHistoryView);
 
-        ArrayList<SignalDataDTO> data = new ArrayList<>();
-        data = mDbRepository.getSignalDataList("NULL", selectedDate);
+        ArrayList<TradeBackupDataDTO> data = new ArrayList<>();
+        data = mDbRepository.getTradeBackupDataList(selectedDate);
         if (data.size() <= 0) {
             txtError.setVisibility(View.VISIBLE);
             listTradeHistory.setVisibility(View.GONE);
