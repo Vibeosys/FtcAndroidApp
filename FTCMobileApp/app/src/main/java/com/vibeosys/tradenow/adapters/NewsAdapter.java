@@ -1,6 +1,7 @@
 package com.vibeosys.tradenow.adapters;
 
 import android.content.Context;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,20 +55,22 @@ public class NewsAdapter extends BaseAdapter {
             viewHolder = new ViewHolder();
             viewHolder.txtHeader = (TextView) row.findViewById(R.id.newsHeader);
             viewHolder.txtDesc = (TextView) row.findViewById(R.id.newsDesc);
+            viewHolder.txtDate = (TextView) row.findViewById(R.id.newsDate);
             row.setTag(viewHolder);
 
         } else
             viewHolder = (ViewHolder) convertView.getTag();
         News news = data.get(position);
-        viewHolder.txtHeader.setText(news.getTitle());
-        viewHolder.txtDesc.setText(news.getDescription());
+        viewHolder.txtHeader.setText(Html.fromHtml(news.getTitle()));
+        viewHolder.txtDesc.setText(Html.fromHtml(news.getDescription()));
+        viewHolder.txtDate.setText(Html.fromHtml(news.getPubdate()));
         Log.d("NewsAdapter", "## news " + news.getTitle() + "\n" + "desc:" + news.getDescription() + "\n"
                 + "Date: " + news.getPubdate());
         return row;
     }
 
     private class ViewHolder {
-        TextView txtHeader, txtDesc;
+        TextView txtHeader, txtDesc, txtDate;
     }
 
     public void addItem(final News item) {

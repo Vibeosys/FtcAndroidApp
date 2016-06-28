@@ -21,7 +21,7 @@
         android:layout_margin="4dp"
         android:gravity="center"
         android:padding="6dp"
-        android:text="Welcome,\n To \nTrade Now"
+        android:text="@string/str_welcome"
         android:textColor="@color/white_color"
         android:textSize="38sp" />
 </RelativeLayout>
