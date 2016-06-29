@@ -82,7 +82,9 @@
         <activity
             android:name=".activities.NewsDetailsActivity"
             android:parentActivityName=".activities.NewsActivity" />
-        <activity android:name=".activities.DynamicPageActivity"></activity>
+        <activity
+            android:name=".activities.DynamicPageActivity"
+            android:parentActivityName=".MainActivity"></activity>
     </application>
 
 </manifest>

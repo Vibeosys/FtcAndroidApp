@@ -17,7 +17,7 @@ public class ResponseWidgetData extends BaseDTO {
     private String widgetTitle;
     private int position;
     private String data;
-    private int active;
+    private int pageId;
 
     public ResponseWidgetData() {
     }
@@ -46,20 +46,20 @@ public class ResponseWidgetData extends BaseDTO {
         this.position = position;
     }
 
-    public String getWidgetData() {
+    public String getData() {
         return data;
     }
 
-    public void setWidgetData(String widgetData) {
-        this.data = widgetData;
+    public void setData(String data) {
+        this.data = data;
     }
 
-    public int getActive() {
-        return active;
+    public int getPageId() {
+        return pageId;
     }
 
-    public void setActive(int active) {
-        this.active = active;
+    public void setPageId(int pageId) {
+        this.pageId = pageId;
     }
 
     public static ArrayList<ResponseWidgetData> deserializeToArray(String serializedString) {

@@ -67,6 +67,6 @@ public class SqlContract {
         public static final String WIDGET_TITLE = "WidgetTitle";
         public static final String POSITION = "Position";
         public static final String WIDGET_DATA = "WidgetData";
-        public static final String ACTIVE = "Active";
+        public static final String PAGE_ID = "PageId";
     }
 }

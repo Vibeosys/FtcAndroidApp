@@ -179,7 +179,10 @@ public class MainActivity extends BaseActivity
         } else if (id == R.id.nav_news) {
             startActivity(new Intent(getApplicationContext(), NewsActivity.class));
         } else {
-            startActivity(new Intent(getApplicationContext(), DynamicPageActivity.class));
+            String pageTitle = item.getTitle().toString();
+            Intent iDynamic = new Intent(getApplicationContext(), DynamicPageActivity.class);
+            iDynamic.putExtra("pageTitle", pageTitle);
+            startActivity(iDynamic);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

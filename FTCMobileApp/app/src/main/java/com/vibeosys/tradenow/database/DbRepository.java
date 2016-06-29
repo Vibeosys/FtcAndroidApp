@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.vibeosys.tradenow.custompageutils.pagedata.PageWidgetDTO;
 import com.vibeosys.tradenow.data.adapterdata.SignalDataDTO;
 import com.vibeosys.tradenow.data.adapterdata.SignalDateDTO;
 import com.vibeosys.tradenow.data.adapterdata.TradeBackupDataDTO;
@@ -671,8 +672,8 @@ public class DbRepository extends SQLiteOpenHelper {
                     contentValues.put(SqlContract.SqlWidget.WIDGET_ID, widgetData.getWidgetId());
                     contentValues.put(SqlContract.SqlWidget.WIDGET_TITLE, widgetData.getWidgetTitle());
                     contentValues.put(SqlContract.SqlWidget.POSITION, widgetData.getPosition());
-                    contentValues.put(SqlContract.SqlWidget.WIDGET_DATA, widgetData.getWidgetData());
-                    contentValues.put(SqlContract.SqlWidget.ACTIVE, widgetData.getActive());
+                    contentValues.put(SqlContract.SqlWidget.WIDGET_DATA, widgetData.getData());
+                    contentValues.put(SqlContract.SqlWidget.PAGE_ID, widgetData.getPageId());
                     if (!sqLiteDatabase.isOpen()) sqLiteDatabase = getWritableDatabase();
                     count = sqLiteDatabase.insert(SqlContract.SqlWidget.TABLE_NAME, null, contentValues);
                     contentValues.clear();
@@ -752,16 +753,18 @@ public class DbRepository extends SQLiteOpenHelper {
                 contentValues = new ContentValues();
                 for (ResponseWidgetData widgetData : widgetsList) {
                     String strWidgetTitle = widgetData.getWidgetTitle();
-                    String strWidgetData = widgetData.getWidgetData();
+                    String strWidgetData = widgetData.getData();
                     int position = widgetData.getPosition();
-                    int active = widgetData.getActive();
+                    int pageId = widgetData.getPageId();
+
                     if (TextUtils.isEmpty(strWidgetTitle) || strWidgetTitle != null)
                         contentValues.put(SqlContract.SqlWidget.WIDGET_TITLE, strWidgetTitle);
                     if (TextUtils.isEmpty(strWidgetData) || strWidgetData != null)
                         contentValues.put(SqlContract.SqlWidget.WIDGET_DATA, strWidgetData);
                     if (position != 0)
                         contentValues.put(SqlContract.SqlWidget.POSITION, position);
-                    contentValues.put(SqlContract.SqlWidget.ACTIVE, active);
+                    if (pageId != 0)
+                        contentValues.put(SqlContract.SqlWidget.PAGE_ID, pageId);
                     if (!sqLiteDatabase.isOpen()) sqLiteDatabase = getWritableDatabase();
                     count = sqLiteDatabase.insert(SqlContract.SqlWidget.TABLE_NAME, null, contentValues);
                     contentValues.clear();
@@ -817,4 +820,80 @@ public class DbRepository extends SQLiteOpenHelper {
 
         return mobilePageList;
     }
+
+
+    public ArrayList<PageWidgetDTO> getWidgets(String pageTitle) {
+        int pageId = getPageId(pageTitle);
+        return getPageWidget(pageId);
+    }
+
+    public int getPageId(String pageTitle) {
+        SQLiteDatabase sqLiteDatabase = null;
+        Cursor cursor = null;
+        int pageId = 0;
+        try {
+            sqLiteDatabase = getReadableDatabase();
+            synchronized (sqLiteDatabase) {
+                String[] whereClause = new String[]{pageTitle};
+                cursor = sqLiteDatabase.rawQuery("SELECT " + SqlContract.SqlPage.
+                        PAGE_ID + " From " + SqlContract.SqlPage.TABLE_NAME + " where " +
+                        SqlContract.SqlPage.PAGE_TITLE + "=?", whereClause);
+                if (cursor != null) {
+                    if (cursor.getCount() > 0) {
+                        cursor.moveToFirst();
+                        pageId = cursor.getInt(cursor.getColumnIndex(SqlContract.SqlPage.PAGE_ID));
+                    }
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (cursor != null)
+                cursor.close();
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen())
+                sqLiteDatabase.close();
+        }
+        return pageId;
+    }
+
+
+    public ArrayList<PageWidgetDTO> getPageWidget(int pageId) {
+        SQLiteDatabase sqLiteDatabase = null;
+        Cursor cursor = null;
+        ArrayList<PageWidgetDTO> pageWidgets = null;
+        try {
+            String[] whereClause = new String[]{String.valueOf(pageId)};
+            sqLiteDatabase = getReadableDatabase();
+            synchronized (sqLiteDatabase) {
+                cursor = sqLiteDatabase.rawQuery("SELECT * From " + SqlContract.SqlWidget.TABLE_NAME + " where "
+                        + SqlContract.SqlWidget.PAGE_ID + "=?", whereClause);
+                pageWidgets = new ArrayList<>();
+                if (cursor != null) {
+                    if (cursor.getCount() > 0) {
+                        cursor.moveToFirst();
+
+                        do {
+                            int widgetId = cursor.getInt(cursor.getColumnIndex(SqlContract.SqlWidget.WIDGET_ID));
+                            String widgetTitle = cursor.getString(cursor.getColumnIndex(SqlContract.SqlWidget.WIDGET_TITLE));
+                            int position = cursor.getInt(cursor.getColumnIndex(SqlContract.SqlWidget.POSITION));
+                            String widgetData = cursor.getString(cursor.getColumnIndex(SqlContract.SqlWidget.WIDGET_DATA));
+                            PageWidgetDTO widgetDTO = new PageWidgetDTO(widgetId, widgetTitle, position, widgetData);
+                            pageWidgets.add(widgetDTO);
+
+                        } while (cursor.moveToNext());
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (cursor != null)
+                cursor.close();
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen())
+                sqLiteDatabase.close();
+        }
+        return pageWidgets;
+    }
+
 }
