@@ -14,14 +14,13 @@ import com.vibeosys.tradenow.data.adapterdata.SignalDateDTO;
 import com.vibeosys.tradenow.data.adapterdata.TradeBackupDataDTO;
 import com.vibeosys.tradenow.data.adapterdata.TradeBackupDateDTO;
 import com.vibeosys.tradenow.data.responsedata.ResponsePageData;
+import com.vibeosys.tradenow.data.responsedata.ResponsePageType;
 import com.vibeosys.tradenow.data.responsedata.ResponseSignalDTO;
 import com.vibeosys.tradenow.data.responsedata.ResponseTradeBackUp;
 import com.vibeosys.tradenow.data.responsedata.ResponseWidgetData;
 import com.vibeosys.tradenow.utils.DateUtils;
 import com.vibeosys.tradenow.utils.SessionManager;
 
-import java.sql.Date;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,7 +78,7 @@ public class DbRepository extends SQLiteOpenHelper {
 
     private final String CREATE_PAGE = "CREATE TABLE IF NOT EXISTS mobile_pages(" +
             "  PageId VARCHAR(50) NOT NULL ," +
-            "  PageTitle VARCHAR(45) NULL," +
+            "  PageTitle VARCHAR(45) NOT NULL," +
             "  Status INT(1) NULL," +
             "  PageTypeId INT NULL," +
             "  CreatedDate DATETIME NULL," +
@@ -132,7 +131,21 @@ public class DbRepository extends SQLiteOpenHelper {
         } catch (SQLiteException e) {
             Log.e(TAG, "##could not create widget table" + e.toString());
         }
+       /* db.execSQL("INSERT INTO mobile_page_type (PageTypeId, PageTypeDesc" +
+                ", Active) VALUES (1, 'Custom', 1);");
 
+        db.execSQL("INSERT INTO mobile_pages" +
+                "(PageId, PageTitle, Status, PageTypeId,Active) VALUES (1, 'Page 1', 1, 1,1);");
+        db.execSQL("INSERT INTO mobile_pages" +
+                "(PageId, PageTitle, Status, PageTypeId,Active) VALUES (2, 'Page 2', 1, 1,1);");
+        db.execSQL("INSERT INTO mobile_pages" +
+                "(PageId, PageTitle, Status, PageTypeId,Active) VALUES (3, 'Page 3', 1, 1,1);");
+        db.execSQL("INSERT INTO widget (WidgetId, WidgetTitle, Position," +
+                " WidgetData, PageId) VALUES (1, 'Link', 5, " +
+                "'{\\\"link\\\":\\\"http://192.168.1.6/tradenowwebapp/\\\",\\\"caption\\\":\\\"Home\\\"}', '1');");
+        db.execSQL("INSERT INTO widget (WidgetId, WidgetTitle, Position, " +
+                "WidgetData, PageId) VALUES (2, 'Image', 2, '{\\\"url\\\":\\\"http://192.168.1.6/tradenowwebapp/img/logo.png\\\"}'," +
+                " 1);");*/
     }
 
     @Override
@@ -269,7 +282,6 @@ public class DbRepository extends SQLiteOpenHelper {
         return flagError;
     }
 
-
     public ArrayList<SignalDateDTO> getSignalDateList(String status) {
         SQLiteDatabase sqLiteDatabase = null;
         Cursor cursor = null;
@@ -308,7 +320,6 @@ public class DbRepository extends SQLiteOpenHelper {
 
         return signalDateList;
     }
-
 
     public ArrayList<SignalDataDTO> getSignalDataList(String status, String openTime) {
         SQLiteDatabase sqLiteDatabase = null;
@@ -574,6 +585,40 @@ public class DbRepository extends SQLiteOpenHelper {
     /**
      * Page insert
      */
+    public boolean insertPageTypes(List<ResponsePageType> pagesList) {
+        boolean flagError = false;
+        String errorMessage = "";
+        SQLiteDatabase sqLiteDatabase = null;
+        ContentValues contentValues = null;
+        long count = -1;
+        try {
+            sqLiteDatabase = getWritableDatabase();
+            synchronized (sqLiteDatabase) {
+                contentValues = new ContentValues();
+                for (ResponsePageType pageType : pagesList) {
+                    contentValues.put(SqlContract.SqlPageType.PAGE_TYPE_ID, pageType.getPageTypeId());
+                    contentValues.put(SqlContract.SqlPageType.PAGET_TYPE_DESC, pageType.getPageTypeDesc());
+                    contentValues.put(SqlContract.SqlPageType.ACTIVE, pageType.getActive());
+                    if (!sqLiteDatabase.isOpen()) sqLiteDatabase = getWritableDatabase();
+                    count = sqLiteDatabase.insert(SqlContract.SqlPageType.TABLE_NAME, null, contentValues);
+                    contentValues.clear();
+                    Log.d(TAG, "## Page type is Added Successfully");
+                    flagError = true;
+                }
+            }
+        } catch (Exception e) {
+            flagError = false;
+            errorMessage = e.getMessage();
+            Log.e(TAG, "##Error while insert Page type " + e.toString());
+        } finally {
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen())
+                sqLiteDatabase.close();
+            if (!flagError)
+                Log.e(TAG, "##Insert Page type" + errorMessage);
+        }
+        return flagError;
+    }
+
     public boolean insertPages(List<ResponsePageData> pagesList) {
         boolean flagError = false;
         String errorMessage = "";
@@ -589,7 +634,7 @@ public class DbRepository extends SQLiteOpenHelper {
                     contentValues.put(SqlContract.SqlPage.PAGE_ID, pageData.getPageId());
                     contentValues.put(SqlContract.SqlPage.PAGE_TITLE, pageData.getPageTitle());
                     contentValues.put(SqlContract.SqlPage.PAGE_STATUS, pageData.getStatus());
-                    contentValues.put(SqlContract.SqlPage.PAGE_TYPE_ID, pageData.getPageTypeId());
+                    contentValues.put(SqlContract.SqlPage.PAGE_TYPE_ID, pageData.getPageType());
                     contentValues.put(SqlContract.SqlPage.ACTIVE, pageData.getActive());
                     if (!sqLiteDatabase.isOpen()) sqLiteDatabase = getWritableDatabase();
                     count = sqLiteDatabase.insert(SqlContract.SqlPage.TABLE_NAME, null, contentValues);
@@ -662,13 +707,13 @@ public class DbRepository extends SQLiteOpenHelper {
                 for (ResponsePageData pageData : updatePageList) {
                     String[] whereClause = new String[]{String.valueOf(pageData.getPageId())};
                     String strPageTitle = pageData.getPageTitle();
-                    String pageStatus = pageData.getStatus();
-                    int pageTypeId = pageData.getPageTypeId();
+                    int pageStatus = pageData.getStatus();
+                    int pageTypeId = pageData.getPageType();
                     int active = pageData.getActive();
 
                     if (!TextUtils.isEmpty(strPageTitle) || strPageTitle != null)
                         contentValues.put(SqlContract.SqlPage.PAGE_TITLE, strPageTitle);
-                    if (!TextUtils.isEmpty(pageStatus) || pageStatus != null)
+                    if (pageStatus != 0)
                         contentValues.put(SqlContract.SqlPage.PAGE_STATUS, pageStatus);
                     if (pageTypeId != 0)
                         contentValues.put(SqlContract.SqlPage.PAGE_TYPE_ID, pageTypeId);
@@ -735,5 +780,41 @@ public class DbRepository extends SQLiteOpenHelper {
                 Log.e(TAG, "##update widget" + errorMessage);
         }
         return flagError;
+    }
+
+    public ArrayList<String> getMobilePageList() {
+        SQLiteDatabase sqLiteDatabase = null;
+        Cursor cursor = null;
+        ArrayList<String> mobilePageList = null;
+        try {
+            sqLiteDatabase = getReadableDatabase();
+            synchronized (sqLiteDatabase) {
+                cursor = sqLiteDatabase.rawQuery("SELECT " + SqlContract.SqlPage.
+                        PAGE_TITLE + " From " + SqlContract.SqlPage.TABLE_NAME + " where " +
+                        SqlContract.SqlPage.ACTIVE + "=1", null);
+                mobilePageList = new ArrayList<>();
+                if (cursor != null) {
+                    if (cursor.getCount() > 0) {
+                        cursor.moveToFirst();
+                        do {
+                            //Log.i(TAG, "##" + cursor.getCount() + " " + cursor.getInt(1));
+                            String pageTitle = cursor.getString(cursor.getColumnIndex(SqlContract.SqlPage.PAGE_TITLE));
+                            mobilePageList.add(pageTitle);
+
+                        } while (cursor.moveToNext());
+                    }
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (cursor != null)
+                cursor.close();
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen())
+                sqLiteDatabase.close();
+        }
+
+        return mobilePageList;
     }
 }

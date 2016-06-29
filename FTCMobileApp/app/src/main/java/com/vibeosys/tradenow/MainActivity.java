@@ -8,14 +8,17 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.menu.ActionMenuItem;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
 import android.widget.TextView;
 
 import com.vibeosys.tradenow.activities.BaseActivity;
 import com.vibeosys.tradenow.activities.DemoActivity;
+import com.vibeosys.tradenow.activities.DynamicPageActivity;
 import com.vibeosys.tradenow.activities.LoginActivity;
 import com.vibeosys.tradenow.activities.MyProfileActivity;
 import com.vibeosys.tradenow.activities.NewsActivity;
@@ -28,6 +31,8 @@ import com.vibeosys.tradenow.services.TradeBackupSyncService;
 import com.vibeosys.tradenow.utils.NotificationUtil;
 import com.vibeosys.tradenow.utils.TradeBackupSyncManager;
 import com.vibeosys.tradenow.utils.UserAuth;
+
+import java.util.ArrayList;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -75,10 +80,11 @@ public class MainActivity extends BaseActivity
 
             if (mSessionManager.getSubId() > 0) {
                 navigationView.getMenu().clear(); //clear old inflated items.
-                navigationView.inflateMenu(R.menu.activity_main_drawer);
+                navigationView.inflateMenu(R.menu.activity_main_drawer);// drawer for subscribers
 
                 startService(syncServiceIntent);
                 startService(syncHistoryIntent);
+                addNavigationPages(navigationView);
             } else {
                 navigationView.getMenu().clear(); //clear old inflated items.
                 navigationView.inflateMenu(R.menu.activity_user_drawer);
@@ -86,6 +92,18 @@ public class MainActivity extends BaseActivity
         }
 
     }
+
+    private void addNavigationPages(NavigationView navigationView) {
+        Menu menu = navigationView.getMenu();
+        SubMenu subMenuPage = menu.addSubMenu("Pages");
+        int groupId = subMenuPage.getItem().getGroupId();
+        ArrayList<String> pages = mDbRepository.getMobilePageList();
+        for (int i = 0; i < pages.size(); i++) {
+            subMenuPage.add(pages.get(i)).setIcon(getResources().getDrawable(R.drawable.ic_description_black_24dp));
+        }
+        //navigationView.notify();
+    }
+
 
     @Override
     protected View getMainView() {
@@ -160,6 +178,8 @@ public class MainActivity extends BaseActivity
             callToLogOut();
         } else if (id == R.id.nav_news) {
             startActivity(new Intent(getApplicationContext(), NewsActivity.class));
+        } else {
+            startActivity(new Intent(getApplicationContext(), DynamicPageActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

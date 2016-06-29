@@ -25,6 +25,7 @@ public final class PropertyTypeConstants {
     public static final String GET_PROFILE_URL = "api.endpoint.getprofile";
     public static final String GET_UPDATE_PROFILE_URL = "api.endpoint.updateprofile";
     public static final String GET_TRADE_BACKUP_URL = "api.endpoint.tradebackup";
+    public static final String GET_PAGES_URL = "api.endpoint.getpages";//1st time call to this url
 
     public static final String USER_ID = "user.id";
     public static final String USER_FULL_NAME = "user.fullname";

@@ -113,4 +113,8 @@ public class PropertyFileReader {
     public String getTradeBackUpUrl() {
         return getEndPointUri() + mProperties.getProperty(PropertyTypeConstants.GET_TRADE_BACKUP_URL);
     }
+
+    public String getFirstPagesUrl() {
+        return getEndPointUri() + mProperties.getProperty(PropertyTypeConstants.GET_PAGES_URL);
+    }
 }

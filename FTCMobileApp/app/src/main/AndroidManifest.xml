@@ -81,7 +81,8 @@
         <activity android:name=".activities.ClientForgotPassActivity" />
         <activity
             android:name=".activities.NewsDetailsActivity"
-            android:parentActivityName=".activities.NewsActivity"></activity>
+            android:parentActivityName=".activities.NewsActivity" />
+        <activity android:name=".activities.DynamicPageActivity"></activity>
     </application>
 
 </manifest>

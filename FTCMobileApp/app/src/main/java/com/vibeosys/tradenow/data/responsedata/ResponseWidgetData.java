@@ -1,14 +1,22 @@
 package com.vibeosys.tradenow.data.responsedata;
 
+import android.util.Log;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+import com.vibeosys.tradenow.data.BaseDTO;
+
+import java.util.ArrayList;
+
 /**
  * Created by akshay on 28-06-2016.
  */
-public class ResponseWidgetData {
+public class ResponseWidgetData extends BaseDTO {
 
     private int widgetId;
     private String widgetTitle;
     private int position;
-    private String widgetData;
+    private String data;
     private int active;
 
     public ResponseWidgetData() {
@@ -39,11 +47,11 @@ public class ResponseWidgetData {
     }
 
     public String getWidgetData() {
-        return widgetData;
+        return data;
     }
 
     public void setWidgetData(String widgetData) {
-        this.widgetData = widgetData;
+        this.data = widgetData;
     }
 
     public int getActive() {
@@ -52,5 +60,22 @@ public class ResponseWidgetData {
 
     public void setActive(int active) {
         this.active = active;
+    }
+
+    public static ArrayList<ResponseWidgetData> deserializeToArray(String serializedString) {
+        Gson gson = new Gson();
+        ArrayList<ResponseWidgetData> widgetDatas = null;
+        try {
+            ResponseWidgetData[] deserializeObject = gson.fromJson(serializedString, ResponseWidgetData[].class);
+            widgetDatas = new ArrayList<>();
+            for (ResponseWidgetData widgetData : deserializeObject) {
+                widgetDatas.add(widgetData);
+            }
+        } catch (JsonSyntaxException e) {
+            Log.e("deserialize", "Response widget DTO error" + e.toString());
+        }
+
+
+        return widgetDatas;
     }
 }

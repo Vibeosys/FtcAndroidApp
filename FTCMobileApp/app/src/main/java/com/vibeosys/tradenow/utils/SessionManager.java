@@ -72,6 +72,7 @@ public class SessionManager {
         editor.putString(PropertyTypeConstants.GET_PROFILE_URL, mPropertyFileReader.getProfileUrl());
         editor.putString(PropertyTypeConstants.GET_UPDATE_PROFILE_URL, mPropertyFileReader.getUpdateProfileUrl());
         editor.putString(PropertyTypeConstants.GET_TRADE_BACKUP_URL, mPropertyFileReader.getTradeBackUpUrl());
+        editor.putString(PropertyTypeConstants.GET_PAGES_URL, mPropertyFileReader.getFirstPagesUrl());
         editor.apply();
         return true;
     }
@@ -218,5 +219,9 @@ public class SessionManager {
 
     public String getTradeBackupUrl() {
         return mProjectSharedPref.getString(PropertyTypeConstants.GET_TRADE_BACKUP_URL, null);
+    }
+
+    public String getPagesUrl() {//calls 1 time
+        return mProjectSharedPref.getString(PropertyTypeConstants.GET_PAGES_URL, null);
     }
 }
