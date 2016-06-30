@@ -3,6 +3,8 @@ package com.vibeosys.tradenow.custompageutils.CustomWidgets;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
+import android.view.Gravity;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.vibeosys.tradenow.R;
@@ -51,6 +53,11 @@ public class WidgetHeadingView extends TextView {
         setTextSize(20);
         HeadingDataDTO headingDataDTO = HeadingDataDTO.deserializeJson(mWidgetData);
         setText(headingDataDTO.getHead());
+        LinearLayout.LayoutParams lp = new
+                LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        lp.setMargins(8, 8, 8, 8);
+        setGravity(Gravity.CENTER);
+        setLayoutParams(lp);
     }
 
     @Override

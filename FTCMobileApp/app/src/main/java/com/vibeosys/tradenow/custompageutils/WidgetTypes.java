@@ -9,6 +9,7 @@ import com.vibeosys.tradenow.custompageutils.CustomWidgets.WidgetTextView;
 import com.vibeosys.tradenow.custompageutils.CustomWidgets.WidgetVideoView;
 import com.vibeosys.tradenow.custompageutils.CustomWidgets.LinkTextView;
 import com.vibeosys.tradenow.custompageutils.CustomWidgets.WidgetImageView;
+import com.vibeosys.tradenow.custompageutils.CustomWidgets.WidgetWebView;
 import com.vibeosys.tradenow.custompageutils.pagedata.PageWidgetDTO;
 
 import java.util.HashMap;
@@ -63,7 +64,7 @@ public class WidgetTypes {
             case Heading:
                 return new WidgetHeadingView(mContext, this.mPageWidgetDTO.getWidgetData());
             case WebView:
-                return new TextView(mContext);
+                return new WidgetWebView(mContext, this.mPageWidgetDTO.getWidgetData());
             case Rss:
                 return new TextView(mContext);
             default:

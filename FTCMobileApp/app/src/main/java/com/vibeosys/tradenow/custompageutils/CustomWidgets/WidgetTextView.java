@@ -3,6 +3,7 @@ package com.vibeosys.tradenow.custompageutils.CustomWidgets;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.vibeosys.tradenow.R;
@@ -49,9 +50,13 @@ public class WidgetTextView extends TextView {
         final int paddingBottom = 2;
         setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom);
         setTextColor(getResources().getColor(R.color.secondaryText));
-        setTextSize(14);
+        setTextSize(16);
         TextDataDTO textDataDTO = TextDataDTO.deserializeJson(mWidgetData);
         setText(textDataDTO.getText());
+        LinearLayout.LayoutParams lp = new
+                LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        lp.setMargins(8, 8, 8, 8);
+        setLayoutParams(lp);
     }
 
     @Override

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
@@ -66,6 +67,10 @@ public class WidgetImageView extends NetworkImageView {
         } else {
             setImageResource(R.drawable.ic_icon);
         }
+        LinearLayout.LayoutParams lp = new
+                LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        lp.setMargins(8, 8, 8, 8);
+        setLayoutParams(lp);
     }
 
     @Override

@@ -80,11 +80,14 @@
 
         <activity android:name=".activities.ClientForgotPassActivity" />
         <activity
-            android:name=".activities.NewsDetailsActivity"
+            android:name=".activities.WebViewActivity"
             android:parentActivityName=".activities.NewsActivity" />
         <activity
             android:name=".activities.DynamicPageActivity"
-            android:parentActivityName=".MainActivity"></activity>
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".activities.CustomWebViewActivity"
+            android:parentActivityName=".activities.NewsActivity"></activity>
     </application>
 
 </manifest>

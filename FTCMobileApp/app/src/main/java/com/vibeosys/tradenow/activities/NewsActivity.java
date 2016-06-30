@@ -11,11 +11,7 @@ import android.widget.ListView;
 import com.vibeosys.tradenow.R;
 import com.vibeosys.tradenow.adapters.NewsAdapter;
 import com.vibeosys.tradenow.newutils.News;
-import com.vibeosys.tradenow.newutils.NewsFactory;
-import com.vibeosys.tradenow.newutils.NewsStandConstants;
 import com.vibeosys.tradenow.newutils.data.XMLObject;
-import com.vibeosys.tradenow.newutils.interfaces.NewsReader;
-import com.vibeosys.tradenow.newutils.parser.NewsForexFactoryParser;
 import com.vibeosys.tradenow.newutils.parser.XmlParser;
 
 import java.io.IOException;
@@ -23,7 +19,6 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class NewsActivity extends BaseActivity {
@@ -51,7 +46,7 @@ public class NewsActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 News news = (News) adapter.getItem(position);
-                Intent iDetails = new Intent(getApplicationContext(), NewsDetailsActivity.class);
+                Intent iDetails = new Intent(getApplicationContext(), WebViewActivity.class);
                 iDetails.putExtra("link", news.getLink());
                 startActivity(iDetails);
             }

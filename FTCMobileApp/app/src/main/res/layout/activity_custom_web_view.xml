@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activities.WebViewActivity">
+    tools:context="com.vibeosys.tradenow.activities.CustomWebViewActivity">
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -28,6 +28,4 @@
             android:layout_gravity="center_horizontal"
             android:visibility="visible" />
     </LinearLayout>
-
-
 </LinearLayout>

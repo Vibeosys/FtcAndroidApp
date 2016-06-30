@@ -867,7 +867,7 @@ public class DbRepository extends SQLiteOpenHelper {
             sqLiteDatabase = getReadableDatabase();
             synchronized (sqLiteDatabase) {
                 cursor = sqLiteDatabase.rawQuery("SELECT * From " + SqlContract.SqlWidget.TABLE_NAME + " where "
-                        + SqlContract.SqlWidget.PAGE_ID + "=?", whereClause);
+                        + SqlContract.SqlWidget.PAGE_ID + "=? Order By " + SqlContract.SqlWidget.POSITION + " asc", whereClause);
                 pageWidgets = new ArrayList<>();
                 if (cursor != null) {
                     if (cursor.getCount() > 0) {

@@ -11,7 +11,7 @@ import android.widget.ProgressBar;
 import com.vibeosys.tradenow.R;
 import com.vibeosys.tradenow.utils.NetworkUtils;
 
-public class NewsDetailsActivity extends BaseActivity {
+public class WebViewActivity extends BaseActivity {
 
     private WebView mWebView;
     private String mUrl;

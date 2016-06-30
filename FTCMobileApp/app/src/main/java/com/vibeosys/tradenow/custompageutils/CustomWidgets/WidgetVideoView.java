@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.net.Uri;
 import android.util.AttributeSet;
+import android.widget.LinearLayout;
 import android.widget.MediaController;
 import android.widget.VideoView;
 
@@ -52,10 +53,14 @@ public class WidgetVideoView extends VideoView {
         VideoDataDTO videoDataDTO = VideoDataDTO.deserializeJson(mWidgetData);
         Uri vidUri = Uri.parse(videoDataDTO.getUrl());
         setVideoURI(vidUri);
-        /*MediaController vidControl = new MediaController(mContext);
+        MediaController vidControl = new MediaController(mContext);
         vidControl.setAnchorView(this);
-        setMediaController(vidControl);*/
+        setMediaController(vidControl);
         start();
+        LinearLayout.LayoutParams lp = new
+                LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        lp.setMargins(8, 8, 8, 8);
+        setLayoutParams(lp);
     }
 
 
