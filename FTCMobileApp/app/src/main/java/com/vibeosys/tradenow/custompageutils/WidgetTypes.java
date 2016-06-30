@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.vibeosys.tradenow.custompageutils.CustomWidgets.WidgetHeadingView;
+import com.vibeosys.tradenow.custompageutils.CustomWidgets.WidgetRssFeed;
 import com.vibeosys.tradenow.custompageutils.CustomWidgets.WidgetTextView;
 import com.vibeosys.tradenow.custompageutils.CustomWidgets.WidgetVideoView;
 import com.vibeosys.tradenow.custompageutils.CustomWidgets.LinkTextView;
@@ -66,7 +67,7 @@ public class WidgetTypes {
             case WebView:
                 return new WidgetWebView(mContext, this.mPageWidgetDTO.getWidgetData());
             case Rss:
-                return new TextView(mContext);
+                return new WidgetRssFeed(mContext, this.mPageWidgetDTO.getWidgetData());
             default:
                 return null;
         }

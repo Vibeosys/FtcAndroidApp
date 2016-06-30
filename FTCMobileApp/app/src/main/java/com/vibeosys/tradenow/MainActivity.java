@@ -87,7 +87,7 @@ public class MainActivity extends BaseActivity
 
                 startService(syncServiceIntent);
                 startService(syncHistoryIntent);
-                startService(syncPageIntent);
+                //startService(syncPageIntent);
                 addNavigationPages(navigationView);
             } else {
                 navigationView.getMenu().clear(); //clear old inflated items.
