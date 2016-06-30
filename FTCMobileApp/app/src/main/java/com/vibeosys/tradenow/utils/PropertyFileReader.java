@@ -65,8 +65,8 @@ public class PropertyFileReader {
         return getEndPointUri() + mProperties.getProperty(PropertyTypeConstants.SIGNAL_URL);
     }
 
-    public String getPagesUrl() {
-        return getEndPointUri() + mProperties.getProperty(PropertyTypeConstants.PAGES_URL);
+    public String getSyncPagesUrl() {
+        return getEndPointUri() + mProperties.getProperty(PropertyTypeConstants.SYNC_PAGES_URL);
     }
 
     public int getDbVersion() {

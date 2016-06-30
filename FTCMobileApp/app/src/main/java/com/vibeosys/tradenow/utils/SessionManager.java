@@ -57,7 +57,7 @@ public class SessionManager {
         SharedPreferences.Editor editor = mProjectSharedPref.edit();
         editor.putString(PropertyTypeConstants.SIGNAL_URL, mPropertyFileReader.getSignalUrl());
         editor.putString(PropertyTypeConstants.CLIENT_LOGIN_URL, mPropertyFileReader.getClientLoginUrl());
-        editor.putString(PropertyTypeConstants.PAGES_URL, mPropertyFileReader.getPagesUrl());
+        editor.putString(PropertyTypeConstants.SYNC_PAGES_URL, mPropertyFileReader.getSyncPagesUrl());
         editor.putString(PropertyTypeConstants.DATABASE_DEVICE_FULLPATH, mPropertyFileReader.getDatabaseDeviceFullPath());
         editor.putString(PropertyTypeConstants.DATABASE_DIR_PATH, mPropertyFileReader.getDatabaseDirPath());
         editor.putString(PropertyTypeConstants.DATABASE_FILE_NAME, mPropertyFileReader.getDatabaseFileName());
@@ -88,8 +88,8 @@ public class SessionManager {
         return mProjectSharedPref.getString(PropertyTypeConstants.SIGNAL_URL, null);
     }
 
-    public String getPageUrl() {
-        return mProjectSharedPref.getString(PropertyTypeConstants.PAGES_URL, null);
+    public String getSyncPageUrl() {
+        return mProjectSharedPref.getString(PropertyTypeConstants.SYNC_PAGES_URL, null);
     }
 
     public int getDatabaseVersion() {

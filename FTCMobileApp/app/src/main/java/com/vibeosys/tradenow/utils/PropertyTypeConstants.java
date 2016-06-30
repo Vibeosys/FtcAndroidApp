@@ -11,7 +11,7 @@ public final class PropertyTypeConstants {
     public static final String DATABASE_FILE_NAME = "db.file.name";
     public static final String VERSION_NUMBER = "version.number";
     public static final String SIGNAL_URL = "api.endpoint.signal";
-    public static final String PAGES_URL = "api.endpoint.pages";
+    public static final String SYNC_PAGES_URL = "api.endpoint.pages";
     public static final String DATABASE_VERSION_NUMBER = "database.version.number";
     public static final String DATE_TO_SYNC = "syncdate";
     public static final String TRADE_BACKUP_SYNC = "trade.backup.syncdate";

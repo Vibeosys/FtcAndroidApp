@@ -7,6 +7,7 @@ import com.google.gson.JsonSyntaxException;
 import com.vibeosys.tradenow.data.BaseDTO;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by akshay on 28-06-2016.
@@ -77,5 +78,21 @@ public class ResponsePageData extends BaseDTO {
 
 
         return pages;
+    }
+
+    public static List<ResponsePageData> deserializePageData(List<String> serializedStringList) {
+        Gson gson = new Gson();
+        ArrayList<ResponsePageData> objectList = new ArrayList<>();
+        try {
+
+            for (String serializedString : serializedStringList) {
+                ResponsePageData deserializeObject = gson.fromJson(serializedString, ResponsePageData.class);
+                objectList.add(deserializeObject);
+            }
+        } catch (Exception e) {
+            Log.e("deserialize", "Response Page DTO error" + e.toString());
+        }
+
+        return objectList;
     }
 }

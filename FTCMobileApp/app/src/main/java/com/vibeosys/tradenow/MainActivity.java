@@ -26,6 +26,7 @@ import com.vibeosys.tradenow.activities.NotificationActivity;
 import com.vibeosys.tradenow.activities.ResetPassActivity;
 import com.vibeosys.tradenow.activities.TradeAlertDateActivity;
 import com.vibeosys.tradenow.activities.TradeHistoryDateActivity;
+import com.vibeosys.tradenow.services.PageSyncService;
 import com.vibeosys.tradenow.services.SignalSyncService;
 import com.vibeosys.tradenow.services.TradeBackupSyncService;
 import com.vibeosys.tradenow.utils.NotificationUtil;
@@ -40,6 +41,7 @@ public class MainActivity extends BaseActivity
     private View mainActivityView;
     private Intent syncServiceIntent;
     private Intent syncHistoryIntent;
+    private Intent syncPageIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,7 @@ public class MainActivity extends BaseActivity
         setSupportActionBar(toolbar);
         syncServiceIntent = new Intent(Intent.ACTION_SYNC, null, this, SignalSyncService.class);
         syncHistoryIntent = new Intent(Intent.ACTION_SYNC, null, this, TradeBackupSyncService.class);
+        syncPageIntent = new Intent(Intent.ACTION_SYNC, null, this, PageSyncService.class);
         if (!UserAuth.isUserLoggedIn()) {
             callToLogOut();
         } else {
@@ -84,6 +87,7 @@ public class MainActivity extends BaseActivity
 
                 startService(syncServiceIntent);
                 startService(syncHistoryIntent);
+                startService(syncPageIntent);
                 addNavigationPages(navigationView);
             } else {
                 navigationView.getMenu().clear(); //clear old inflated items.
@@ -170,6 +174,7 @@ public class MainActivity extends BaseActivity
                 try {
                     stopService(syncServiceIntent);
                     stopService(syncHistoryIntent);
+                    stopService(syncPageIntent);
                 } catch (NullPointerException e) {
 
                 }

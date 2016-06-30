@@ -17,4 +17,5 @@ public class ServerRequestConstants {
     public static final int REQUEST_UPDATE_PROFILE = 120;
     public static final int REQUEST_TRADE_BACKUP = 121;
     public static final int REQUEST_GET_PAGES = 122;
+    public static final int REQUEST_SYNC_PAGES = 123;
 }
