@@ -36,6 +36,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     private String mStrUserName, mStrName, mStrPassword, mStrEmailId, mStrPhone;
     private boolean checkUserFlag = false;
     private View progressBar, registerForm;
+    private final int RUNTIME_CHECK_NAME = 1;
+    private final int CHECK_NAME = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +65,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     protected View getMainView() throws NullPointerException {
-        return null;
+        return registerForm;
     }
 
     @Override
@@ -83,7 +85,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             case R.id.btnAvailablityCheck:
                 mStrUserName = txtUserName.getText().toString();
                 if (NetworkUtils.isActiveNetworkAvailable(getApplicationContext()))
-                    checkAvailable(mStrUserName);
+                    checkAvailable(mStrUserName, CHECK_NAME);
                 else
                     createNetworkAlertDialog("Network Alert", "Please check your data connection for registration");
                 break;
@@ -125,9 +127,10 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         } else if (!checkUserFlag) {
             cancelFlag = true;
             focusView = txtUserName;
-            checkAvailable(mStrUserName);
+            mStrUserName = txtUserName.getText().toString();
+            checkAvailable(mStrUserName, RUNTIME_CHECK_NAME);
             txtUserName.setEnabled(true);
-            txtUserName.setError(getResources().getString(R.string.str_error_user_name_validate));
+            // txtUserName.setError(getResources().getString(R.string.str_error_user_name_validate));
         }
 
         if (cancelFlag) {
@@ -145,7 +148,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         }
     }
 
-    private void checkAvailable(String userName) {
+    private void checkAvailable(String userName, int flag) {
 
         boolean cancelFlag = false;
         View focusView = null;
@@ -170,8 +173,13 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             String serializedJsonString = gson.toJson(checkUser);
             BaseRequestDTO baseRequestDTO = new BaseRequestDTO();
             baseRequestDTO.setData(serializedJsonString);
-            mServerSyncManager.uploadDataToServer(ServerRequestConstants.REQUEST_USER_NAME_AVAIL,
-                    mSessionManager.getAvailableUserUrl(), baseRequestDTO);
+            if (flag == CHECK_NAME) {
+                mServerSyncManager.uploadDataToServer(ServerRequestConstants.REQUEST_USER_NAME_AVAIL,
+                        mSessionManager.getAvailableUserUrl(), baseRequestDTO);
+            } else if (flag == RUNTIME_CHECK_NAME) {
+                mServerSyncManager.uploadDataToServer(ServerRequestConstants.REQUEST_RUNTIME_USER_NAME_AVAIL,
+                        mSessionManager.getAvailableUserUrl(), baseRequestDTO);
+            }
         }
 
     }
@@ -191,6 +199,12 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                         getResources().getString(R.string.str_err_server_msg));
                 Log.e(TAG, "Error at check User Name" + error.toString());
                 break;
+            case ServerRequestConstants.REQUEST_RUNTIME_USER_NAME_AVAIL:
+                progressCheck.setVisibility(View.GONE);
+                customAlterDialog(getResources().getString(R.string.str_err_server_err),
+                        getResources().getString(R.string.str_err_server_msg));
+                Log.e(TAG, "Error at check User Name" + error.toString());
+                break;
         }
     }
 
@@ -206,6 +220,12 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             case ServerRequestConstants.REQUEST_REGISTER_USER:
                 showProgress(false, registerForm, progressBar);
                 Log.e(TAG, "Error at check User Name" + errorDbDTO.getMessage());
+                break;
+            case ServerRequestConstants.REQUEST_RUNTIME_USER_NAME_AVAIL:
+                progressCheck.setVisibility(View.GONE);
+                Log.e(TAG, "Error at check User Name" + errorDbDTO.getMessage());
+                txtAvailStatus.setText(errorDbDTO.getMessage());
+                txtAvailStatus.setTextColor(getResources().getColor(R.color.colorAccent));
                 break;
         }
     }
@@ -229,6 +249,23 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                         getString(R.string.str_register_success), Toast.LENGTH_LONG).show();
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 finish();
+                break;
+            case ServerRequestConstants.REQUEST_RUNTIME_USER_NAME_AVAIL:
+                progressCheck.setVisibility(View.GONE);
+                Log.d(TAG, "Success result" + data);
+                checkUserFlag = true;
+                txtAvailStatus.setText("User name is available");
+                txtUserName.setEnabled(false);
+                txtAvailStatus.setTextColor(getResources().getColor(R.color.textAlert));
+                btnCheck.setVisibility(View.GONE);
+                mStrName = txtName.getText().toString();
+                mStrEmailId = txtEmailId.getText().toString();
+                mStrPassword = txtPassword.getText().toString();
+                mStrPhone = txtPhone.getText().toString();
+                if (NetworkUtils.isActiveNetworkAvailable(getApplicationContext()))
+                    callRegister(mStrName, mStrEmailId, mStrPassword, mStrPhone);
+                else
+                    createNetworkAlertDialog("Network Alert", "Please check your data connection for registration");
                 break;
         }
     }
