@@ -75,7 +75,7 @@ public class DynamicPageActivity extends BaseActivity {
             showProgress(false, mLinearLayout, progressBar);
             for (int i = 0; i < widgetDTOs.size(); i++) {
                 PageWidgetDTO pageWidgetDTO = widgetDTOs.get(i);
-                WidgetTypes widgetTypes = new WidgetTypes(pageWidgetDTO, getApplicationContext(),
+                WidgetTypes widgetTypes = new WidgetTypes(pageWidgetDTO, DynamicPageActivity.this,
                         mLinearLayout, progressBar);
                 try {
                     mLinearLayout.addView(widgetTypes.getView());

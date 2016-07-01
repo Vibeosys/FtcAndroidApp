@@ -4,19 +4,24 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.net.Uri;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.MediaController;
 import android.widget.VideoView;
 
+import com.vibeosys.tradenow.R;
+import com.vibeosys.tradenow.activities.DynamicPageActivity;
 import com.vibeosys.tradenow.custompageutils.widgetdata.VideoDataDTO;
 
 /**
  * Created by akshay on 29-06-2016.
  */
-public class WidgetVideoView extends VideoView {
+public class WidgetVideoView extends LinearLayout {
 
     private Context mContext;
     private String mWidgetData;
+    private VideoView videoView;
+    private LinearLayout linearLayout;
 
     public WidgetVideoView(Context context) {
         super(context);
@@ -45,22 +50,23 @@ public class WidgetVideoView extends VideoView {
     }
 
     private void init() {
-        final int paddingLeft = 2;
-        final int paddingRight = 2;
-        final int paddingTop = 2;
-        final int paddingBottom = 2;
-        setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom);
+        inflate(mContext, R.layout.widget_video_view_layout, this);
+        setPadding(0, 2, 0, 2);
+        LinearLayout.LayoutParams lp = new
+                LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, 400);
+        lp.setMargins(0, 16, 0, 16);
+        setLayoutParams(lp);
+
+        VideoView videoView = (VideoView) findViewById(R.id.widgetVideoView);
         VideoDataDTO videoDataDTO = VideoDataDTO.deserializeJson(mWidgetData);
         Uri vidUri = Uri.parse(videoDataDTO.getUrl());
-        setVideoURI(vidUri);
+        videoView.setVideoURI(vidUri);
+
         MediaController vidControl = new MediaController(mContext);
         vidControl.setAnchorView(this);
-        setMediaController(vidControl);
-        start();
-        LinearLayout.LayoutParams lp = new
-                LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        lp.setMargins(8, 8, 8, 8);
-        setLayoutParams(lp);
+        videoView.setMediaController(vidControl);
+        //start();
+
     }
 
 

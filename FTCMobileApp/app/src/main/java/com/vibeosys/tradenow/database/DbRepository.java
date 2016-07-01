@@ -156,6 +156,10 @@ public class DbRepository extends SQLiteOpenHelper {
 
     public void deleteAllData() {
         deleteSignal();
+        deleteTradeBackUp();
+        deleteWidget();
+        deletePage();
+        deletePageType();
     }
 
     public void getDatabaseStructure() {
@@ -582,6 +586,93 @@ public class DbRepository extends SQLiteOpenHelper {
         return count != -1;
     }
 
+    public boolean deleteTradeBackUp() {
+        SQLiteDatabase sqLiteDatabase = null;
+        sqLiteDatabase = getWritableDatabase();
+        long count = -1;
+
+        try {
+            synchronized (sqLiteDatabase) {
+                count = sqLiteDatabase.delete(SqlContract.SqlTradeBackUp.TABLE_NAME, null, null);
+                Log.d(TAG, " ## delete trade back up data successfully");
+            }
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            Log.d(TAG, "## Error to delete Trade Back Up data" + e.toString());
+        } finally {
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen())
+                sqLiteDatabase.close();
+        }
+        return count != -1;
+    }
+
+    public boolean deleteWidget() {
+        SQLiteDatabase sqLiteDatabase = null;
+        sqLiteDatabase = getWritableDatabase();
+        long count = -1;
+
+        try {
+            synchronized (sqLiteDatabase) {
+                count = sqLiteDatabase.delete(SqlContract.SqlWidget.TABLE_NAME, null, null);
+                Log.d(TAG, " ## delete Widget data successfully");
+            }
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            Log.d(TAG, "## Error to delete widget data" + e.toString());
+        } finally {
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen())
+                sqLiteDatabase.close();
+        }
+        return count != -1;
+    }
+
+    public boolean deletePage() {
+        SQLiteDatabase sqLiteDatabase = null;
+        sqLiteDatabase = getWritableDatabase();
+        long count = -1;
+
+        try {
+            synchronized (sqLiteDatabase) {
+                count = sqLiteDatabase.delete(SqlContract.SqlPage.TABLE_NAME, null, null);
+                Log.d(TAG, " ## delete Page data successfully");
+            }
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            Log.d(TAG, "## Error to delete page data" + e.toString());
+        } finally {
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen())
+                sqLiteDatabase.close();
+        }
+        return count != -1;
+    }
+
+    public boolean deletePageType() {
+        SQLiteDatabase sqLiteDatabase = null;
+        sqLiteDatabase = getWritableDatabase();
+        long count = -1;
+
+        try {
+            synchronized (sqLiteDatabase) {
+                count = sqLiteDatabase.delete(SqlContract.SqlPageType.TABLE_NAME, null, null);
+                Log.d(TAG, " ## delete Page Type data successfully");
+            }
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            Log.d(TAG, "## Error to delete page type data" + e.toString());
+        } finally {
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen())
+                sqLiteDatabase.close();
+        }
+        return count != -1;
+    }
 
     /**
      * Page insert
