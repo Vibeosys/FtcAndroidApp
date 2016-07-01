@@ -896,4 +896,33 @@ public class DbRepository extends SQLiteOpenHelper {
         return pageWidgets;
     }
 
+    public int getPageType(String pageTitle) {
+        SQLiteDatabase sqLiteDatabase = null;
+        Cursor cursor = null;
+        int pageTypeId = 0;
+        try {
+            sqLiteDatabase = getReadableDatabase();
+            synchronized (sqLiteDatabase) {
+                String[] whereClause = new String[]{pageTitle};
+                cursor = sqLiteDatabase.rawQuery("SELECT " + SqlContract.SqlPage.
+                        PAGE_TYPE_ID + " From " + SqlContract.SqlPage.TABLE_NAME + " where " +
+                        SqlContract.SqlPage.PAGE_TITLE + "=?", whereClause);
+                if (cursor != null) {
+                    if (cursor.getCount() > 0) {
+                        cursor.moveToFirst();
+                        pageTypeId = cursor.getInt(cursor.getColumnIndex(SqlContract.SqlPage.PAGE_TYPE_ID));
+                    }
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (cursor != null)
+                cursor.close();
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen())
+                sqLiteDatabase.close();
+        }
+        return pageTypeId;
+    }
 }

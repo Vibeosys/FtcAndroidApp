@@ -29,6 +29,12 @@ public class News {
         this.pubdate = pubdate;
         this.description = description;
     }
+    public News(String title, String link,String pubdate, String description) {
+        this.title = title;
+        this.link = link;
+        this.pubdate = pubdate;
+        this.description = description;
+    }
 
     public String getTitle() {
         return title;

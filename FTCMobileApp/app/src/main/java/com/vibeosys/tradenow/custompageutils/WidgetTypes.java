@@ -30,12 +30,15 @@ public class WidgetTypes {
     private Widget mWidget;
     private Context mContext;
     private PageWidgetDTO mPageWidgetDTO;
+    private View formView, progressView;
 
-    public WidgetTypes(PageWidgetDTO widgetDTO, Context context) {
+    public WidgetTypes(PageWidgetDTO widgetDTO, Context context, View formView, View progressView) {
         initMap();
         this.mPageWidgetDTO = widgetDTO;
         this.mWidget = getWidget(this.mPageWidgetDTO.getWidgetTitle());
         this.mContext = context;
+        this.formView = formView;
+        this.progressView = progressView;
     }
 
     private Widget getWidget(String widgetTitle) {
@@ -65,9 +68,9 @@ public class WidgetTypes {
             case Heading:
                 return new WidgetHeadingView(mContext, this.mPageWidgetDTO.getWidgetData());
             case WebView:
-                return new WidgetWebView(mContext, this.mPageWidgetDTO.getWidgetData());
+                return new WidgetWebView(mContext, this.mPageWidgetDTO.getWidgetData(),formView,progressView);
             case Rss:
-                return new WidgetRssFeed(mContext, this.mPageWidgetDTO.getWidgetData());
+                return new WidgetRssFeed(mContext, this.mPageWidgetDTO.getWidgetData(), formView, progressView);
             default:
                 return null;
         }

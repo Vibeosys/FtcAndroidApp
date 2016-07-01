@@ -18,6 +18,11 @@ import java.util.ArrayList;
 public class DynamicPageActivity extends BaseActivity {
 
     private static final String TAG = DynamicPageActivity.class.getSimpleName();
+
+    private final int PAGE_TYPE_CUSTOM = 1;
+    private final int PAGE_TYPE_WEB_VIEW = 2;
+    private final int PAGE_TYPE_RSS = 3;
+
     private String pageTitle;
     private LinearLayout mLinearLayout;
     private View progressBar;
@@ -26,13 +31,19 @@ public class DynamicPageActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dynamic_page);
         pageTitle = getIntent().getExtras().getString("pageTitle");
         setTitle(pageTitle);
-        mLinearLayout = (LinearLayout) findViewById(R.id.mainView);
-        progressBar = findViewById(R.id.progressBar);
-        mTxtError = (TextView) findViewById(R.id.txtError);
+
         if (!TextUtils.isEmpty(pageTitle) || pageTitle != null) {
+            int pageTypeId = mDbRepository.getPageType(pageTitle);
+            if (pageTypeId == PAGE_TYPE_RSS) {
+                setContentView(R.layout.widget_rss_feed_dynamic_page);
+            } else {
+                setContentView(R.layout.activity_dynamic_page);
+            }
+            mLinearLayout = (LinearLayout) findViewById(R.id.mainView);
+            progressBar = findViewById(R.id.progressBar);
+            mTxtError = (TextView) findViewById(R.id.txtError);
             SetUpUi setUpUi = new SetUpUi();
             setUpUi.execute(pageTitle);
         } else {
@@ -62,10 +73,10 @@ public class DynamicPageActivity extends BaseActivity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             showProgress(false, mLinearLayout, progressBar);
-
             for (int i = 0; i < widgetDTOs.size(); i++) {
                 PageWidgetDTO pageWidgetDTO = widgetDTOs.get(i);
-                WidgetTypes widgetTypes = new WidgetTypes(pageWidgetDTO, getApplicationContext());
+                WidgetTypes widgetTypes = new WidgetTypes(pageWidgetDTO, getApplicationContext(),
+                        mLinearLayout, progressBar);
                 try {
                     mLinearLayout.addView(widgetTypes.getView());
                 } catch (NullPointerException e) {
@@ -79,11 +90,12 @@ public class DynamicPageActivity extends BaseActivity {
                 }
 
             }
+
         }
     }
 
     @Override
     protected View getMainView() throws NullPointerException {
-        return null;
+        return mLinearLayout;
     }
 }
