@@ -69,4 +69,13 @@ public class SqlContract {
         public static final String WIDGET_DATA = "WidgetData";
         public static final String PAGE_ID = "PageId";
     }
+
+    public abstract class SqlNotification {
+        public static final String TABLE_NAME = "ftcnotification";
+        public static final String NOTIFICATION_ID = "notificationId";
+        public static final String NOTIFICATION_TITLE = "notificationTitle";
+        public static final String NOTIFICATION_DESC = "notificationDesc";
+        public static final String NOTIFICATION_DATE = "notificationDate";
+        public static final String IS_READ = "isRead";
+    }
 }

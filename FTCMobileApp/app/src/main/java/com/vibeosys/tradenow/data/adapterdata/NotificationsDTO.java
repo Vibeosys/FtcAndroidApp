@@ -11,6 +11,13 @@ public class NotificationsDTO {
     private String mNotificationDate;
     private int mIsRead;
 
+    public NotificationsDTO(String mNotificationTitle, String mNotificationDesc, String mNotificationDate, int mIsRead) {
+        this.mNotificationTitle = mNotificationTitle;
+        this.mNotificationDesc = mNotificationDesc;
+        this.mNotificationDate = mNotificationDate;
+        this.mIsRead = mIsRead;
+    }
+
     public NotificationsDTO(int mNotificationId, String mNotificationTitle, String mNotificationDesc,
                             String mNotificationDate, int mIsRead) {
         this.mNotificationId = mNotificationId;

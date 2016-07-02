@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.vibeosys.tradenow.R;
+import com.vibeosys.tradenow.data.adapterdata.NotificationsDTO;
 
 import java.util.ArrayList;
 
@@ -16,17 +17,20 @@ import java.util.ArrayList;
  */
 public class NotificationAdapter extends BaseAdapter {
 
-    private ArrayList<Integer> data;
+    private ArrayList<NotificationsDTO> data = null;
     private Context mContext;
 
-    public NotificationAdapter(ArrayList<Integer> data, Context mContext) {
+    public NotificationAdapter(ArrayList<NotificationsDTO> data, Context mContext) {
         this.data = data;
         this.mContext = mContext;
     }
 
     @Override
     public int getCount() {
-        return data.size();
+        if (data != null)
+            return data.size();
+        else
+            return 0;
     }
 
     @Override
@@ -49,21 +53,25 @@ public class NotificationAdapter extends BaseAdapter {
                     (Context.LAYOUT_INFLATER_SERVICE);
             row = theLayoutInflator.inflate(R.layout.row_notification, null);
             viewHolder = new ViewHolder();
-
+            viewHolder.txtHeading = (TextView) row.findViewById(R.id.txtHeading);
+            viewHolder.txtDescription = (TextView) row.findViewById(R.id.txtDescription);
+            viewHolder.txtDate = (TextView) row.findViewById(R.id.txtDate);
             row.setTag(viewHolder);
 
         } else
             viewHolder = (ViewHolder) convertView.getTag();
-        int i = data.get(position);
-
+        NotificationsDTO notificationsDTO = data.get(position);
+        viewHolder.txtHeading.setText(notificationsDTO.getmNotificationTitle());
+        viewHolder.txtDescription.setText(notificationsDTO.getmNotificationDesc());
+        viewHolder.txtDate.setText(notificationsDTO.getmNotificationDate());
         return row;
     }
 
     private class ViewHolder {
-
+        TextView txtHeading, txtDescription, txtDate;
     }
 
-    public void addItem(final Integer item) {
+    public void addItem(final NotificationsDTO item) {
         data.add(item);
         notifyDataSetChanged();
     }

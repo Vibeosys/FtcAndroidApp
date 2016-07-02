@@ -4,6 +4,10 @@ import android.app.Application;
 import android.util.Log;
 
 import com.onesignal.OneSignal;
+import com.vibeosys.tradenow.data.adapterdata.NotificationsDTO;
+import com.vibeosys.tradenow.database.DbRepository;
+import com.vibeosys.tradenow.utils.DateUtils;
+import com.vibeosys.tradenow.utils.SessionManager;
 
 import org.json.JSONObject;
 
@@ -14,9 +18,15 @@ public class TradeNowApplication extends Application {
 
     private static final String TAG = TradeNowApplication.class.getSimpleName();
 
+    DateUtils dateUtils = new DateUtils();
+    private DbRepository mDbRepository = null;
+    private static SessionManager mSessionManager = null;
+
     @Override
     public void onCreate() {
         super.onCreate();
+        mSessionManager = SessionManager.getInstance(getApplicationContext());
+        mDbRepository = new DbRepository(getApplicationContext(), mSessionManager);
         try {
             OneSignal.startInit(this)
                     .setNotificationOpenedHandler(new ExampleNotificationOpenedHandler())
@@ -41,16 +51,22 @@ public class TradeNowApplication extends Application {
         @Override
         public void notificationOpened(String message, JSONObject additionalData, boolean isActive) {
             String additionalMessage = "";
-
+            String title = "";
             try {
                 if (additionalData != null) {
                     if (additionalData.has("actionSelected"))
                         additionalMessage += "Pressed ButtonID: " + additionalData.getString("actionSelected");
 
                     additionalMessage = message + "\nFull additionalData:\n" + additionalData.toString();
+                    if (additionalData.has("title")) {
+                        title = additionalData.getString("title");
+                    }
                 }
-
+                java.util.Date currentDate = new java.util.Date();
+                String date = dateUtils.getDateAndTimeFromLong(currentDate.getTime());
                 Log.d(TAG, "message:\n" + message + "\nadditionalMessage:\n" + additionalMessage);
+                NotificationsDTO notificationsDTO = new NotificationsDTO(title, message, date, 0);
+                mDbRepository.insertNotification(notificationsDTO);
             } catch (Throwable t) {
                 t.printStackTrace();
             }

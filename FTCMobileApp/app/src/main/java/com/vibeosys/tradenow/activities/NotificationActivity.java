@@ -7,6 +7,7 @@ import android.widget.ListView;
 
 import com.vibeosys.tradenow.R;
 import com.vibeosys.tradenow.adapters.NotificationAdapter;
+import com.vibeosys.tradenow.data.adapterdata.NotificationsDTO;
 
 import java.util.ArrayList;
 
@@ -21,37 +22,8 @@ public class NotificationActivity extends BaseActivity {
         setContentView(R.layout.activity_notification);
         setTitle(getResources().getString(R.string.action_notification));
         listNotification = (ListView) findViewById(R.id.listNotification);
-        ArrayList<Integer> data = new ArrayList<>();
-        data.add(1);
-        data.add(3);
-        data.add(2);
-        data.add(4);
-        data.add(5);
-        data.add(6);
-        data.add(1);
-        data.add(3);
-        data.add(2);
-        data.add(4);
-        data.add(5);
-        data.add(6);
-        data.add(1);
-        data.add(3);
-        data.add(2);
-        data.add(4);
-        data.add(5);
-        data.add(6);
-        data.add(1);
-        data.add(3);
-        data.add(2);
-        data.add(4);
-        data.add(5);
-        data.add(6);
-        data.add(1);
-        data.add(3);
-        data.add(2);
-        data.add(4);
-        data.add(5);
-        data.add(6);
+        ArrayList<NotificationsDTO> data = new ArrayList<>();
+        data = mDbRepository.getNotification();
         adapter = new NotificationAdapter(data, getApplicationContext());
         listNotification.setAdapter(adapter);
     }

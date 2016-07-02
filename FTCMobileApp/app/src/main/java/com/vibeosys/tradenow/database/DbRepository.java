@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.vibeosys.tradenow.custompageutils.pagedata.PageWidgetDTO;
+import com.vibeosys.tradenow.data.adapterdata.NotificationsDTO;
 import com.vibeosys.tradenow.data.adapterdata.SignalDataDTO;
 import com.vibeosys.tradenow.data.adapterdata.SignalDateDTO;
 import com.vibeosys.tradenow.data.adapterdata.TradeBackupDataDTO;
@@ -96,13 +97,13 @@ public class DbRepository extends SQLiteOpenHelper {
             "  PageId VARCHAR(50) NOT NULL," +
             "  PRIMARY KEY (WidgetId));";
 
-    private final String CREATE_NOTIFICATON = "CREATE TABLE notification(" +
+    private final String CREATE_NOTIFICATION = "CREATE TABLE ftcnotification(" +
             " notificationId INT NOT NULL," +
             " notificationTitle varchar(45) NULL," +
             " notificationDesc VARCHAR(255) NULL," +
-            " notificationDate DATETIME NULL,"+
+            " notificationDate DATETIME NULL," +
             " isRead INT(1) DEFAULT 0," +
-            " PRIMARY KEY (notificationId);";
+            " PRIMARY KEY (notificationId));";
 
     public DbRepository(Context context, SessionManager sessionManager) {
         super(context, DATABASE_NAME, null, sessionManager.getDatabaseVersion());
@@ -142,8 +143,8 @@ public class DbRepository extends SQLiteOpenHelper {
             Log.e(TAG, "##could not create widget table" + e.toString());
         }
         try {
-            db.execSQL(CREATE_NOTIFICATON);
-            Log.d(TAG, "## Notification table created " + CREATE_NOTIFICATON);
+            db.execSQL(CREATE_NOTIFICATION);
+            Log.d(TAG, "## Notification table created " + CREATE_NOTIFICATION);
         } catch (SQLException e) {
             Log.e(TAG, "## Could not create Notification table" + e.toString());
         }
@@ -1033,28 +1034,28 @@ public class DbRepository extends SQLiteOpenHelper {
     }
 
 
-    public ArrayList<PageWidgetDTO> getNotification(int pageId) {
+    public ArrayList<NotificationsDTO> getNotification() {
         SQLiteDatabase sqLiteDatabase = null;
         Cursor cursor = null;
-        ArrayList<PageWidgetDTO> pageWidgets = null;
+        ArrayList<NotificationsDTO> notificationsDTOs = null;
         try {
-            String[] whereClause = new String[]{String.valueOf(pageId)};
             sqLiteDatabase = getReadableDatabase();
             synchronized (sqLiteDatabase) {
-                cursor = sqLiteDatabase.rawQuery("SELECT * From " + SqlContract.SqlWidget.TABLE_NAME + " where "
-                        + SqlContract.SqlWidget.PAGE_ID + "=? Order By " + SqlContract.SqlWidget.POSITION + " asc", whereClause);
-                pageWidgets = new ArrayList<>();
+                cursor = sqLiteDatabase.rawQuery("SELECT * From " + SqlContract.SqlNotification.TABLE_NAME
+                        + " Order By " + SqlContract.SqlNotification.NOTIFICATION_DATE + " desc", null);
+                notificationsDTOs = new ArrayList<>();
                 if (cursor != null) {
                     if (cursor.getCount() > 0) {
                         cursor.moveToFirst();
 
                         do {
-                            int widgetId = cursor.getInt(cursor.getColumnIndex(SqlContract.SqlWidget.WIDGET_ID));
-                            String widgetTitle = cursor.getString(cursor.getColumnIndex(SqlContract.SqlWidget.WIDGET_TITLE));
-                            int position = cursor.getInt(cursor.getColumnIndex(SqlContract.SqlWidget.POSITION));
-                            String widgetData = cursor.getString(cursor.getColumnIndex(SqlContract.SqlWidget.WIDGET_DATA));
-                            PageWidgetDTO widgetDTO = new PageWidgetDTO(widgetId, widgetTitle, position, widgetData);
-                            pageWidgets.add(widgetDTO);
+                            int notificationId = cursor.getInt(cursor.getColumnIndex(SqlContract.SqlNotification.NOTIFICATION_ID));
+                            String title = cursor.getString(cursor.getColumnIndex(SqlContract.SqlNotification.NOTIFICATION_TITLE));
+                            String description = cursor.getString(cursor.getColumnIndex(SqlContract.SqlNotification.NOTIFICATION_DESC));
+                            String date = cursor.getString(cursor.getColumnIndex(SqlContract.SqlNotification.NOTIFICATION_DATE));
+                            int isRead = cursor.getInt(cursor.getColumnIndex(SqlContract.SqlNotification.IS_READ));
+                            NotificationsDTO notificationsDTO = new NotificationsDTO(notificationId, title, description, date, isRead);
+                            notificationsDTOs.add(notificationsDTO);
 
                         } while (cursor.moveToNext());
                     }
@@ -1068,6 +1069,65 @@ public class DbRepository extends SQLiteOpenHelper {
             if (sqLiteDatabase != null && sqLiteDatabase.isOpen())
                 sqLiteDatabase.close();
         }
-        return pageWidgets;
+        return notificationsDTOs;
+    }
+
+    public boolean insertNotification(NotificationsDTO notificationsDTO) {
+        boolean flagError = false;
+        String errorMessage = "";
+        SQLiteDatabase sqLiteDatabase = null;
+        ContentValues contentValues = null;
+        DateUtils dateUtils = new DateUtils();
+        long count = -1;
+        try {
+            sqLiteDatabase = getWritableDatabase();
+            synchronized (sqLiteDatabase) {
+                contentValues = new ContentValues();
+                contentValues.put(SqlContract.SqlNotification.NOTIFICATION_ID, getLastId
+                        (sqLiteDatabase, SqlContract.SqlNotification.NOTIFICATION_ID, SqlContract.SqlNotification.TABLE_NAME));
+                contentValues.put(SqlContract.SqlNotification.NOTIFICATION_TITLE, notificationsDTO.getmNotificationTitle());
+                contentValues.put(SqlContract.SqlNotification.NOTIFICATION_DESC, notificationsDTO.getmNotificationDesc());
+                contentValues.put(SqlContract.SqlNotification.NOTIFICATION_DATE, notificationsDTO.getmNotificationDate());
+                contentValues.put(SqlContract.SqlNotification.IS_READ, notificationsDTO.getmIsRead());
+
+                if (!sqLiteDatabase.isOpen())
+                    sqLiteDatabase = getWritableDatabase();
+                count = sqLiteDatabase.insert(SqlContract.SqlNotification.TABLE_NAME, null, contentValues);
+                contentValues.clear();
+                Log.d(TAG, "##Notification is Added Successfully");
+                flagError = true;
+            }
+        } catch (Exception e) {
+            flagError = false;
+            errorMessage = e.getMessage();
+            Log.e(TAG, "##Error while insert Notification " + e.toString());
+        } finally {
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen())
+                sqLiteDatabase.close();
+            if (!flagError)
+                Log.e(TAG, "##Insert Notification" + errorMessage);
+        }
+        return flagError;
+    }
+
+    public long getLastId(SQLiteDatabase db, String columnName, String tableName) {
+        long lLastId = 0;
+        try {
+            final String sql = "SELECT " + columnName + " FROM " + tableName
+                    + " ORDER BY " + columnName + " DESC LIMIT 1";
+            Cursor c = db.rawQuery(sql, null);
+            if (c != null && c.moveToFirst()) {
+                lLastId = c.getLong(0); // The 0 is the column index, we only
+                // have 1 column, so the index is 0
+            }
+            // db.close();
+            return lLastId + 1;
+        } catch (SQLiteException e) {
+            Log.e(TAG, "Get Last" + e);
+            return -1;
+        } finally {
+            Log.i(TAG, "Last MyDetails Id=" + lLastId);
+            // db.close();
+        }
     }
 }
