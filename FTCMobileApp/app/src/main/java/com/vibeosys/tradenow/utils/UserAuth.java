@@ -67,6 +67,7 @@ public class UserAuth {
         theSessionManager.setUserEmailId(null);
         theSessionManager.setSubId(0);
         theSessionManager.setLastSyncDate(0);
+        theSessionManager.setLastBackupSyncDate(0);
         return true;
     }
 
