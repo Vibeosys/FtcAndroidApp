@@ -9,8 +9,10 @@ import android.widget.TextView;
 
 import com.vibeosys.tradenow.R;
 import com.vibeosys.tradenow.data.adapterdata.NotificationsDTO;
+import com.vibeosys.tradenow.utils.DateUtils;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by akshay on 14-06-2016.
@@ -19,6 +21,7 @@ public class NotificationAdapter extends BaseAdapter {
 
     private ArrayList<NotificationsDTO> data = null;
     private Context mContext;
+    DateUtils dateUtils = new DateUtils();
 
     public NotificationAdapter(ArrayList<NotificationsDTO> data, Context mContext) {
         this.data = data;
@@ -63,7 +66,9 @@ public class NotificationAdapter extends BaseAdapter {
         NotificationsDTO notificationsDTO = data.get(position);
         viewHolder.txtHeading.setText(notificationsDTO.getmNotificationTitle());
         viewHolder.txtDescription.setText(notificationsDTO.getmNotificationDesc());
-        viewHolder.txtDate.setText(notificationsDTO.getmNotificationDate());
+        Date closeDate = dateUtils.getFormattedDate(notificationsDTO.getmNotificationDate());
+        viewHolder.txtDate.setText(dateUtils.getLocalDateInReadableFormat(closeDate) + " "
+                + dateUtils.getLocalTimeInReadableFormat(closeDate));
         return row;
     }
 

@@ -1130,4 +1130,66 @@ public class DbRepository extends SQLiteOpenHelper {
             // db.close();
         }
     }
+
+    public int getUnreadNotificationCount() {
+        SQLiteDatabase sqLiteDatabase = null;
+        Cursor cursor = null;
+        int notificationCount = 0;
+        try {
+            sqLiteDatabase = getReadableDatabase();
+            synchronized (sqLiteDatabase) {
+                cursor = sqLiteDatabase.rawQuery("SELECT count(" + SqlContract.SqlNotification.
+                        NOTIFICATION_ID + ") From " + SqlContract.SqlNotification.TABLE_NAME + " where " +
+                        SqlContract.SqlNotification.IS_READ + "=0", null);
+                if (cursor != null) {
+                    if (cursor.getCount() > 0) {
+                        cursor.moveToFirst();
+                        notificationCount = cursor.getInt(0);
+                    }
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (cursor != null)
+                cursor.close();
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen())
+                sqLiteDatabase.close();
+        }
+        return notificationCount;
+    }
+
+    public boolean updateNotification(NotificationsDTO notificationDTO) {
+        boolean flagError = false;
+        String errorMessage = "";
+        SQLiteDatabase sqLiteDatabase = null;
+        ContentValues contentValues = null;
+        DateUtils dateUtils = new DateUtils();
+        long count = -1;
+        try {
+            sqLiteDatabase = getWritableDatabase();
+            synchronized (sqLiteDatabase) {
+                contentValues = new ContentValues();
+                String[] whereClause = new String[]{String.valueOf(notificationDTO.getmNotificationId())};
+                contentValues.put(SqlContract.SqlNotification.IS_READ, notificationDTO.getmIsRead());
+                if (!sqLiteDatabase.isOpen()) sqLiteDatabase = getWritableDatabase();
+                count = sqLiteDatabase.update(SqlContract.SqlNotification.TABLE_NAME, contentValues,
+                        SqlContract.SqlNotification.NOTIFICATION_ID + "=?", whereClause);
+                contentValues.clear();
+                Log.d(TAG, "## notification is Updated Successfully");
+                flagError = true;
+            }
+        } catch (Exception e) {
+            flagError = false;
+            errorMessage = e.getMessage();
+            Log.e(TAG, "##Error while Update notification " + e.toString());
+        } finally {
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen())
+                sqLiteDatabase.close();
+            if (!flagError)
+                Log.e(TAG, "##update notification" + errorMessage);
+        }
+        return flagError;
+    }
 }

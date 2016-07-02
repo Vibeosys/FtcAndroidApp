@@ -62,8 +62,7 @@ public class TradeNowApplication extends Application {
                         title = additionalData.getString("title");
                     }
                 }
-                java.util.Date currentDate = new java.util.Date();
-                String date = dateUtils.getDateAndTimeFromLong(currentDate.getTime());
+                String date = dateUtils.getLocalCurrentDate();
                 Log.d(TAG, "message:\n" + message + "\nadditionalMessage:\n" + additionalMessage);
                 NotificationsDTO notificationsDTO = new NotificationsDTO(title, message, date, 0);
                 mDbRepository.insertNotification(notificationsDTO);

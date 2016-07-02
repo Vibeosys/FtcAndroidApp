@@ -66,6 +66,7 @@ public class TradeHistoryAdapter extends BaseAdapter {
             viewHolder.txtViewAll = (TextView) row.findViewById(R.id.txtViewAll);
             viewHolder.txtClosePrice = (TextView) row.findViewById(R.id.txtClosePrice);
             viewHolder.txtType = (TextView) row.findViewById(R.id.txtType);
+            viewHolder.txtDate = (TextView) row.findViewById(R.id.txtDate);
             row.setTag(viewHolder);
 
         } else
@@ -89,6 +90,7 @@ public class TradeHistoryAdapter extends BaseAdapter {
         Date closeDate = dateUtils.getFormattedDate(tradeBackupDataDTO.getCloseTime());
         viewHolder.txtCloseTime.setText(dateUtils.getLocalTimeInReadableFormat(closeDate));
         viewHolder.txtClosePrice.setText("" + tradeBackupDataDTO.getClosePrice());
+        viewHolder.txtDate.setText(dateUtils.getLocalDateInReadableFormat(closeDate)+" "+dateUtils.getLocalTimeInReadableFormat(closeDate));
         if (tradeBackupDataDTO.getProfit() < 0) {
             viewHolder.txtProfitOrLoss.setTextColor(mContext.getResources().getColor(R.color.cancel_btn_colour));
             viewHolder.txtProfitOrLoss.setText("LOSS");
@@ -103,12 +105,13 @@ public class TradeHistoryAdapter extends BaseAdapter {
                     viewDetailsListener.onViewClickListener(v.getId(), tradeBackupDataDTO.getTicket(), new Object());
             }
         });
+
         return row;
     }
 
     private class ViewHolder {
         TextView txtPrice, txtSL, txtPlPip, txtTP, txtTime, txtCloseTime, txtProfitOrLoss,
-                txtViewAll, txtClosePrice, txtType;
+                txtViewAll, txtClosePrice, txtType, txtDate;
     }
 
     public void addItem(final TradeBackupDataDTO item) {

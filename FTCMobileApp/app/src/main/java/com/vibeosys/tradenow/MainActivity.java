@@ -132,7 +132,7 @@ public class MainActivity extends BaseActivity
         LayerDrawable icon = (LayerDrawable) item.getIcon();
 
         // Update LayerDrawable's BadgeDrawable
-        NotificationUtil.setBadgeCount(this, icon, 2);
+        NotificationUtil.setBadgeCount(this, icon, mDbRepository.getUnreadNotificationCount());
         return true;
     }
 

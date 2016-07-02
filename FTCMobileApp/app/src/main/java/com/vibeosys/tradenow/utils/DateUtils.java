@@ -23,12 +23,12 @@ public class DateUtils {
     final SimpleDateFormat dateWithTimeFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 
     public String getGMTCurrentDate() {
-        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
-        return dateFormat.format(new java.util.Date());
+        dateWithTimeFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+        return dateWithTimeFormat.format(new java.util.Date());
     }
 
     public String getLocalCurrentDate() {
-        return dateFormat.format(new java.util.Date());
+        return dateWithTimeFormat.format(new java.util.Date());
     }
 
     public String getLocalSQLCurrentDate() {
