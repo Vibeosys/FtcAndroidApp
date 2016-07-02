@@ -1160,7 +1160,7 @@ public class DbRepository extends SQLiteOpenHelper {
         return notificationCount;
     }
 
-    public boolean updateNotification(NotificationsDTO notificationDTO) {
+    public boolean updateNotification(ArrayList<NotificationsDTO> notificationDTOs) {
         boolean flagError = false;
         String errorMessage = "";
         SQLiteDatabase sqLiteDatabase = null;
@@ -1171,14 +1171,16 @@ public class DbRepository extends SQLiteOpenHelper {
             sqLiteDatabase = getWritableDatabase();
             synchronized (sqLiteDatabase) {
                 contentValues = new ContentValues();
-                String[] whereClause = new String[]{String.valueOf(notificationDTO.getmNotificationId())};
-                contentValues.put(SqlContract.SqlNotification.IS_READ, notificationDTO.getmIsRead());
-                if (!sqLiteDatabase.isOpen()) sqLiteDatabase = getWritableDatabase();
-                count = sqLiteDatabase.update(SqlContract.SqlNotification.TABLE_NAME, contentValues,
-                        SqlContract.SqlNotification.NOTIFICATION_ID + "=?", whereClause);
-                contentValues.clear();
-                Log.d(TAG, "## notification is Updated Successfully");
-                flagError = true;
+                for (NotificationsDTO notificationDTO : notificationDTOs) {
+                    String[] whereClause = new String[]{String.valueOf(notificationDTO.getmNotificationId())};
+                    contentValues.put(SqlContract.SqlNotification.IS_READ, "1");
+                    if (!sqLiteDatabase.isOpen()) sqLiteDatabase = getWritableDatabase();
+                    count = sqLiteDatabase.update(SqlContract.SqlNotification.TABLE_NAME, contentValues,
+                            SqlContract.SqlNotification.NOTIFICATION_ID + "=?", whereClause);
+                    contentValues.clear();
+                    Log.d(TAG, "## notification is Updated Successfully");
+                    flagError = true;
+                }
             }
         } catch (Exception e) {
             flagError = false;

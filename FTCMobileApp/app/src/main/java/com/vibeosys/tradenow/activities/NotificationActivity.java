@@ -26,6 +26,8 @@ public class NotificationActivity extends BaseActivity {
         data = mDbRepository.getNotification();
         adapter = new NotificationAdapter(data, getApplicationContext());
         listNotification.setAdapter(adapter);
+        if (data != null)
+            mDbRepository.updateNotification(data);
     }
 
     @Override
