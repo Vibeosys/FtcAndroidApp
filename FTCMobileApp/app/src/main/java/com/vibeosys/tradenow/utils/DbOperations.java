@@ -19,20 +19,42 @@ public class DbOperations {
     }
 
     public boolean addOrUpdatePage(ArrayList<String> jsonInsertList, ArrayList<String> updateJsonList) {
+        boolean isInserted = false, isUpdated = false;
         List<ResponsePageData> insertPageData = ResponsePageData.deserializePageData(jsonInsertList);
         List<ResponsePageData> updatePageData = ResponsePageData.deserializePageData(updateJsonList);
 
-        boolean isInserted = dbRepository.insertPages(insertPageData);
-        boolean isUpdated = dbRepository.updatePages(updatePageData);
-        return isInserted & isUpdated;
+        if (!jsonInsertList.isEmpty() && !updateJsonList.isEmpty()) {
+            isInserted = dbRepository.insertPages(insertPageData);
+            isUpdated = dbRepository.updatePages(updatePageData);
+            return isInserted & isUpdated;
+        } else if (jsonInsertList.isEmpty() && !updateJsonList.isEmpty()) {
+            isUpdated = dbRepository.updatePages(updatePageData);
+            return isUpdated;
+        } else if (!jsonInsertList.isEmpty() && updateJsonList.isEmpty()) {
+            isInserted = dbRepository.insertPages(insertPageData);
+            return isInserted;
+        } else {
+            return false;
+        }
     }
 
     public boolean addOrUpdateWidgets(ArrayList<String> jsonInsertList, ArrayList<String> updateJsonList) {
+        boolean isInserted = false, isUpdated = false;
         List<ResponseWidgetData> insertWidgetData = ResponseWidgetData.deserializeWidgetData(jsonInsertList);
         List<ResponseWidgetData> updateWidgetData = ResponseWidgetData.deserializeWidgetData(updateJsonList);
 
-        boolean isInserted = dbRepository.insertWidgets(insertWidgetData);
-        boolean isUpdated = dbRepository.updateWidgets(updateWidgetData);
-        return isInserted & isUpdated;
+        if (!jsonInsertList.isEmpty() && !updateJsonList.isEmpty()) {
+            isInserted = dbRepository.insertWidgets(insertWidgetData);
+            isUpdated = dbRepository.updateWidgets(updateWidgetData);
+            return isInserted & isUpdated;
+        } else if (jsonInsertList.isEmpty() && !updateJsonList.isEmpty()) {
+            isUpdated = dbRepository.updateWidgets(updateWidgetData);
+            return isUpdated;
+        } else if (!jsonInsertList.isEmpty() && updateJsonList.isEmpty()) {
+            isInserted = dbRepository.insertWidgets(insertWidgetData);
+            return isInserted;
+        } else {
+            return false;
+        }
     }
 }

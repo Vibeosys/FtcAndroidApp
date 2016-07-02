@@ -3,6 +3,7 @@ package com.vibeosys.tradenow.database;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -95,6 +96,14 @@ public class DbRepository extends SQLiteOpenHelper {
             "  PageId VARCHAR(50) NOT NULL," +
             "  PRIMARY KEY (WidgetId));";
 
+    private final String CREATE_NOTIFICATON = "CREATE TABLE notification(" +
+            " notificationId INT NOT NULL," +
+            " notificationTitle varchar(45) NULL," +
+            " notificationDesc VARCHAR(255) NULL," +
+            " notificationDate DATETIME NULL,"+
+            " isRead INT(1) DEFAULT 0," +
+            " PRIMARY KEY (notificationId);";
+
     public DbRepository(Context context, SessionManager sessionManager) {
         super(context, DATABASE_NAME, null, sessionManager.getDatabaseVersion());
     }
@@ -131,6 +140,12 @@ public class DbRepository extends SQLiteOpenHelper {
             Log.d(TAG, "##Widget Table created" + CREATE_WIDGET);
         } catch (SQLiteException e) {
             Log.e(TAG, "##could not create widget table" + e.toString());
+        }
+        try {
+            db.execSQL(CREATE_NOTIFICATON);
+            Log.d(TAG, "## Notification table created " + CREATE_NOTIFICATON);
+        } catch (SQLException e) {
+            Log.e(TAG, "## Could not create Notification table" + e.toString());
         }
        /* db.execSQL("INSERT INTO mobile_page_type (PageTypeId, PageTypeDesc" +
                 ", Active) VALUES (1, 'Custom', 1);");
@@ -1015,5 +1030,44 @@ public class DbRepository extends SQLiteOpenHelper {
                 sqLiteDatabase.close();
         }
         return pageTypeId;
+    }
+
+
+    public ArrayList<PageWidgetDTO> getNotification(int pageId) {
+        SQLiteDatabase sqLiteDatabase = null;
+        Cursor cursor = null;
+        ArrayList<PageWidgetDTO> pageWidgets = null;
+        try {
+            String[] whereClause = new String[]{String.valueOf(pageId)};
+            sqLiteDatabase = getReadableDatabase();
+            synchronized (sqLiteDatabase) {
+                cursor = sqLiteDatabase.rawQuery("SELECT * From " + SqlContract.SqlWidget.TABLE_NAME + " where "
+                        + SqlContract.SqlWidget.PAGE_ID + "=? Order By " + SqlContract.SqlWidget.POSITION + " asc", whereClause);
+                pageWidgets = new ArrayList<>();
+                if (cursor != null) {
+                    if (cursor.getCount() > 0) {
+                        cursor.moveToFirst();
+
+                        do {
+                            int widgetId = cursor.getInt(cursor.getColumnIndex(SqlContract.SqlWidget.WIDGET_ID));
+                            String widgetTitle = cursor.getString(cursor.getColumnIndex(SqlContract.SqlWidget.WIDGET_TITLE));
+                            int position = cursor.getInt(cursor.getColumnIndex(SqlContract.SqlWidget.POSITION));
+                            String widgetData = cursor.getString(cursor.getColumnIndex(SqlContract.SqlWidget.WIDGET_DATA));
+                            PageWidgetDTO widgetDTO = new PageWidgetDTO(widgetId, widgetTitle, position, widgetData);
+                            pageWidgets.add(widgetDTO);
+
+                        } while (cursor.moveToNext());
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (cursor != null)
+                cursor.close();
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen())
+                sqLiteDatabase.close();
+        }
+        return pageWidgets;
     }
 }

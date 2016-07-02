@@ -117,4 +117,8 @@ public class PropertyFileReader {
     public String getFirstPagesUrl() {
         return getEndPointUri() + mProperties.getProperty(PropertyTypeConstants.GET_PAGES_URL);
     }
+
+    public String getSyncAckUrl() {
+        return getEndPointUri() + mProperties.getProperty(PropertyTypeConstants.GET_SYNC_ACK);
+    }
 }

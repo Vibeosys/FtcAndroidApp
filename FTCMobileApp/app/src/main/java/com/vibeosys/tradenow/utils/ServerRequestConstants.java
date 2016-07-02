@@ -19,4 +19,5 @@ public class ServerRequestConstants {
     public static final int REQUEST_GET_PAGES = 122;
     public static final int REQUEST_SYNC_PAGES = 123;
     public static final int REQUEST_RUNTIME_USER_NAME_AVAIL = 124;
+    public static final int REQUEST_ACK_SYNC = 125;
 }
