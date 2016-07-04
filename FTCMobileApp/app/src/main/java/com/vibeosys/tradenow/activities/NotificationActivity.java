@@ -1,5 +1,7 @@
 package com.vibeosys.tradenow.activities;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,8 +15,9 @@ import java.util.ArrayList;
 
 public class NotificationActivity extends BaseActivity {
 
-    ListView listNotification;
-    NotificationAdapter adapter;
+    private ListView listNotification;
+    public static NotificationAdapter adapter;
+    public static Handler UIHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +27,7 @@ public class NotificationActivity extends BaseActivity {
         listNotification = (ListView) findViewById(R.id.listNotification);
         ArrayList<NotificationsDTO> data = new ArrayList<>();
         data = mDbRepository.getNotification();
-        adapter = new NotificationAdapter(data, getApplicationContext());
+        adapter = new NotificationAdapter(data, getApplicationContext(), mDbRepository);
         listNotification.setAdapter(adapter);
         if (data != null)
             mDbRepository.updateNotification(data);
@@ -33,5 +36,13 @@ public class NotificationActivity extends BaseActivity {
     @Override
     protected View getMainView() {
         return null;
+    }
+
+    static {
+        UIHandler = new Handler(Looper.getMainLooper());
+    }
+
+    public static void runOnUI(Runnable runnable) {
+        UIHandler.post(runnable);
     }
 }

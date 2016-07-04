@@ -1,8 +1,11 @@
 package com.vibeosys.tradenow;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -42,6 +45,9 @@ public class MainActivity extends BaseActivity
     private Intent syncServiceIntent;
     private Intent syncHistoryIntent;
     private Intent syncPageIntent;
+    public static Handler UIHandler;
+    private Context context;
+    public static NotificationUtil notificationUtil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +55,7 @@ public class MainActivity extends BaseActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        context = this;
         syncServiceIntent = new Intent(Intent.ACTION_SYNC, null, this, SignalSyncService.class);
         syncHistoryIntent = new Intent(Intent.ACTION_SYNC, null, this, TradeBackupSyncService.class);
         syncPageIntent = new Intent(Intent.ACTION_SYNC, null, this, PageSyncService.class);
@@ -131,9 +138,18 @@ public class MainActivity extends BaseActivity
         MenuItem item = menu.findItem(R.id.action_notification);
         LayerDrawable icon = (LayerDrawable) item.getIcon();
 
-        // Update LayerDrawable's BadgeDrawable
-        NotificationUtil.setBadgeCount(this, icon, mDbRepository.getUnreadNotificationCount());
+        // Update LayerDrawable's BadgeDrawable\
+        notificationUtil = new NotificationUtil(this, icon);
+        notificationUtil.setBadgeCount(mDbRepository.getUnreadNotificationCount());
         return true;
+    }
+
+    static {
+        UIHandler = new Handler(Looper.getMainLooper());
+    }
+
+    public static void runOnUI(Runnable runnable) {
+        UIHandler.post(runnable);
     }
 
     @Override

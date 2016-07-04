@@ -25,7 +25,7 @@ public class BadgeDrawable extends Drawable {
 
     public BadgeDrawable(Context context) {
         //mTextSize = context.getResources().getDimension(R.dimen.badge_text_size);
-        mTextSize = 12F;
+        mTextSize = 22F;
 
         mBadgePaint = new Paint();
         mBadgePaint.setColor(Color.RED);
@@ -56,7 +56,7 @@ public class BadgeDrawable extends Drawable {
         float centerY = radius + 1;
 
         // Draw badge circle.
-        canvas.drawCircle(centerX, centerY, radius, mBadgePaint);
+        canvas.drawCircle(centerX, centerY, radius + 5, mBadgePaint);
 
         // Draw badge count text inside the circle.
         mTextPaint.getTextBounds(mCount, 0, mCount.length(), mTxtRect);

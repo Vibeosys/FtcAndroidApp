@@ -11,20 +11,22 @@ import com.vibeosys.tradenow.views.BadgeDrawable;
  * Created by akshay on 18-06-2016.
  */
 public class NotificationUtil {
-    public static void setBadgeCount(Context context, LayerDrawable icon, int count) {
 
-        BadgeDrawable badge;
+    static BadgeDrawable badge;
 
-        // Reuse drawable if possible
+    public NotificationUtil(Context context, LayerDrawable icon) {
         Drawable reuse = icon.findDrawableByLayerId(R.id.ic_badge);
         if (reuse != null && reuse instanceof BadgeDrawable) {
             badge = (BadgeDrawable) reuse;
         } else {
             badge = new BadgeDrawable(context);
         }
-
-        badge.setCount(count);
         icon.mutate();
         icon.setDrawableByLayerId(R.id.ic_badge, badge);
+    }
+
+    public static void setBadgeCount(int count) {
+        // Reuse drawable if possible
+        badge.setCount(count);
     }
 }

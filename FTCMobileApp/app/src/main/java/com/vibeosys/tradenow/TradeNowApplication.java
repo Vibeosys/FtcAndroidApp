@@ -30,7 +30,6 @@ public class TradeNowApplication extends Application {
         try {
             OneSignal.startInit(this)
                     .setNotificationOpenedHandler(new ExampleNotificationOpenedHandler())
-                    .setAutoPromptLocation(true)
                     .init();
         } catch (Exception e) {
             Log.e(TAG, "Error to open signal");
@@ -50,7 +49,7 @@ public class TradeNowApplication extends Application {
          */
         @Override
         public void notificationOpened(String message, JSONObject additionalData, boolean isActive) {
-            String additionalMessage = "";
+           /* String additionalMessage = "";
             String title = "";
             try {
                 if (additionalData != null) {
@@ -62,13 +61,13 @@ public class TradeNowApplication extends Application {
                         title = additionalData.getString("title");
                     }
                 }
-                String date = dateUtils.getLocalCurrentDate();
+               *//* String date = dateUtils.getLocalCurrentDate();
                 Log.d(TAG, "message:\n" + message + "\nadditionalMessage:\n" + additionalMessage);
                 NotificationsDTO notificationsDTO = new NotificationsDTO(title, message, date, 0);
-                mDbRepository.insertNotification(notificationsDTO);
+                mDbRepository.insertNotification(notificationsDTO);*//*
             } catch (Throwable t) {
                 t.printStackTrace();
-            }
+            }*/
         }
     }
 }
