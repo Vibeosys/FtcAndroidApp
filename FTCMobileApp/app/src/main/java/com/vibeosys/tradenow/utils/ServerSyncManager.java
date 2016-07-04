@@ -1,6 +1,7 @@
 package com.vibeosys.tradenow.utils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -11,10 +12,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.vibeosys.tradenow.activities.LoginActivity;
 import com.vibeosys.tradenow.data.requestdata.BaseRequestDTO;
 import com.vibeosys.tradenow.data.requestdata.UserRequestDTO;
 import com.vibeosys.tradenow.data.responsedata.BaseResponseDTO;
 import com.vibeosys.tradenow.data.responsedata.ResponseErrorDTO;
+import com.vibeosys.tradenow.database.DbRepository;
 import com.vibeosys.tradenow.interfaces.BackgroundTaskCallback;
 
 import org.json.JSONObject;
@@ -29,6 +32,7 @@ public class ServerSyncManager
 
     private SessionManager mSessionManager;
     private Context mContext;
+    private DbRepository mDbRepository = null;
     private OnSuccessResultReceived mOnSuccessResultReceived;
     private OnErrorResultReceived mErrorReceived;
     private OnSuccessResultReceived mOnSuccessResultSettingsReceived;
@@ -42,6 +46,7 @@ public class ServerSyncManager
     public ServerSyncManager(@NonNull Context context, @NonNull SessionManager sessionManager) {
         mContext = context;
         mSessionManager = sessionManager;
+        mDbRepository = new DbRepository(mContext, mSessionManager);
     }
 
     public void uploadDataToServer(int requestToken, String url, BaseRequestDTO params) {
@@ -91,6 +96,10 @@ public class ServerSyncManager
                     Log.e(TAG, "Error to get the data from server");
                     return;
                 }
+                if (errorDTO.getErrorCode() == 110) {
+                    callToLogOut();
+                    return;
+                }
                 if (errorDTO.getErrorCode() > 0) {
                     if (mErrorReceived != null)
                         mErrorReceived.onDataErrorReceived(errorDTO, requestToken);
@@ -117,6 +126,15 @@ public class ServerSyncManager
         vollyRequest.add(uploadRequest);
     }
 
+    private void callToLogOut() {
+
+        mDbRepository.deleteAllData();
+        UserAuth.CleanAuthenticationInfo();
+        Intent loginIntent = new Intent(mContext, LoginActivity.class);
+        loginIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        mContext.startActivity(loginIntent);
+        //finish();
+    }
 
     @Override
     public void onResultReceived(String downloadedJson) {
