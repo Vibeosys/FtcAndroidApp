@@ -176,7 +176,9 @@ public class DbRepository extends SQLiteOpenHelper {
         deleteWidget();
         deletePage();
         deletePageType();
+        deleteNotifications();
     }
+
 
     public void getDatabaseStructure() {
         final ArrayList<String> dirArray = new ArrayList<String>();
@@ -683,6 +685,28 @@ public class DbRepository extends SQLiteOpenHelper {
 
             e.printStackTrace();
             Log.d(TAG, "## Error to delete page type data" + e.toString());
+        } finally {
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen())
+                sqLiteDatabase.close();
+        }
+        return count != -1;
+    }
+
+    private boolean deleteNotifications() {
+        SQLiteDatabase sqLiteDatabase = null;
+        sqLiteDatabase = getWritableDatabase();
+        long count = -1;
+
+        try {
+            synchronized (sqLiteDatabase) {
+                count = sqLiteDatabase.delete(SqlContract.SqlNotification.TABLE_NAME, null, null);
+                Log.d(TAG, " ## delete Notifications successfully");
+            }
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            Log.d(TAG, "## Error to delete Notifications" + e.toString());
         } finally {
             if (sqLiteDatabase != null && sqLiteDatabase.isOpen())
                 sqLiteDatabase.close();
