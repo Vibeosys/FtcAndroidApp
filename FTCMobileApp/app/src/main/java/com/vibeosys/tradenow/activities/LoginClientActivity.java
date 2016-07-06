@@ -17,6 +17,7 @@ import com.vibeosys.tradenow.R;
 import com.vibeosys.tradenow.data.requestdata.BaseRequestDTO;
 import com.vibeosys.tradenow.data.requestdata.GetUserSubLogin;
 import com.vibeosys.tradenow.data.responsedata.ResponseErrorDTO;
+import com.vibeosys.tradenow.utils.OneSignalIdHandler;
 import com.vibeosys.tradenow.utils.ServerRequestConstants;
 import com.vibeosys.tradenow.utils.ServerSyncManager;
 
@@ -94,7 +95,8 @@ public class LoginClientActivity extends BaseActivity implements View.OnClickLis
         } else {
             try {
                 int userSubId = Integer.parseInt(subId);
-                GetUserSubLogin userSubLogin = new GetUserSubLogin(userName, password, userSubId);
+                OneSignalIdHandler signalIdHandler = new OneSignalIdHandler();
+                GetUserSubLogin userSubLogin = new GetUserSubLogin(userName, password, userSubId, signalIdHandler.getUserId());
                 Gson gson = new Gson();
                 String serializedJsonString = gson.toJson(userSubLogin);
                 BaseRequestDTO baseRequestDTO = new BaseRequestDTO();

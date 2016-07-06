@@ -65,7 +65,8 @@ public class ClientForgotPassActivity extends BaseActivity implements View.OnCli
                 if (NetworkUtils.isActiveNetworkAvailable(getApplicationContext()))
                     callForgotPass(strEmail, strUserName, strSubId);
                 else
-                    createNetworkAlertDialog("Network Error", "Please connect to the Internet");
+                    createNetworkAlertDialog(getResources().getString(R.string.str_net_err),
+                            getResources().getString(R.string.str_err_net_msg));
                 break;
         }
 

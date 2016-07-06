@@ -29,6 +29,7 @@ import com.vibeosys.tradenow.data.requestdata.BaseRequestDTO;
 import com.vibeosys.tradenow.data.requestdata.GetUserLogin;
 import com.vibeosys.tradenow.data.responsedata.ResponseErrorDTO;
 import com.vibeosys.tradenow.data.responsedata.ResponseLoginDTO;
+import com.vibeosys.tradenow.utils.OneSignalIdHandler;
 import com.vibeosys.tradenow.utils.ServerRequestConstants;
 import com.vibeosys.tradenow.utils.ServerSyncManager;
 import com.vibeosys.tradenow.utils.UserAuth;
@@ -119,7 +120,8 @@ public class NewUserLoginFragment extends BaseFragment implements View.OnClickLi
         } else {
             txtError.setVisibility(View.GONE);
             showProgress(true, formView, progressView);
-            GetUserLogin userLogin = new GetUserLogin(userName, password);
+            OneSignalIdHandler signalIdHandler = new OneSignalIdHandler();
+            GetUserLogin userLogin = new GetUserLogin(userName, password, signalIdHandler.getUserId());
             Gson gson = new Gson();
             String serializedJsonString = gson.toJson(userLogin);
             BaseRequestDTO baseRequestDTO = new BaseRequestDTO();

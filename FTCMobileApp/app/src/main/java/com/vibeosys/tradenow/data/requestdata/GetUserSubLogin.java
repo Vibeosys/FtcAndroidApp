@@ -10,11 +10,13 @@ public class GetUserSubLogin extends BaseDTO {
     private String username;
     private String pwd;
     private int subscriberId;
+    private String gcmId;
 
-    public GetUserSubLogin(String username, String pwd, int subscriberId) {
+    public GetUserSubLogin(String username, String pwd, int subscriberId, String gcmId) {
         this.username = username;
         this.pwd = pwd;
         this.subscriberId = subscriberId;
+        this.gcmId = gcmId;
     }
 
     public String getUsername() {

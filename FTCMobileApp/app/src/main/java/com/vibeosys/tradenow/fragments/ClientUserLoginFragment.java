@@ -33,6 +33,7 @@ import com.vibeosys.tradenow.data.responsedata.ResponseErrorDTO;
 import com.vibeosys.tradenow.data.responsedata.ResponsePageData;
 import com.vibeosys.tradenow.data.responsedata.ResponsePageType;
 import com.vibeosys.tradenow.data.responsedata.ResponseWidgetData;
+import com.vibeosys.tradenow.utils.OneSignalIdHandler;
 import com.vibeosys.tradenow.utils.ServerRequestConstants;
 import com.vibeosys.tradenow.utils.ServerSyncManager;
 import com.vibeosys.tradenow.utils.UserAuth;
@@ -130,7 +131,8 @@ public class ClientUserLoginFragment extends BaseFragment implements View.OnClic
             try {
                 showProgress(true, formView, progressView);
                 int userSubId = Integer.parseInt(subId);
-                GetUserSubLogin userSubLogin = new GetUserSubLogin(userName, password, userSubId);
+                OneSignalIdHandler signalIdHandler = new OneSignalIdHandler();
+                GetUserSubLogin userSubLogin = new GetUserSubLogin(userName, password, userSubId, signalIdHandler.getUserId());
                 Gson gson = new Gson();
                 String serializedJsonString = gson.toJson(userSubLogin);
                 BaseRequestDTO baseRequestDTO = new BaseRequestDTO();

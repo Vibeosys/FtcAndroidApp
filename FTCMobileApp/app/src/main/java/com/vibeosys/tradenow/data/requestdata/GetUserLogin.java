@@ -9,10 +9,12 @@ public class GetUserLogin extends BaseDTO {
 
     private String username;
     private String pwd;
+    private String gcmId;
 
-    public GetUserLogin(String username, String pwd) {
+    public GetUserLogin(String username, String pwd, String gcmId) {
         this.username = username;
         this.pwd = pwd;
+        this.gcmId = gcmId;
     }
 
     public String getUsername() {
@@ -29,5 +31,13 @@ public class GetUserLogin extends BaseDTO {
 
     public void setPwd(String pwd) {
         this.pwd = pwd;
+    }
+
+    public String getGcmId() {
+        return gcmId;
+    }
+
+    public void setGcmId(String gcmId) {
+        this.gcmId = gcmId;
     }
 }
