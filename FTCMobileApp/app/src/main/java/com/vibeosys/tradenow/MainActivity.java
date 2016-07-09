@@ -87,14 +87,14 @@ public class MainActivity extends BaseActivity
             txtUserName.setText(mSessionManager.getUserFullName());
             TextView txtEmail = (TextView) headerView.findViewById(R.id.txtEmail);
             txtEmail.setText(mSessionManager.getUserEmailId());
-
+            startService(syncPageIntent);
             if (mSessionManager.getSubId() > 0) {
                 navigationView.getMenu().clear(); //clear old inflated items.
                 navigationView.inflateMenu(R.menu.activity_main_drawer);// drawer for subscribers
 
                 startService(syncServiceIntent);
                 startService(syncHistoryIntent);
-                startService(syncPageIntent);
+
                 addNavigationPages(navigationView);
             } else {
                 navigationView.getMenu().clear(); //clear old inflated items.
@@ -183,9 +183,9 @@ public class MainActivity extends BaseActivity
             startActivity(new Intent(getApplicationContext(), TradeHistoryDateActivity.class));
         } else if (id == R.id.nav_change_pass) {
             startActivity(new Intent(getApplicationContext(), ResetPassActivity.class));
-        } else if (id == R.id.nav_demo) {
+        } /*else if (id == R.id.nav_demo) {
             startActivity(new Intent(getApplicationContext(), DemoActivity.class));
-        } else if (id == R.id.nav_log_out) {
+        } */ else if (id == R.id.nav_log_out) {
             if (isMyServiceRunning(SignalSyncService.class)) {
                 try {
                     stopService(syncServiceIntent);
@@ -197,9 +197,9 @@ public class MainActivity extends BaseActivity
 
             }
             callToLogOut();
-        } else if (id == R.id.nav_news) {
+        } /*else if (id == R.id.nav_news) {
             startActivity(new Intent(getApplicationContext(), NewsActivity.class));
-        } else {
+        }*/ else {
             String pageTitle = item.getTitle().toString();
             Intent iDynamic = new Intent(getApplicationContext(), DynamicPageActivity.class);
             iDynamic.putExtra("pageTitle", pageTitle);

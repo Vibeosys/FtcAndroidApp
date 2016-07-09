@@ -185,6 +185,10 @@ public class ClientUserLoginFragment extends BaseFragment implements View.OnClic
                 break;
             case ServerRequestConstants.REQUEST_GET_PAGES:
                 showProgress(false, formView, progressView);
+                Intent mainIntent = new Intent(getContext(), MainActivity.class);
+                mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(mainIntent);
+                getActivity().finish();
                 break;
             default:
                 showProgress(false, formView, progressView);

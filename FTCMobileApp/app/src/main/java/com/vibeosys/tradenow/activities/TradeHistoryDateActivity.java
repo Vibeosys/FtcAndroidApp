@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.vibeosys.tradenow.R;
 import com.vibeosys.tradenow.adapters.TradeDateAdapter;
@@ -18,6 +19,7 @@ public class TradeHistoryDateActivity extends BaseActivity {
 
     private ListView listTradeData;
     private TradeHistoryDateAdapter adapter;
+    private TextView txtError;
     private View mainTradHistoryDateView;
 
     @Override
@@ -26,21 +28,30 @@ public class TradeHistoryDateActivity extends BaseActivity {
         setContentView(R.layout.activity_trade_history_date_activiy);
         setTitle(getResources().getString(R.string.trade_history));
         listTradeData = (ListView) findViewById(R.id.listTradeDate);
+        txtError = (TextView) findViewById(R.id.txtError);
         mainTradHistoryDateView = findViewById(R.id.mainTradHistoryDateView);
         ArrayList<TradeBackupDateDTO> data = new ArrayList<>();
         data = mDbRepository.getTradeDateList();
-        adapter = new TradeHistoryDateAdapter(data, getApplicationContext());
-        listTradeData.setAdapter(adapter);
-        listTradeData.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TradeBackupDateDTO backupDate = (TradeBackupDateDTO) adapter.getItem(position);
-                String date = backupDate.getDate();
-                Intent iTradeAlert = new Intent(getApplicationContext(), TradeHistoryActivity.class);
-                iTradeAlert.putExtra("SelectedDate", date);
-                startActivity(iTradeAlert);
-            }
-        });
+        if (data.size() <= 0) {
+            txtError.setVisibility(View.VISIBLE);
+            listTradeData.setVisibility(View.GONE);
+        } else {
+            txtError.setVisibility(View.GONE);
+            listTradeData.setVisibility(View.VISIBLE);
+            adapter = new TradeHistoryDateAdapter(data, getApplicationContext());
+            listTradeData.setAdapter(adapter);
+            listTradeData.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    TradeBackupDateDTO backupDate = (TradeBackupDateDTO) adapter.getItem(position);
+                    String date = backupDate.getDate();
+                    Intent iTradeAlert = new Intent(getApplicationContext(), TradeHistoryActivity.class);
+                    iTradeAlert.putExtra("SelectedDate", date);
+                    startActivity(iTradeAlert);
+                }
+            });
+        }
+
     }
 
     @Override

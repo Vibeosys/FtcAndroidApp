@@ -10,24 +10,25 @@
             android:id="@+id/nav_change_pass"
             android:icon="@drawable/ic_menu_manage"
             android:title="@string/str_change_pass" />
+        <item
+            android:id="@+id/nav_log_out"
+            android:icon="@drawable/ic_power_settings_new_black_24dp"
+            android:title="@string/nav_str_log_out" />
     </group>
 
-    <item android:title="Communicate">
+    <!--<item android:title="Communicate">
         <menu>
-            <item
+            &lt;!&ndash;<item
                 android:id="@+id/nav_demo"
                 android:icon="@drawable/ic_menu_share"
-                android:title="@string/nav_demo_view" />
+                android:title="@string/nav_demo_view" />&ndash;&gt;
             <item
                 android:id="@+id/nav_news"
                 android:icon="@drawable/ic_menu_share"
                 android:title="@string/nav_news" />
-            <item
-                android:id="@+id/nav_log_out"
-                android:icon="@drawable/ic_power_settings_new_black_24dp"
-                android:title="@string/nav_str_log_out" />
+
 
         </menu>
-    </item>
+    </item>-->
 
 </menu>
