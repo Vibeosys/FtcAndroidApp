@@ -28,6 +28,7 @@ public class DbOperations {
             isUpdated = dbRepository.updatePages(updatePageData);
             return isInserted & isUpdated;
         } else if (jsonInsertList.isEmpty() && !updateJsonList.isEmpty()) {
+            dbRepository.deleteWidget(updatePageData);
             isUpdated = dbRepository.updatePages(updatePageData);
             return isUpdated;
         } else if (!jsonInsertList.isEmpty() && updateJsonList.isEmpty()) {

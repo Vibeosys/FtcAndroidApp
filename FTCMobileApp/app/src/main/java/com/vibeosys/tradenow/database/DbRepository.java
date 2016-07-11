@@ -1218,4 +1218,31 @@ public class DbRepository extends SQLiteOpenHelper {
         }
         return flagError;
     }
+
+    public boolean deleteWidget(List<ResponsePageData> updatePageData) {
+        boolean flagError = false;
+        String errorMessage = "";
+        SQLiteDatabase sqLiteDatabase = null;
+        long count = -1;
+        try {
+            sqLiteDatabase = getWritableDatabase();
+            synchronized (sqLiteDatabase) {
+                for (ResponsePageData pageData : updatePageData) {
+                    String[] whereClause = new String[]{String.valueOf(pageData.getPageId())};
+                    count = sqLiteDatabase.delete(SqlContract.SqlWidget.TABLE_NAME, SqlContract.SqlWidget.PAGE_ID + "=?", whereClause);
+                    Log.d(TAG, " ## delete Widget data successfully");
+                }
+            }
+        } catch (Exception e) {
+            flagError = false;
+            errorMessage = e.getMessage();
+            Log.e(TAG, "##Error while delete widget " + e.toString());
+        } finally {
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen())
+                sqLiteDatabase.close();
+            if (!flagError)
+                Log.e(TAG, "##delete widget by page" + errorMessage);
+        }
+        return flagError;
+    }
 }
