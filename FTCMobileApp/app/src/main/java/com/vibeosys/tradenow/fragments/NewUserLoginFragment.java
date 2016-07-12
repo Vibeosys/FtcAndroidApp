@@ -28,11 +28,17 @@ import com.vibeosys.tradenow.data.UserDTO;
 import com.vibeosys.tradenow.data.requestdata.BaseRequestDTO;
 import com.vibeosys.tradenow.data.requestdata.GetUserLogin;
 import com.vibeosys.tradenow.data.responsedata.ResponseErrorDTO;
+import com.vibeosys.tradenow.data.responsedata.ResponseGetPages;
 import com.vibeosys.tradenow.data.responsedata.ResponseLoginDTO;
+import com.vibeosys.tradenow.data.responsedata.ResponsePageData;
+import com.vibeosys.tradenow.data.responsedata.ResponsePageType;
+import com.vibeosys.tradenow.data.responsedata.ResponseWidgetData;
 import com.vibeosys.tradenow.utils.OneSignalIdHandler;
 import com.vibeosys.tradenow.utils.ServerRequestConstants;
 import com.vibeosys.tradenow.utils.ServerSyncManager;
 import com.vibeosys.tradenow.utils.UserAuth;
+
+import java.util.ArrayList;
 
 /**
  * Created by akshay on 18-06-2016.
@@ -141,6 +147,12 @@ public class NewUserLoginFragment extends BaseFragment implements View.OnClickLi
                         getResources().getString(R.string.str_err_server_msg));
                 Log.e(TAG, "Error in User Login data" + error.getMessage());
                 break;
+            case ServerRequestConstants.REQUEST_GET_PAGES:
+                showProgress(false, formView, progressView);
+                break;
+            default:
+                showProgress(false, formView, progressView);
+                break;
         }
     }
 
@@ -162,6 +174,16 @@ public class NewUserLoginFragment extends BaseFragment implements View.OnClickLi
                 snackbar.setActionTextColor(Color.RED);
                 snackbar.show();
                 break;
+            case ServerRequestConstants.REQUEST_GET_PAGES:
+                showProgress(false, formView, progressView);
+                Intent mainIntent = new Intent(getContext(), MainActivity.class);
+                mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(mainIntent);
+                getActivity().finish();
+                break;
+            default:
+                showProgress(false, formView, progressView);
+                break;
         }
     }
 
@@ -176,11 +198,37 @@ public class NewUserLoginFragment extends BaseFragment implements View.OnClickLi
                         loginDTO.getUsername(), loginDTO.getPwd(), loginDTO.getEmail(), loginDTO.getSubscriberId());
                 UserAuth userAuth = new UserAuth();
                 userAuth.saveAuthenticationInfo(userDTO, getContext());
+                callToPages();
+                break;
+            case ServerRequestConstants.REQUEST_GET_PAGES:
+                showProgress(false, formView, progressView);
+                fillData(data);
                 Intent mainIntent = new Intent(getContext(), MainActivity.class);
                 mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(mainIntent);
                 getActivity().finish();
                 break;
+            default:
+                showProgress(false, formView, progressView);
+                break;
         }
+    }
+
+    private void fillData(String data) {
+        ResponseGetPages getPagesResponse = ResponseGetPages.deserializeJson(data);
+        Log.d(TAG, "##" + getPagesResponse.toString());
+        ArrayList<ResponsePageType> pageTypes = ResponsePageType.deserializeToArray(getPagesResponse.getPageType());
+        mDbRepository.insertPageTypes(pageTypes);
+        ArrayList<ResponsePageData> mobilePages = ResponsePageData.deserializeToArray(getPagesResponse.getPages());
+        mDbRepository.insertPages(mobilePages);
+        ArrayList<ResponseWidgetData> widgetDatas = ResponseWidgetData.deserializeToArray(getPagesResponse.getWidgets());
+        mDbRepository.insertWidgets(widgetDatas);
+    }
+
+    private void callToPages() {
+        showProgress(true, formView, progressView);
+        BaseRequestDTO baseRequestDTO = new BaseRequestDTO();
+        mServerSyncManager.uploadDataToServer(ServerRequestConstants.REQUEST_GET_PAGES,
+                mSessionManager.getPagesUrl(), baseRequestDTO);
     }
 }

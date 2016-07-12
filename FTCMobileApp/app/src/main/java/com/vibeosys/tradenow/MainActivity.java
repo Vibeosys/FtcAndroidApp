@@ -94,12 +94,11 @@ public class MainActivity extends BaseActivity
 
                 startService(syncServiceIntent);
                 startService(syncHistoryIntent);
-
-                addNavigationPages(navigationView);
             } else {
                 navigationView.getMenu().clear(); //clear old inflated items.
                 navigationView.inflateMenu(R.menu.activity_user_drawer);
             }
+            addNavigationPages(navigationView);
         }
 
     }
