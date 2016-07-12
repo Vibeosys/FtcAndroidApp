@@ -1,6 +1,8 @@
 package com.vibeosys.tradenow.utils;
 
 import android.content.Context;
+import android.os.AsyncTask;
+import android.support.annotation.BoolRes;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -72,18 +74,40 @@ public class SignalSyncManager implements ServerSyncManager.OnSuccessResultRecei
         switch (requestToken) {
             case ServerRequestConstants.REQUEST_SIGNAL:
                 List<ResponseSignalDTO> signalDTOList = ResponseSignalDTO.deserializeToArray(data);
-                boolean flagQuery = mDbRepository.insertSignal(signalDTOList);
-                if (flagQuery) {
-                    try {
-                        ResponseSignalDTO responseSignalDTO = signalDTOList.get(signalDTOList.size() - 1);
-                        mSessionManager.setLastSyncDate(responseSignalDTO.getOpenTime());
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        Log.e(TAG, " Error at Signal Sync " + e.toString());
-                    }
 
-                }
+                AsyncInsertDB asyncInsertDB = new AsyncInsertDB(signalDTOList);
+                asyncInsertDB.execute();
                 Log.d(TAG, "##Volley Response" + data);
                 break;
+        }
+    }
+
+    private class AsyncInsertDB extends AsyncTask<Void, Void, Boolean> {
+
+        List<ResponseSignalDTO> signalDTOList;
+
+        AsyncInsertDB(List<ResponseSignalDTO> signalDTOList) {
+            this.signalDTOList = signalDTOList;
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            boolean flagQuery = mDbRepository.insertSignal(signalDTOList);
+            return flagQuery;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            super.onPostExecute(result);
+            if (result) {
+                try {
+                    ResponseSignalDTO responseSignalDTO = signalDTOList.get(signalDTOList.size() - 1);
+                    mSessionManager.setLastSyncDate(responseSignalDTO.getOpenTime());
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    Log.e(TAG, " Error at Signal Sync " + e.toString());
+                }
+
+            }
         }
     }
 }

@@ -68,7 +68,7 @@ public class WidgetImageView extends NetworkImageView {
             setImageResource(R.drawable.ic_icon);
         }
         LinearLayout.LayoutParams lp = new
-                LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+                LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         lp.setMargins(8, 8, 8, 8);
         setLayoutParams(lp);
     }

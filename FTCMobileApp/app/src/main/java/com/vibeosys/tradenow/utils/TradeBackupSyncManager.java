@@ -1,6 +1,7 @@
 package com.vibeosys.tradenow.utils;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -71,18 +72,39 @@ public class TradeBackupSyncManager implements ServerSyncManager.OnSuccessResult
         switch (requestToken) {
             case ServerRequestConstants.REQUEST_TRADE_BACKUP:
                 List<ResponseTradeBackUp> tradeBackupDTOList = ResponseTradeBackUp.deserializeToArray(data);
-                boolean flagQuery = mDbRepository.insertTradeBackUp(tradeBackupDTOList);
-                if (flagQuery) {
-                    try {
-                        ResponseTradeBackUp responseTradeBackupDTO = tradeBackupDTOList.get(tradeBackupDTOList.size() - 1);
-                        mSessionManager.setLastBackupSyncDate(responseTradeBackupDTO.getCloseTime());
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        Log.e(TAG, " Error at trade backup Sync " + e.toString());
-                    }
-
-                }
+                AsyncInsertDb asyncInsertDb = new AsyncInsertDb(tradeBackupDTOList);
+                asyncInsertDb.execute();
                 Log.d(TAG, "##Volley Response" + data);
                 break;
+        }
+    }
+
+    private class AsyncInsertDb extends AsyncTask<Void, Void, Boolean> {
+
+        List<ResponseTradeBackUp> tradeBackupDTOList;
+
+        AsyncInsertDb(List<ResponseTradeBackUp> tradeBackupDTOList) {
+            this.tradeBackupDTOList = tradeBackupDTOList;
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            boolean flagQuery = mDbRepository.insertTradeBackUp(tradeBackupDTOList);
+            return flagQuery;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            super.onPostExecute(result);
+            if (result) {
+                try {
+                    ResponseTradeBackUp responseTradeBackupDTO = tradeBackupDTOList.get(tradeBackupDTOList.size() - 1);
+                    mSessionManager.setLastBackupSyncDate(responseTradeBackupDTO.getCloseTime());
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    Log.e(TAG, " Error at trade backup Sync " + e.toString());
+                }
+
+            }
         }
     }
 }
