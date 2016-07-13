@@ -58,6 +58,7 @@ public class WidgetYoutubeView extends ImageView implements View.OnClickListener
         lp.setMargins(8, 16, 8, 16);
         setLayoutParams(lp);
         setImageDrawable(getResources().getDrawable(R.drawable.youtube_player_icon));
+        setScaleType(ScaleType.FIT_XY);
         youtubeDataDTO = YoutubeDataDTO.deserializeJson(mWidgetData);
         setOnClickListener(this);
     }
