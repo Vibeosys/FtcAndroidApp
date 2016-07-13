@@ -54,11 +54,11 @@ public class WidgetYoutubeView extends ImageView implements View.OnClickListener
 
         setPadding(2, 2, 2, 2);
         LinearLayout.LayoutParams lp = new
-                LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 350);
+                LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         lp.setMargins(8, 16, 8, 16);
         setLayoutParams(lp);
         setImageDrawable(getResources().getDrawable(R.drawable.youtube_player_icon));
-        setScaleType(ScaleType.FIT_XY);
+
         youtubeDataDTO = YoutubeDataDTO.deserializeJson(mWidgetData);
         setOnClickListener(this);
     }
