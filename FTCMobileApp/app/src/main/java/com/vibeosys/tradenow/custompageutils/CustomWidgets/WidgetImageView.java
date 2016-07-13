@@ -59,13 +59,13 @@ public class WidgetImageView extends NetworkImageView {
         if (url != null && !url.isEmpty()) {
             try {
                 mImageLoader.get(url, ImageLoader.getImageListener(this,
-                        R.drawable.ic_icon, R.drawable.ic_icon));
+                        R.drawable.image_not_found, R.drawable.image_not_found));
                 setImageUrl(url, mImageLoader);
             } catch (Exception e) {
-                setImageResource(R.drawable.ic_icon);
+                setImageResource(R.drawable.image_not_found);
             }
         } else {
-            setImageResource(R.drawable.ic_icon);
+            setImageResource(R.drawable.image_not_found);
         }
         LinearLayout.LayoutParams lp = new
                 LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
