@@ -94,7 +94,9 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".activities.CustomWebViewActivity"
-            android:parentActivityName=".activities.NewsActivity"></activity>
+            android:parentActivityName=".activities.NewsActivity" />
+        <activity android:name=".activities.WidgetYouTubeActivity"
+            android:screenOrientation="portrait" android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
     </application>
 
 </manifest>

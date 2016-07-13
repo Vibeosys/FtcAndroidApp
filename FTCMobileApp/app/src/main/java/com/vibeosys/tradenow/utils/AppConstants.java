@@ -6,4 +6,7 @@ package com.vibeosys.tradenow.utils;
 public class AppConstants {
     public static final int SERVICE_TIME_OUT = 15;
     public static final int PAGE_SERVICE_TIME_OUT = 9;
+
+    public static final String YOUTUBE_AUTH_KEY = "AIzaSyDq0pjLS7YvqsbX1EW2ePI528WCo6OExrM";
+
 }

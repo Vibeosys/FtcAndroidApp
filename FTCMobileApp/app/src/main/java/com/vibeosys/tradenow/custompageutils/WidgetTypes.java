@@ -11,6 +11,7 @@ import com.vibeosys.tradenow.custompageutils.CustomWidgets.WidgetVideoView;
 import com.vibeosys.tradenow.custompageutils.CustomWidgets.LinkTextView;
 import com.vibeosys.tradenow.custompageutils.CustomWidgets.WidgetImageView;
 import com.vibeosys.tradenow.custompageutils.CustomWidgets.WidgetWebView;
+import com.vibeosys.tradenow.custompageutils.CustomWidgets.WidgetYoutubeView;
 import com.vibeosys.tradenow.custompageutils.pagedata.PageWidgetDTO;
 
 import java.util.HashMap;
@@ -24,7 +25,7 @@ public class WidgetTypes {
     private Map<String, Widget> mWidgetHashMap = new HashMap<>();
 
     public enum Widget {
-        Link, Image, Video, Text, Heading, WebView, Rss
+        Link, Image, Video, Text, Heading, WebView, Rss, YoutubeVideo
     }
 
     private Widget mWidget;
@@ -53,6 +54,7 @@ public class WidgetTypes {
         mWidgetHashMap.put("Heading", Widget.Heading);
         mWidgetHashMap.put("WebView", Widget.WebView);
         mWidgetHashMap.put("Rss", Widget.Rss);
+        mWidgetHashMap.put("YouTube", Widget.YoutubeVideo);
     }
 
     public View getView() throws NullPointerException, IllegalArgumentException {
@@ -68,9 +70,11 @@ public class WidgetTypes {
             case Heading:
                 return new WidgetHeadingView(mContext, this.mPageWidgetDTO.getWidgetData());
             case WebView:
-                return new WidgetWebView(mContext, this.mPageWidgetDTO.getWidgetData(),formView,progressView);
+                return new WidgetWebView(mContext, this.mPageWidgetDTO.getWidgetData(), formView, progressView);
             case Rss:
                 return new WidgetRssFeed(mContext, this.mPageWidgetDTO.getWidgetData(), formView, progressView);
+            case YoutubeVideo:
+                return new WidgetYoutubeView(mContext, this.mPageWidgetDTO.getWidgetData());
             default:
                 return null;
         }

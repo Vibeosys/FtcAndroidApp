@@ -20,4 +20,5 @@
     <color name="ok_btn_colour">#2ecc71</color>
     <color name="hyperlink_color">#0000EE</color>
     <color name="unread_notifications">#dddeff</color>
+    <color name="transperentvideo">#b7000000</color>
 </resources>
