@@ -55,7 +55,7 @@ public class WidgetTextView extends TextView {
         setText(textDataDTO.getText());
         LinearLayout.LayoutParams lp = new
                 LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        lp.setMargins(18, 8, 18, 8);
+        lp.setMargins(48, 8, 48, 10);
         setLayoutParams(lp);
     }
 

@@ -47,14 +47,14 @@ public class LinkTextView extends TextView implements View.OnClickListener {
     private void init() {
         mLinePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mLinePaint.setColor(mContext.getResources().getColor(R.color.hyperlink_color));
-        final int paddingLeft = 3;
-        final int paddingRight = 3;
-        final int paddingTop = 3;
-        final int paddingBottom = 3;
+        final int paddingLeft = 6;
+        final int paddingRight = 6;
+        final int paddingTop = 6;
+        final int paddingBottom = 6;
         setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom);
         LinearLayout.LayoutParams lp = new
                 LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        lp.setMargins(8, 8, 8, 8);
+        lp.setMargins(48, 8, 48, 10);
         setTextColor(mContext.getResources().getColor(R.color.hyperlink_color));
         linkDataDTO = LinkDataDTO.deserializeJson(mWidgetData);
         setText(linkDataDTO.getCaption());
