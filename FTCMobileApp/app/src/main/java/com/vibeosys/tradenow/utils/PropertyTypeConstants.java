@@ -27,6 +27,8 @@ public final class PropertyTypeConstants {
     public static final String GET_TRADE_BACKUP_URL = "api.endpoint.tradebackup";
     public static final String GET_SYNC_ACK = "api.endpoint.getsyncack";
     public static final String GET_PAGES_URL = "api.endpoint.getpages";//1st time call to this url
+    public static final String GET_PAGES_SYNC_TIME_OUT = "api.pagesync.timeout";//1st time call to this url
+    public static final String GET_SIGNAL_SYNC_TIME_OUT = "api.signalsync.timeout";//1st time call to this url
 
     public static final String SYNC_REFERENCE_ID = "user.sync.ref.id";
     public static final String USER_ID = "user.id";

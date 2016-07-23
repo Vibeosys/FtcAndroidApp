@@ -74,6 +74,8 @@ public class SessionManager {
         editor.putString(PropertyTypeConstants.GET_TRADE_BACKUP_URL, mPropertyFileReader.getTradeBackUpUrl());
         editor.putString(PropertyTypeConstants.GET_PAGES_URL, mPropertyFileReader.getFirstPagesUrl());
         editor.putString(PropertyTypeConstants.GET_SYNC_ACK, mPropertyFileReader.getSyncAckUrl());
+        editor.putInt(PropertyTypeConstants.GET_SIGNAL_SYNC_TIME_OUT, mPropertyFileReader.getSignalSyncTime());
+        editor.putInt(PropertyTypeConstants.GET_PAGES_SYNC_TIME_OUT, mPropertyFileReader.getPageSyncTime());
         editor.apply();
         return true;
     }
@@ -236,5 +238,13 @@ public class SessionManager {
 
     public String getSyncAcknowledge() {
         return mProjectSharedPref.getString(PropertyTypeConstants.GET_SYNC_ACK, null);
+    }
+
+    public int getPageSyncTime() {
+        return mProjectSharedPref.getInt(PropertyTypeConstants.GET_PAGES_SYNC_TIME_OUT, 60);
+    }
+
+    public int getSignalSyncTime() {
+        return mProjectSharedPref.getInt(PropertyTypeConstants.GET_SIGNAL_SYNC_TIME_OUT, 20);
     }
 }

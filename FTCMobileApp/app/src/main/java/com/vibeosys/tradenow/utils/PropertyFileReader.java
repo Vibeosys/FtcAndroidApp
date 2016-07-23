@@ -121,4 +121,12 @@ public class PropertyFileReader {
     public String getSyncAckUrl() {
         return getEndPointUri() + mProperties.getProperty(PropertyTypeConstants.GET_SYNC_ACK);
     }
+
+    public int getSignalSyncTime() {
+        return Integer.parseInt(mProperties.getProperty(PropertyTypeConstants.GET_SIGNAL_SYNC_TIME_OUT));
+    }
+
+    public int getPageSyncTime() {
+        return Integer.parseInt(mProperties.getProperty(PropertyTypeConstants.GET_PAGES_SYNC_TIME_OUT));
+    }
 }

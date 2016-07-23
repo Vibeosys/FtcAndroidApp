@@ -47,7 +47,7 @@ public class SignalSyncService extends IntentService {
 
                     Log.d(TAG, "##In Signal sync service");
                     //TODO: Hardcoded time for now, need to read from properties
-                    wait(AppConstants.SERVICE_TIME_OUT * 1000);
+                    wait(mSessionManager.getSignalSyncTime() * 1000);
                 } catch (Exception e) {
                     Log.e(TAG, "##Error occurred in Signal Sync service " + e.toString());
                 }
