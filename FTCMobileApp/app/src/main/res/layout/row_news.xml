@@ -67,7 +67,7 @@
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="8dp"
                     android:padding="1dp"
-                    android:text="Cheif Potential Bonanza Set Ups: Monday 20th June 2016"
+                    android:text="Error To get value"
                     android:textColor="@color/hyperlink_color"
                     android:textSize="14sp" />
 
@@ -79,7 +79,7 @@
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="1dp"
                     android:padding="1dp"
-                    android:text="Monday 20th June 2016"
+                    android:text="Error To get value"
                     android:textColor="@color/secondaryText"
                     android:textSize="12sp" />
 
@@ -92,7 +92,7 @@
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="1dp"
                     android:padding="1dp"
-                    android:text="Cheif Potential Bonanza Set Ups: Monday 20th June 2016"
+                    android:text="Error To get value"
                     android:textColor="@color/primaryText"
                     android:textSize="13sp" />
             </LinearLayout>
