@@ -167,7 +167,7 @@
                                 android:drawablePadding="10dp"
                                 android:focusableInTouchMode="true"
                                 android:hint="@string/subscriber_id"
-                                android:inputType="number"
+                                android:inputType="text"
                                 android:paddingStart="5dp"
                                 android:singleLine="true"
                                 android:textColor="@android:color/white"

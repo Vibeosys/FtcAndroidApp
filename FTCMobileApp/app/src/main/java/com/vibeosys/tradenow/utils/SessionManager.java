@@ -187,12 +187,12 @@ public class SessionManager {
         return mProjectSharedPref.getString(PropertyTypeConstants.USER_EMAIL, null);
     }
 
-    public void setSubId(long subId) {
+    public void setSubId(String subId) {
         setValuesInSharedPrefs(PropertyTypeConstants.USER_SUB_ID, subId);
     }
 
-    public long getSubId() {
-        return mProjectSharedPref.getLong(PropertyTypeConstants.USER_SUB_ID, 0);
+    public String getSubId() {
+        return mProjectSharedPref.getString(PropertyTypeConstants.USER_SUB_ID, null);
     }
 
     public String getUserLoginUrl() {

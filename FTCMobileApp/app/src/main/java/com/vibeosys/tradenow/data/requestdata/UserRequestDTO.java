@@ -8,11 +8,11 @@ import com.vibeosys.tradenow.data.BaseDTO;
 public class UserRequestDTO extends BaseDTO {
 
     private long userId;
-    private long subscriberId;
+    private String subscriberId;
     private String username;
     private String pwd;
 
-    public UserRequestDTO(long userId, long subscriberId, String userName, String pwd) {
+    public UserRequestDTO(long userId, String subscriberId, String userName, String pwd) {
         this.userId = userId;
         this.subscriberId = subscriberId;
         this.username = userName;
@@ -27,11 +27,11 @@ public class UserRequestDTO extends BaseDTO {
         this.userId = userId;
     }
 
-    public long getSubscriberId() {
+    public String getSubscriberId() {
         return subscriberId;
     }
 
-    public void setSubscriberId(long subscriberId) {
+    public void setSubscriberId(String subscriberId) {
         this.subscriberId = subscriberId;
     }
 

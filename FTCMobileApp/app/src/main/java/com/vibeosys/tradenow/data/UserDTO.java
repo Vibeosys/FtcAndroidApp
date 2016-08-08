@@ -10,7 +10,7 @@ public class UserDTO {
     private String mUsername;
     private String mPwd;
     private String mEmail;
-    private long mSubscriberId;
+    private String mSubscriberId;
 
 
     public UserDTO(long mUserId, String mFullName, String mUsername, String mPwd, String mEmail) {
@@ -21,7 +21,7 @@ public class UserDTO {
         this.mEmail = mEmail;
     }
 
-    public UserDTO(long mUserId, String mFullName, String mUsername, String mPwd, String mEmail, long mSubscriberId) {
+    public UserDTO(long mUserId, String mFullName, String mUsername, String mPwd, String mEmail, String mSubscriberId) {
         this.mUserId = mUserId;
         this.mFullName = mFullName;
         this.mUsername = mUsername;
@@ -70,11 +70,11 @@ public class UserDTO {
         this.mEmail = mEmail;
     }
 
-    public long getSubscriberId() {
+    public String getSubscriberId() {
         return mSubscriberId;
     }
 
-    public void setSubscriberId(long mSubscriberId) {
+    public void setSubscriberId(String mSubscriberId) {
         this.mSubscriberId = mSubscriberId;
     }
 }

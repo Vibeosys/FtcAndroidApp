@@ -130,9 +130,9 @@ public class ClientUserLoginFragment extends BaseFragment implements View.OnClic
             txtError.setVisibility(View.GONE);
             try {
                 showProgress(true, formView, progressView);
-                int userSubId = Integer.parseInt(subId);
+                // int userSubId = Integer.parseInt(subId);
                 OneSignalIdHandler signalIdHandler = new OneSignalIdHandler();
-                GetUserSubLogin userSubLogin = new GetUserSubLogin(userName, password, userSubId, signalIdHandler.getUserId());
+                GetUserSubLogin userSubLogin = new GetUserSubLogin(userName, password, subId, signalIdHandler.getUserId());
                 Gson gson = new Gson();
                 String serializedJsonString = gson.toJson(userSubLogin);
                 BaseRequestDTO baseRequestDTO = new BaseRequestDTO();

@@ -256,7 +256,7 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
         mTxtCompanyname.setText(data.getCompanyName());
         mTxtPlan.setText(data.getPlan());
         mTxtSubId.setText("" + data.getSubscriberId());
-        if (data.getSubscriberId() == 0) {
+        if (data.getSubscriberId().equals("0")) {
             laySub.setVisibility(View.GONE);
             layoutPlan.setVisibility(View.GONE);
         } else {

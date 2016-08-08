@@ -19,7 +19,7 @@ public class ResponseGetProfile extends BaseDTO {
     private String phone;
     private String companyName;
     private String plan;
-    private long subscriberId;
+    private String subscriberId;
 
     public ResponseGetProfile() {
     }
@@ -80,11 +80,11 @@ public class ResponseGetProfile extends BaseDTO {
         this.plan = plan;
     }
 
-    public long getSubscriberId() {
+    public String getSubscriberId() {
         return subscriberId;
     }
 
-    public void setSubscriberId(long subscriberId) {
+    public void setSubscriberId(String subscriberId) {
         this.subscriberId = subscriberId;
     }
 

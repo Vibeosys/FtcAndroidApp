@@ -96,7 +96,7 @@ public class LoginClientActivity extends BaseActivity implements View.OnClickLis
             try {
                 int userSubId = Integer.parseInt(subId);
                 OneSignalIdHandler signalIdHandler = new OneSignalIdHandler();
-                GetUserSubLogin userSubLogin = new GetUserSubLogin(userName, password, userSubId, signalIdHandler.getUserId());
+                GetUserSubLogin userSubLogin = new GetUserSubLogin(userName, password, subId, signalIdHandler.getUserId());
                 Gson gson = new Gson();
                 String serializedJsonString = gson.toJson(userSubLogin);
                 BaseRequestDTO baseRequestDTO = new BaseRequestDTO();

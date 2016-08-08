@@ -88,7 +88,7 @@ public class MainActivity extends BaseActivity
             TextView txtEmail = (TextView) headerView.findViewById(R.id.txtEmail);
             txtEmail.setText(mSessionManager.getUserEmailId());
             startService(syncPageIntent);
-            if (mSessionManager.getSubId() > 0) {
+            if (!mSessionManager.getSubId().equals("0")) {
                 navigationView.getMenu().clear(); //clear old inflated items.
                 navigationView.inflateMenu(R.menu.activity_main_drawer);// drawer for subscribers
 

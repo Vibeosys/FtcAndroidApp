@@ -72,7 +72,7 @@ public class TradeNowNotificationExtender extends NotificationExtenderService {
             MainActivity.runOnUI(new Runnable() {
                 @Override
                 public void run() {
-                    MainActivity.notificationUtil.setBadgeCount(mDbRepository.getUnreadNotificationCount());
+//                    MainActivity.notificationUtil.setBadgeCount(mDbRepository.getUnreadNotificationCount());
                 }
             });
 
