@@ -7,9 +7,9 @@ public class ForgotSubPasswordRequest {
 
     private String username;
     private String email;
-    private long subscriberId;
+    private String subscriberId;
 
-    public ForgotSubPasswordRequest(String username, String email, long subscriberId) {
+    public ForgotSubPasswordRequest(String username, String email, String subscriberId) {
         this.username = username;
         this.email = email;
         this.subscriberId = subscriberId;
@@ -31,11 +31,11 @@ public class ForgotSubPasswordRequest {
         this.email = email;
     }
 
-    public long getSubscriberId() {
+    public String getSubscriberId() {
         return subscriberId;
     }
 
-    public void setSubscriberId(long subscriberId) {
+    public void setSubscriberId(String subscriberId) {
         this.subscriberId = subscriberId;
     }
 }

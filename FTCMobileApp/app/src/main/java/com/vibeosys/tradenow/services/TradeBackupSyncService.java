@@ -48,7 +48,7 @@ public class TradeBackupSyncService extends IntentService {
 
                     Log.d(TAG, "##In trade backup sync service");
                     //TODO: Hardcoded time for now, need to read from properties
-                    wait(mSessionManager.getSignalSyncTime() * 1000);
+                    wait(mSessionManager.getSignalSyncTime() * 1000*60);
                 } catch (Exception e) {
                     Log.e(TAG, "##Error occurred in trade backup Sync service " + e.toString());
                 }

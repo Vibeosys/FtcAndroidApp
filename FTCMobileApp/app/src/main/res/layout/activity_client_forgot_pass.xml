@@ -136,7 +136,7 @@
                                 android:background="@android:color/transparent"
                                 android:drawablePadding="10dp"
                                 android:hint="@string/subscriber_id"
-                                android:inputType="number"
+                                android:inputType="text"
                                 android:paddingStart="5dp"
 
                                 android:singleLine="true"

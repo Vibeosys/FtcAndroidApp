@@ -48,7 +48,7 @@ public class PageSyncService extends IntentService {
 
                     Log.d(TAG, "##In page service");
                     //TODO: Hardcoded time for now, need to read from properties
-                    wait(mSessionManager.getPageSyncTime() * 1000);
+                    wait(mSessionManager.getPageSyncTime() * 1000 * 60);
                 } catch (Exception e) {
                     Log.e(TAG, "##Error occurred in page service " + e.toString());
                 }

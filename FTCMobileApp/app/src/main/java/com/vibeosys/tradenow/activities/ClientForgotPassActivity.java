@@ -101,9 +101,9 @@ public class ClientForgotPassActivity extends BaseActivity implements View.OnCli
             focusView.requestFocus();
         } else {
             try {
-                long subId = Long.parseLong(strSubId);
+                //long subId = Long.parseLong(strSubId);
                 showProgress(true, formView, progressView);
-                ForgotSubPasswordRequest forgotPasswordRequest = new ForgotSubPasswordRequest(userName, strEmail, subId);
+                ForgotSubPasswordRequest forgotPasswordRequest = new ForgotSubPasswordRequest(userName, strEmail, strSubId);
                 Gson gson = new Gson();
                 String serializedJsonString = gson.toJson(forgotPasswordRequest);
                 BaseRequestDTO baseRequestDTO = new BaseRequestDTO();
