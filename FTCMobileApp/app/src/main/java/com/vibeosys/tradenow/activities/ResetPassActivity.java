@@ -88,6 +88,7 @@ public class ResetPassActivity extends BaseActivity implements View.OnClickListe
                 callTOUpdate(strOldPass, strNewPass, strConfirm);
                 break;
             case R.id.btnCancel:
+                finish();
                 break;
         }
     }
