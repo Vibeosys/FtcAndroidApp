@@ -73,6 +73,7 @@ public class PagesSyncManager implements ServerSyncManager.OnSuccessResultReceiv
     public void onDataErrorReceived(ResponseErrorDTO errorDbDTO, int requestToken) {
         switch (requestToken) {
             case ServerRequestConstants.REQUEST_SYNC_PAGES:
+                callToAcknowledge();
                 break;
             case ServerRequestConstants.REQUEST_ACK_SYNC:
                 break;
