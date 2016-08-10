@@ -43,7 +43,7 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
         setTitle(getResources().getString(R.string.my_profile));
         formView = findViewById(R.id.profileView);
         progressBar = findViewById(R.id.progressBar);
-        mTxtUserId = (EditText) findViewById(R.id.txtUserId);
+       // mTxtUserId = (EditText) findViewById(R.id.txtUserId);
         mTxtUserName = (EditText) findViewById(R.id.txtUserName);
         mTxtName = (EditText) findViewById(R.id.txtName);
         mTxtEmail = (EditText) findViewById(R.id.txtEmail);
@@ -248,7 +248,7 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
     }
 
     public void setData(ResponseGetProfile data) {
-        mTxtUserId.setText("" + data.getUserId());
+       // mTxtUserId.setText("" + data.getUserId());
         mTxtUserName.setText(data.getUsername());
         mTxtName.setText(data.getFullName());
         mTxtEmail.setText(data.getEmail());
