@@ -4,7 +4,7 @@
     android:id="@+id/mainForgotPassword"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.vibeosys.tradenow.activities.ClientForgotPassActivity">
+    tools:context="com.ftcsolutions.tradenow.activities.ClientForgotPassActivity">
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"

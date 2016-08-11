@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/back_login"
-    tools:context="com.vibeosys.tradenow.activities.MyProfileActivity">
+    tools:context="com.ftcsolutions.tradenow.activities.MyProfileActivity">
 
     <!--<RelativeLayout
         android:id="@+id/profilePic"

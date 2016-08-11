@@ -1,57 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.vibeosys.tradenow">
+    package="com.ftcsolutions.tradenow">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".TradeNowApplication"
+        android:name="com.ftcsolutions.tradenow.TradeNowApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name="com.ftcsolutions.tradenow.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activities.LoginActivity" />
-        <activity android:name=".activities.RegisterActivity" />
-        <activity android:name=".activities.UserForgotPassActivity" />
+        <activity android:name="com.ftcsolutions.tradenow.activities.LoginActivity" />
+        <activity android:name="com.ftcsolutions.tradenow.activities.RegisterActivity" />
+        <activity android:name="com.ftcsolutions.tradenow.activities.UserForgotPassActivity" />
         <activity
-            android:name=".activities.TradingAlertActivity"
-            android:parentActivityName=".activities.TradeAlertDateActivity" />
+            android:name="com.ftcsolutions.tradenow.activities.TradingAlertActivity"
+            android:parentActivityName="com.ftcsolutions.tradenow.activities.TradeAlertDateActivity" />
         <activity
-            android:name=".activities.MyProfileActivity"
-            android:parentActivityName=".MainActivity" />
-        <activity android:name=".activities.LoginClientActivity" />
+            android:name="com.ftcsolutions.tradenow.activities.MyProfileActivity"
+            android:parentActivityName="com.ftcsolutions.tradenow.MainActivity" />
+        <activity android:name="com.ftcsolutions.tradenow.activities.LoginClientActivity" />
         <activity
-            android:name=".activities.ResetPassActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name="com.ftcsolutions.tradenow.activities.ResetPassActivity"
+            android:parentActivityName="com.ftcsolutions.tradenow.MainActivity" />
         <activity
-            android:name=".activities.DemoActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name="com.ftcsolutions.tradenow.activities.DemoActivity"
+            android:parentActivityName="com.ftcsolutions.tradenow.MainActivity" />
         <activity
-            android:name=".activities.TradeHistoryActivity"
-            android:parentActivityName=".activities.TradeHistoryDateActivity" />
+            android:name="com.ftcsolutions.tradenow.activities.TradeHistoryActivity"
+            android:parentActivityName="com.ftcsolutions.tradenow.activities.TradeHistoryDateActivity" />
         <activity
-            android:name=".activities.NotificationActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name="com.ftcsolutions.tradenow.activities.NotificationActivity"
+            android:parentActivityName="com.ftcsolutions.tradenow.MainActivity" />
         <activity
-            android:name=".activities.TermsAndConditionActivity"
-            android:parentActivityName=".activities.LoginActivity" />
+            android:name="com.ftcsolutions.tradenow.activities.TermsAndConditionActivity"
+            android:parentActivityName="com.ftcsolutions.tradenow.activities.LoginActivity" />
         <activity
-            android:name=".activities.TradeAlertDetailsActivity"
-            android:parentActivityName=".activities.TradingAlertActivity" />
+            android:name="com.ftcsolutions.tradenow.activities.TradeAlertDetailsActivity"
+            android:parentActivityName="com.ftcsolutions.tradenow.activities.TradingAlertActivity" />
         <activity
-            android:name=".activities.TradeHistoryDetailsActivity"
-            android:parentActivityName=".activities.TradeHistoryDateActivity" />
+            android:name="com.ftcsolutions.tradenow.activities.TradeHistoryDetailsActivity"
+            android:parentActivityName="com.ftcsolutions.tradenow.activities.TradeHistoryDateActivity" />
         <activity
-            android:name=".activities.TradeDetailViewActivity"
-            android:parentActivityName=".activities.TradeHistoryDateActivity" />
-        <activity android:name=".activities.SplashScreenActivity">
+            android:name="com.ftcsolutions.tradenow.activities.TradeDetailViewActivity"
+            android:parentActivityName="com.ftcsolutions.tradenow.activities.TradeHistoryDateActivity" />
+        <activity android:name="com.ftcsolutions.tradenow.activities.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -59,43 +59,43 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.TradeAlertDateActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name="com.ftcsolutions.tradenow.activities.TradeAlertDateActivity"
+            android:parentActivityName="com.ftcsolutions.tradenow.MainActivity" />
         <activity
-            android:name=".activities.TradeHistoryDateActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name="com.ftcsolutions.tradenow.activities.TradeHistoryDateActivity"
+            android:parentActivityName="com.ftcsolutions.tradenow.MainActivity" />
         <activity
-            android:name=".activities.NewsActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name="com.ftcsolutions.tradenow.activities.NewsActivity"
+            android:parentActivityName="com.ftcsolutions.tradenow.MainActivity" />
 
         <service
-            android:name=".services.TradeNowNotificationExtender"
+            android:name="com.ftcsolutions.tradenow.services.TradeNowNotificationExtender"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.onesignal.NotificationExtender" />
             </intent-filter>
         </service>
         <service
-            android:name=".services.SignalSyncService"
+            android:name="com.ftcsolutions.tradenow.services.SignalSyncService"
             android:exported="false" />
         <service
-            android:name=".services.TradeBackupSyncService"
+            android:name="com.ftcsolutions.tradenow.services.TradeBackupSyncService"
             android:exported="false" />
         <service
-            android:name=".services.PageSyncService"
+            android:name="com.ftcsolutions.tradenow.services.PageSyncService"
             android:exported="false" />
 
-        <activity android:name=".activities.ClientForgotPassActivity" />
+        <activity android:name="com.ftcsolutions.tradenow.activities.ClientForgotPassActivity" />
         <activity
-            android:name=".activities.WebViewActivity"
-            android:parentActivityName=".activities.NewsActivity" />
+            android:name="com.ftcsolutions.tradenow.activities.WebViewActivity"
+            android:parentActivityName="com.ftcsolutions.tradenow.activities.NewsActivity" />
         <activity
-            android:name=".activities.DynamicPageActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name="com.ftcsolutions.tradenow.activities.DynamicPageActivity"
+            android:parentActivityName="com.ftcsolutions.tradenow.MainActivity" />
         <activity
-            android:name=".activities.CustomWebViewActivity"
-            android:parentActivityName=".activities.NewsActivity" />
-        <activity android:name=".activities.WidgetYouTubeActivity"
+            android:name="com.ftcsolutions.tradenow.activities.CustomWebViewActivity"
+            android:parentActivityName="com.ftcsolutions.tradenow.activities.NewsActivity" />
+        <activity android:name="com.ftcsolutions.tradenow.activities.WidgetYouTubeActivity"
             android:screenOrientation="portrait" android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
     </application>
 

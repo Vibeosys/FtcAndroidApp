@@ -1,4 +1,4 @@
-package com.vibeosys.tradenow;
+package com.ftcsolutions.tradenow;
 
 import org.junit.Test;
 

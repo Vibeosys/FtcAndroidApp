@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/back_login"
-    tools:context="com.vibeosys.tradenow.activities.DemoActivity">
+    tools:context="com.ftcsolutions.tradenow.activities.DemoActivity">
 
     <ScrollView
         android:layout_width="match_parent"

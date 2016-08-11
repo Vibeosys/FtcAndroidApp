@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.3"
 
     defaultConfig {
-        applicationId "com.vibeosys.treadenow"
+        applicationId "com.ftcsolutions.tradenow"
 
         manifestPlaceholders = [manifestApplicationId          : "${applicationId}",
                                 onesignal_app_id               : "d7d678e9-7cd4-4e9d-b823-3f172572ef74",

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/loginTransparnt"
     android:fitsSystemWindows="true"
-    tools:context="com.vibeosys.tradenow.MainActivity">
+    tools:context="com.ftcsolutions.tradenow.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

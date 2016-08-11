@@ -7,7 +7,7 @@
     android:background="@drawable/back_login"
     android:orientation="vertical"
     android:padding="10dp"
-    tools:context="com.vibeosys.tradenow.activities.NewsActivity">
+    tools:context="com.ftcsolutions.tradenow.activities.NewsActivity">
 
     <ProgressBar
         android:id="@+id/progressBar"

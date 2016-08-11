@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/back_login"
     android:padding="10dp"
-    tools:context="com.vibeosys.tradenow.activities.TradeAlertDateActivity">
+    tools:context="com.ftcsolutions.tradenow.activities.TradeAlertDateActivity">
 
     <ListView
         android:id="@+id/listTradeDate"
