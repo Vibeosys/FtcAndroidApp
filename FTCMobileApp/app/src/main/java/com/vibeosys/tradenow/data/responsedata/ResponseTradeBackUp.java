@@ -26,7 +26,7 @@ public class ResponseTradeBackUp extends BaseResponseDTO {
     private long openTime;
     private long closeTime;
     private String status;
-    private double pips;
+    private double plPips;
 
     public ResponseTradeBackUp() {
     }
@@ -144,11 +144,11 @@ public class ResponseTradeBackUp extends BaseResponseDTO {
     }
 
     public double getPips() {
-        return pips;
+        return plPips;
     }
 
     public void setPips(double pips) {
-        this.pips = pips;
+        this.plPips = pips;
     }
 
     public static ArrayList<ResponseTradeBackUp> deserializeToArray(String serializedString) {

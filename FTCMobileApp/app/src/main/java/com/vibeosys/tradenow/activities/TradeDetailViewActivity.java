@@ -24,7 +24,7 @@ public class TradeDetailViewActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trade_detail_view);
-        setTitle("INR TO USD");
+
         ticketNo = getIntent().getExtras().getLong("ticketNo");
         //txtMasterAccNo = (TextView) findViewById(R.id.txtMasterAccNo);
         txtTicketNo = (TextView) findViewById(R.id.txtTicketNo);
@@ -43,20 +43,27 @@ public class TradeDetailViewActivity extends BaseActivity {
         updateUi(signalDataDTO);
     }
 
-    private void updateUi(TradeBackupDataDTO traeBackupDTO) {
+    private void updateUi(TradeBackupDataDTO tradeBackupDTO) {
         //txtMasterAccNo.setText("");
-        txtTicketNo.setText("" + traeBackupDTO.getTicket());
-        txtLotSize.setText("" + traeBackupDTO.getLot());
-        txtPrice.setText("" + traeBackupDTO.getPrice());
-        txtClosePrice.setText("" + traeBackupDTO.getClosePrice());
-        txtSp.setText("" + traeBackupDTO.getSl());
-        txtTp.setText("" + traeBackupDTO.getTp());
-        txtSwap.setText("" + traeBackupDTO.getSwap());
-        txtProfit.setText("" + traeBackupDTO.getProfit());
-        txtProfitLoss.setText("" + traeBackupDTO.getPips());
+        String symbol = tradeBackupDTO.getSymbol();
+        if (symbol.length() == 6) {
+            StringBuffer sb = new StringBuffer(symbol);
+            sb.insert(3, " TO ");
+            symbol = sb.toString();
+        }
+        setTitle(symbol);
+        txtTicketNo.setText("" + tradeBackupDTO.getTicket());
+        txtLotSize.setText("" + tradeBackupDTO.getLot());
+        txtPrice.setText("" + tradeBackupDTO.getPrice());
+        txtClosePrice.setText("" + tradeBackupDTO.getClosePrice());
+        txtSp.setText("" + tradeBackupDTO.getSl());
+        txtTp.setText("" + tradeBackupDTO.getTp());
+        txtSwap.setText("" + tradeBackupDTO.getSwap());
+        txtProfit.setText("" + tradeBackupDTO.getProfit());
+        txtProfitLoss.setText("" + tradeBackupDTO.getPips());
         DateUtils dateUtils = new DateUtils();
-        Date signalDate = dateUtils.getFormattedDate(traeBackupDTO.getOpenTime());
-        Date closeDate = dateUtils.getFormattedDate(traeBackupDTO.getCloseTime());
+        Date signalDate = dateUtils.getFormattedDate(tradeBackupDTO.getOpenTime());
+        Date closeDate = dateUtils.getFormattedDate(tradeBackupDTO.getCloseTime());
         txtOpenTime.setText("" + dateUtils.getLocalDateInReadableFormat(signalDate) + " "
                 + dateUtils.getLocalTimeInReadableFormat(signalDate));
         txtCloseTime.setText("" + dateUtils.getLocalDateInReadableFormat(closeDate) + " "
