@@ -3,7 +3,6 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
-
     defaultConfig {
         applicationId "com.ftcsolutions.tradenow"
 
@@ -12,7 +11,7 @@ android {
                                 onesignal_google_project_number: "842391435177"]
         minSdkVersion 19
         targetSdkVersion 23
-        versionCode 1
+        versionCode 2
         versionName "1.0"
     }
     buildTypes {
@@ -21,20 +20,21 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    productFlavors {
+    }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'com.android.support:design:23.4.0'
-    compile 'com.android.support:cardview-v7:23.1.1'
-
     // OneSignal SDK
-    compile 'com.onesignal:OneSignal:2.+@aar'
     // OneSignal requires at least version 7.0.0 of GMS but the newest version is recommend.
-    compile 'com.google.android.gms:play-services-gcm:+'
+    compile project(path: ':shuttercomponent')
+    compile 'com.android.support:appcompat-v7:24.0.0'
+    compile 'com.android.support:design:24.0.0'
+    compile 'com.android.support:cardview-v7:24.0.0'
+    compile 'com.onesignal:OneSignal:2.+@aar'
+    compile 'com.google.android.gms:play-services-gcm:9.2.0'
     compile 'com.google.android.gms:play-services-analytics:+'
     compile 'com.mcxiaoke.volley:library:1.0.19'
-    compile project(path: ':shuttercomponent')
 }
