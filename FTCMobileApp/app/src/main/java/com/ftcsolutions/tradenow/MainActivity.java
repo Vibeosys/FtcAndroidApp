@@ -15,6 +15,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.ftcsolutions.tradenow.activities.BaseActivity;
@@ -43,6 +45,8 @@ public class MainActivity extends BaseActivity
     public static Handler UIHandler;
     private Context context;
     public static NotificationUtil notificationUtil;
+    private RelativeLayout subView;
+    private ScrollView nonSubView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +58,8 @@ public class MainActivity extends BaseActivity
         syncServiceIntent = new Intent(Intent.ACTION_SYNC, null, this, SignalSyncService.class);
         syncHistoryIntent = new Intent(Intent.ACTION_SYNC, null, this, TradeBackupSyncService.class);
         syncPageIntent = new Intent(Intent.ACTION_SYNC, null, this, PageSyncService.class);
+        subView = (RelativeLayout) findViewById(R.id.subscriberView);
+        nonSubView = (ScrollView) findViewById(R.id.nonSubscriberView);
         if (!UserAuth.isUserLoggedIn()) {
             callToLogOut();
         } else {
@@ -89,9 +95,13 @@ public class MainActivity extends BaseActivity
 
                 startService(syncServiceIntent);
                 startService(syncHistoryIntent);
+                nonSubView.setVisibility(View.GONE);
+                subView.setVisibility(View.VISIBLE);
             } else {
                 navigationView.getMenu().clear(); //clear old inflated items.
                 navigationView.inflateMenu(R.menu.activity_user_drawer);
+                nonSubView.setVisibility(View.VISIBLE);
+                subView.setVisibility(View.GONE);
             }
             addNavigationPages(navigationView);
         }

@@ -140,4 +140,9 @@
     <string name="str_err_server_msg">Something went wrong on server</string>
     <string name="str_err_chek_privacy">Please accept terms and condition before login</string>
     <string name="str_welcome">Welcome\n To</string>
+    <string name="str_msg_non_sub">
+        \tIntroducing “Trade Now” the most powerful Mobile APP for Traders in Forex, Index, Stocks and Commodities. You will receive valuable information in the market place that will help you to make informed decisions with your trading strategy. In addition you will receive special notifications from traders and analysts on what and when they are deciding to buy or sell.\n
+        \tIf you are thinking of starting your own trading signal business then this is the right vehicle for you to share your trading ideas promptly with your clients. Our forex trade copier software is integrated with “Trade Now”. When you subscribe to our Forex Remote Copier you are able to generate signals for BUY/SELL or LIMIT ORDERS from your MT4 trading platform which will be instantly sent to all your clients in this Mobile APP.\n
+        \tWhen you become a subscriber this Mobile APP comes with an advanced control panel which makes it extremely easy to set up your own custom pages with your own Images, Videos, Links, Text, Headings, Web View and RSS Feed.\n
+    </string>
 </resources>
