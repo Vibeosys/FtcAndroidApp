@@ -15,7 +15,7 @@ public class TradeDetailViewActivity extends BaseActivity {
 
     private TextView /*txtMasterAccNo,*/ txtTicketNo, txtLotSize, txtPrice, txtClosePrice, txtSp,
             txtTp, txtSwap, txtProfit, txtProfitLoss, txtOpenTime, txtCloseTime;
-    private long ticketNo;
+    //private long ticketNo;
     private DateUtils dateUtils;
 
     @Override
@@ -23,7 +23,7 @@ public class TradeDetailViewActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trade_detail_view);
 
-        ticketNo = getIntent().getExtras().getLong("ticketNo");
+        //ticketNo = getIntent().getExtras().getLong("data");
         //txtMasterAccNo = (TextView) findViewById(R.id.txtMasterAccNo);
         txtTicketNo = (TextView) findViewById(R.id.txtTicketNo);
         txtLotSize = (TextView) findViewById(R.id.txtLotSize);
@@ -37,7 +37,8 @@ public class TradeDetailViewActivity extends BaseActivity {
         txtOpenTime = (TextView) findViewById(R.id.txtOpenTime);
         txtCloseTime = (TextView) findViewById(R.id.txtCloseTime);
 
-        TradeBackupDataDTO signalDataDTO = mDbRepository.getTradeBackUp(ticketNo);
+        //TradeBackupDataDTO signalDataDTO = mDbRepository.getTradeBackUp(ticketNo);
+        TradeBackupDataDTO signalDataDTO = (TradeBackupDataDTO) getIntent().getExtras().getSerializable("data");
         updateUi(signalDataDTO);
     }
 

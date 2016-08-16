@@ -100,7 +100,7 @@ public class TradeHistoryAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 if (viewDetailsListener != null)
-                    viewDetailsListener.onViewClickListener(v.getId(), tradeBackupDataDTO.getTicket(), new Object());
+                    viewDetailsListener.onViewClickListener(v.getId(), tradeBackupDataDTO.getTicket(), tradeBackupDataDTO);
             }
         });
 
@@ -126,6 +126,6 @@ public class TradeHistoryAdapter extends BaseAdapter {
     }
 
     public interface ViewDetailsListener {
-        public void onViewClickListener(int id, long value, Object object);
+        public void onViewClickListener(int id, long value, TradeBackupDataDTO object);
     }
 }

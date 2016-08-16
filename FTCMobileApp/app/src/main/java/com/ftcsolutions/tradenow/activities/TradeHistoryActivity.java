@@ -56,9 +56,9 @@ public class TradeHistoryActivity extends BaseActivity implements TradeHistoryAd
     }
 
     @Override
-    public void onViewClickListener(int id, long value, Object object) {
+    public void onViewClickListener(int id, long value, TradeBackupDataDTO tradeBackupDataDTO) {
         Intent details = new Intent(getApplicationContext(), TradeDetailViewActivity.class);
-        details.putExtra("ticketNo", value);
+        details.putExtra("data", tradeBackupDataDTO);
         startActivity(details);
     }
 }

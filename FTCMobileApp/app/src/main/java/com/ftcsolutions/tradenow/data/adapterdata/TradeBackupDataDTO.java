@@ -1,9 +1,11 @@
 package com.ftcsolutions.tradenow.data.adapterdata;
 
+import java.io.Serializable;
+
 /**
  * Created by akshay on 21-06-2016.
  */
-public class TradeBackupDataDTO {
+public class TradeBackupDataDTO implements Serializable {
 
     private long mMasterAccNo;
     private long mTicket;
