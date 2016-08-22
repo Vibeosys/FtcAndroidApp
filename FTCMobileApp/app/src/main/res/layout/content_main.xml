@@ -14,39 +14,49 @@
     tools:context="com.ftcsolutions.tradenow.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <RelativeLayout
+    <ScrollView
         android:id="@+id/subscriberView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/txtHeading"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
+            android:layout_height="match_parent"
             android:gravity="center"
-            android:paddingLeft="6dp"
-            android:paddingRight="6dp"
-            android:text="@string/str_welcome"
-            android:textColor="@color/white_color"
-            android:textSize="38sp" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/txtTradeNow"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txtHeading"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            android:gravity="center"
-            android:paddingLeft="6dp"
-            android:paddingRight="6dp"
-            android:text="@string/app_name"
-            android:textColor="@color/colorAccent"
-            android:textSize="38sp" />
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/imgSub"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_marginBottom="6dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:paddingLeft="6dp"
+                android:paddingRight="8dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/img_sub" />
+
+            <TextView
+                android:id="@+id/txtSubMsg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                android:text="@string/str_msg_sub"
+                android:textColor="@color/white_color"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/imgSubClickMore"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:src="@drawable/sub_feedback_btn" />
+        </LinearLayout>
+    </ScrollView>
 
     <ScrollView
         android:id="@+id/nonSubscriberView"

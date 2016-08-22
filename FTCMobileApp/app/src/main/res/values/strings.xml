@@ -91,7 +91,7 @@
     <string name="subscriber_id">Subscription Id</string>
     <string name="nav_str_log_out">Log Out</string>
     <string name="privacy_text_check"><![CDATA[ I have read and agree to the
-    <font color="#23E763">Terms and Conditions</font of Trade Now ]]></string>
+    <font color="#23E763">Terms and Conditions</font> of Trade Now ]]></string>
     <string name="terms_n_condition">Terms And Conditions</string>
     <string name="trade_alert_details">Trade Alert Details</string>
     <string name="trade_history_details">Trade History Details</string>
@@ -145,4 +145,13 @@
         \tIf you are thinking of starting your own trading signal business then this is the right vehicle for you to share your trading ideas promptly with your clients. Our forex trade copier software is integrated with “Trade Now”. When you subscribe to our Forex Remote Copier you are able to generate signals for BUY/SELL or LIMIT ORDERS from your MT4 trading platform which will be instantly sent to all your clients in this Mobile APP.\n
         \tWhen you become a subscriber this Mobile APP comes with an advanced control panel which makes it extremely easy to set up your own custom pages with your own Images, Videos, Links, Text, Headings, Web View and RSS Feed.\n
     </string>
+    <string name="str_msg_sub">
+        <![CDATA[<p>Thank you for subscribing to “Trade Now” the most powerful Mobile APP for Traders in Forex, Index, Stocks and Commodities.</p>
+<font color="#FE5E08">If you are subscribing to a signal service then:</font>
+<p>You can now receive trading ideas and signals from your trader or broker from anywhere around the globe 24/5 while the market is open. The tool allows you to receive valuable market information from time to time from all over the world that will help you to make informed decisions with your trading strategy. In addition you may receive instant notifications from your provider on what and when they are deciding to buy or sell.</p>
+<font color="#FE5E08">If you are a signal provider then:</font>
+<p>This is the right platform for you to share your trading ideas promptly with your clients. Our forex trade copier software is integrated with “Trade Now”. This allows you to generate trading signals for BUY/SELL or LIMIT ORDERS from your MT4 trading platform which will be instantly sent to all your clients in this Mobile APP.</p>
+Check out our <u>how to use guide</u> for this Mobile APP which comes with an advanced control panel which makes it extremely easy to set up your own custom pages with your own Images, Videos, Links, Text, Headings, Web View and RSS Feed.
+We are constantly looking to improve our Mobile APP and would love to hear from you. Please send your feedback by clicking on the link below:
+     ]]></string>
 </resources>

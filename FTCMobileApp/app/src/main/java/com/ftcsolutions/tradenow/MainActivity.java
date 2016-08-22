@@ -11,6 +11,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
@@ -45,8 +46,9 @@ public class MainActivity extends BaseActivity
     public static Handler UIHandler;
     private Context context;
     public static NotificationUtil notificationUtil;
-    private RelativeLayout subView;
+    private ScrollView subView;
     private ScrollView nonSubView;
+    private TextView txtSubMsg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +60,9 @@ public class MainActivity extends BaseActivity
         syncServiceIntent = new Intent(Intent.ACTION_SYNC, null, this, SignalSyncService.class);
         syncHistoryIntent = new Intent(Intent.ACTION_SYNC, null, this, TradeBackupSyncService.class);
         syncPageIntent = new Intent(Intent.ACTION_SYNC, null, this, PageSyncService.class);
-        subView = (RelativeLayout) findViewById(R.id.subscriberView);
+        subView = (ScrollView) findViewById(R.id.subscriberView);
         nonSubView = (ScrollView) findViewById(R.id.nonSubscriberView);
+        txtSubMsg = (TextView) findViewById(R.id.txtSubMsg);
         if (!UserAuth.isUserLoggedIn()) {
             callToLogOut();
         } else {
@@ -95,6 +98,7 @@ public class MainActivity extends BaseActivity
 
                 startService(syncServiceIntent);
                 startService(syncHistoryIntent);
+                txtSubMsg.setText(Html.fromHtml(getResources().getString(R.string.str_msg_sub)));
                 nonSubView.setVisibility(View.GONE);
                 subView.setVisibility(View.VISIBLE);
             } else {
