@@ -35,7 +35,7 @@
                 android:paddingLeft="6dp"
                 android:paddingRight="8dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/img_sub" />
+                android:src="@drawable/subscriber_welcome_img" />
 
             <TextView
                 android:id="@+id/txtSubMsg"
@@ -79,7 +79,7 @@
                 android:paddingLeft="6dp"
                 android:paddingRight="8dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/non_sub_img" />
+                android:src="@drawable/non_subscriber_welcome_img" />
 
             <TextView
                 android:id="@+id/txtNonSubMsg"
