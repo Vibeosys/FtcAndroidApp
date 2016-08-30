@@ -48,7 +48,7 @@ public class MainActivity extends BaseActivity
     public static NotificationUtil notificationUtil;
     private ScrollView subView;
     private ScrollView nonSubView;
-    private TextView txtSubMsg;
+    private TextView txtSubMsg, txtNonSubMsg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +63,7 @@ public class MainActivity extends BaseActivity
         subView = (ScrollView) findViewById(R.id.subscriberView);
         nonSubView = (ScrollView) findViewById(R.id.nonSubscriberView);
         txtSubMsg = (TextView) findViewById(R.id.txtSubMsg);
+        txtNonSubMsg = (TextView) findViewById(R.id.txtNonSubMsg);
         if (!UserAuth.isUserLoggedIn()) {
             callToLogOut();
         } else {
@@ -104,6 +105,7 @@ public class MainActivity extends BaseActivity
             } else {
                 navigationView.getMenu().clear(); //clear old inflated items.
                 navigationView.inflateMenu(R.menu.activity_user_drawer);
+                txtNonSubMsg.setText(Html.fromHtml(getResources().getString(R.string.str_msg_non_sub)));
                 nonSubView.setVisibility(View.VISIBLE);
                 subView.setVisibility(View.GONE);
             }
